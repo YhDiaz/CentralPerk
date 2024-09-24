@@ -1,3 +1,4 @@
+import 'package:central_perk/pages/page_search.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget
@@ -34,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage>
   {
     setState(()
     {
-      
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchPage(title: 'Search page')));
     });
   }
 
@@ -100,12 +101,6 @@ class _MyHomePageState extends State<MyHomePage>
           ],
         )
       ],
-      // floatingActionButton: FloatingActionButton
-      // (
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }
