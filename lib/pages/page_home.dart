@@ -12,12 +12,45 @@ class MyHomePage extends StatefulWidget
 class _MyHomePageState extends State<MyHomePage>
 {
   int _counter = 0;
+  static const double spaceBetweenButtons = 15; //Space between footer buttons
 
   void _incrementCounter()
   {
     setState(()
     {
       _counter++;
+    });
+  }
+
+  void _goToHomePage()
+  {
+    setState(()
+    {
+      
+    });
+  }
+
+  void _goToSearchPage()
+  {
+    setState(()
+    {
+      
+    });
+  }
+
+  void _goToShopPage()
+  {
+    setState(()
+    {
+      
+    });
+  }
+
+  void _goToProfilePage()
+  {
+    setState(()
+    {
+      
     });
   }
 
@@ -50,12 +83,29 @@ class _MyHomePageState extends State<MyHomePage>
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton
-      (
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      persistentFooterButtons: 
+      [
+        Row
+        (
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:
+          [
+            ElevatedButton(onPressed: _goToHomePage, child: const Icon(Icons.home)), //Home button
+            const SizedBox(width: spaceBetweenButtons),
+            ElevatedButton(onPressed: _goToSearchPage, child: const Icon(Icons.search_outlined)), //Search button
+            const SizedBox(width: spaceBetweenButtons),
+            ElevatedButton(onPressed: _goToShopPage, child: const Icon(Icons.shop_outlined)), //Shop button
+            const SizedBox(width: spaceBetweenButtons),
+            ElevatedButton(onPressed: _goToProfilePage, child: const Icon(Icons.person_outline)), //Profile button
+          ],
+        )
+      ],
+      // floatingActionButton: FloatingActionButton
+      // (
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
