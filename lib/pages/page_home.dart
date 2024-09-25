@@ -1,3 +1,4 @@
+import 'package:central_perk/pages/page_profile.dart';
 import 'package:central_perk/pages/page_search.dart';
 import 'package:central_perk/pages/page_shop.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage>
   {
     setState(()
     {
-      
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(title: 'Profile page'))); 
     });
   }
 
