@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage>
   {
     setState(()
     {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchPage(title: 'Search page')));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchPage(title: 'Central Perk - Search page')));
     });
   }
 
@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage>
   {
     setState(()
     {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const ShopPage(title: 'Shop page')));      
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const ShopPage(title: 'Central Perk - Shop page')));      
     });
   }
 
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage>
   {
     setState(()
     {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(title: 'Profile page'))); 
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(title: 'Central Perk - Profile page'))); 
     });
   }
 
