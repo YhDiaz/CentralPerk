@@ -1,4 +1,3 @@
-import 'package:central_perk/pages/page_home.dart';
 import 'package:central_perk/pages/page_search.dart';
 import 'package:central_perk/pages/page_profile.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class _ShopPageState extends State<ShopPage>
     setState(()
     {
       Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomePage(title: 'Central Perk - Home page')));   
     });
   }
 
