@@ -1,4 +1,3 @@
-import 'package:central_perk/pages/page_home.dart';
 import 'package:central_perk/pages/page_shop.dart';
 import 'package:central_perk/pages/page_profile.dart';
 import 'package:flutter/material.dart';

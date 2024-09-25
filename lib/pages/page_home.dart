@@ -14,16 +14,8 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
-  int _counter = 0;
+  final int _counter = 0;
   static const double spaceBetweenButtons = 15; //Space between footer buttons
-
-  void _incrementCounter()
-  {
-    setState(()
-    {
-      _counter++;
-    });
-  }
 
   void _goToHomePage()
   {
