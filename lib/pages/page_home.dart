@@ -3,16 +3,16 @@ import 'package:central_perk/pages/page_search.dart';
 import 'package:central_perk/pages/page_shop.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget
+class HomePage extends StatefulWidget
 {
-  const MyHomePage({super.key, required this.title});
+  const HomePage({super.key, required this.title});
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
+class _HomePageState extends State<HomePage>
 {
   int _counter = 0;
   static const double spaceBetweenButtons = 15; //Space between footer buttons
