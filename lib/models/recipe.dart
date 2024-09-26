@@ -1,16 +1,16 @@
 import 'dart:ffi';
+
 import 'package:central_perk/models/coffe_bean_type.dart';
 import 'package:central_perk/models/recipe_visibility.dart';
 import 'package:central_perk/models/user.dart';
 
-class Recipe
-{
+class Recipe {
   final String name;
   final Int8 id;
   final User owner;
   final List<String> ingredients = List.empty(growable: true);
-  final Float? rating;
-  final Float time;
+  final double? rating;
+  final double time;
   final String description;
   final String image;
   final RecipeVisibility visibility;
@@ -20,8 +20,7 @@ class Recipe
   // final List<Product> artifacts = List.empty(growable: true);
   final CoffeBeanType coffeBean;
   
-  Recipe
-  ({
+  Recipe({
     required this.name,
     required this.id,
     required this.owner,
