@@ -15,6 +15,20 @@ class HomePage extends StatefulWidget
 class _HomePageState extends State<HomePage>
 {
   static const double spaceBetweenButtons = 15; //Space between footer buttons
+  static const Color footerBarColor =  Color(0xFFF2E0D3);
+  static const Color appBarColor = Color(0xFF66280a);
+  static const Color appBarTextColor = Color(0xFFF2E0D3);
+
+  final ButtonStyle defaultButton = ElevatedButton.styleFrom
+  (
+    iconColor: appBarColor,
+    backgroundColor: footerBarColor
+  );
+  final ButtonStyle selectedButton = ElevatedButton.styleFrom
+  (
+    iconColor: appBarColor,
+    backgroundColor: const Color(0xFFD1B6A3)
+  );
 
   void _goToHomePage()
   {
@@ -55,8 +69,9 @@ class _HomePageState extends State<HomePage>
     (
       appBar: AppBar
       (
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: appBarColor,
+        title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
       ),
       body: Center
       (
@@ -69,10 +84,10 @@ class _HomePageState extends State<HomePage>
             itemExtent: 100,
             shrinkExtent: 50,
             children: List<Widget>.generate(10, (int index) {
-              // return Center(child: Text('Item $index'));
               return Card
               (
                 margin: const EdgeInsets.all(10),
+                color: const Color.fromARGB(255, 163, 128, 104),
                 child: Row
                 (
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -107,20 +122,25 @@ class _HomePageState extends State<HomePage>
       ),
       persistentFooterButtons: 
       [
-        Row
+        ColoredBox
         (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-          [
-            ElevatedButton(onPressed: _goToHomePage, child: const Icon(Icons.home)), //Home button
-            const SizedBox(width: spaceBetweenButtons),
-            ElevatedButton(onPressed: _goToSearchPage, child: const Icon(Icons.search_outlined)), //Search button
-            const SizedBox(width: spaceBetweenButtons),
-            ElevatedButton(onPressed: _goToShopPage, child: const Icon(Icons.shop_outlined)), //Shop button
-            const SizedBox(width: spaceBetweenButtons),
-            ElevatedButton(onPressed: _goToProfilePage, child: const Icon(Icons.person_outline)), //Profile button
-          ],
+          color: footerBarColor,
+          child: Row
+          (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:
+            [
+              ElevatedButton(onPressed: _goToHomePage, style: selectedButton, child: const Icon(Icons.home)), //Home button
+              const SizedBox(width: spaceBetweenButtons),
+              ElevatedButton(onPressed: _goToSearchPage, style: defaultButton, child: const Icon(Icons.search_outlined)), //Search button
+              const SizedBox(width: spaceBetweenButtons),
+              ElevatedButton(onPressed: _goToShopPage, style: defaultButton, child: const Icon(Icons.shop_outlined)), //Shop button
+              const SizedBox(width: spaceBetweenButtons),
+              ElevatedButton(onPressed: _goToProfilePage, style: defaultButton, child: const Icon(Icons.person_outline)), //Profile button
+            ],
+          ),
         )
+        
       ],
     );
   }
