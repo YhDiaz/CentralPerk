@@ -69,7 +69,6 @@ class _HomePageState extends State<HomePage>
     (
       appBar: AppBar
       (
-        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         backgroundColor: appBarColor,
         title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
       ),
