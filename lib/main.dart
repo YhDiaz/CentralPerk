@@ -38,20 +38,11 @@ class SplashPage extends StatefulWidget
 
 class _SplashPageState extends State<SplashPage>
 {
-  // static const String centralPerkLogoPath = 'assets/icons/icon_central_perk_logo.svg';
-  // final Widget centralPerkLogo = SvgPicture.asset(
-  //   centralPerkLogoPath,
-  //   semanticsLabel: 'Central Perk Logo'
-  // );
-
   @override
   Widget build(BuildContext context)
   {
     return EasySplashScreen
     (
-      // logo: Image.network(
-      //     'https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/flutter-512.png'),
-      // logo: Image.asset('assets/icons/icon_central_perk_logo.png'),
       logo: Image.asset('assets/icons/icon_central_perk_logo.png'),
       title: const Text
       (
