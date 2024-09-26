@@ -19,12 +19,12 @@ class _HomePageState extends State<HomePage>
   static const Color appBarColor = Color(0xFF66280a);
   static const Color appBarTextColor = Color(0xFFF2E0D3);
 
-  final ButtonStyle defaultButton = ElevatedButton.styleFrom
+  final ButtonStyle defaultButton = ElevatedButton.styleFrom //Footer buttons non-linked to current page
   (
     iconColor: appBarColor,
     backgroundColor: footerBarColor
   );
-  final ButtonStyle selectedButton = ElevatedButton.styleFrom
+  final ButtonStyle selectedButton = ElevatedButton.styleFrom //Footer button linked to current page
   (
     iconColor: appBarColor,
     backgroundColor: const Color(0xFFD1B6A3)
@@ -139,7 +139,6 @@ class _HomePageState extends State<HomePage>
             ],
           ),
         )
-        
       ],
     );
   }

@@ -14,6 +14,20 @@ class ProfilePage extends StatefulWidget
 class _ProfilePageState extends State<ProfilePage>
 {
   static const double spaceBetweenButtons = 15; //Space between footer buttons
+  static const Color footerBarColor =  Color(0xFFF2E0D3);
+  static const Color appBarColor = Color(0xFF66280a);
+  static const Color appBarTextColor = Color(0xFFF2E0D3);
+
+  final ButtonStyle defaultButton = ElevatedButton.styleFrom //Footer buttons non-linked to current page
+  (
+    iconColor: appBarColor,
+    backgroundColor: footerBarColor
+  );
+  final ButtonStyle selectedButton = ElevatedButton.styleFrom //Footer button linked to current page
+  (
+    iconColor: appBarColor,
+    backgroundColor: const Color(0xFFD1B6A3)
+  );
 
   void _goToHomePage()
   {
@@ -56,24 +70,28 @@ class _ProfilePageState extends State<ProfilePage>
     (
       appBar: AppBar
       (
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: appBarColor,
+        title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
       ),
       persistentFooterButtons: 
       [
-        Row
+        ColoredBox
         (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-          [
-            ElevatedButton(onPressed: _goToHomePage, child: const Icon(Icons.home_outlined)), //Home button
-            const SizedBox(width: spaceBetweenButtons),
-            ElevatedButton(onPressed: _goToSearchPage, child: const Icon(Icons.search_outlined)), //Search button
-            const SizedBox(width: spaceBetweenButtons),
-            ElevatedButton(onPressed: _goToShopPage, child: const Icon(Icons.shop_outlined)), //Shop button
-            const SizedBox(width: spaceBetweenButtons),
-            ElevatedButton(onPressed: _goToProfilePage, child: const Icon(Icons.person)), //Profile button
-          ],
+          color: footerBarColor,
+          child: Row
+          (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:
+            [
+              ElevatedButton(onPressed: _goToHomePage, style: defaultButton, child: const Icon(Icons.home_outlined)), //Home button
+              const SizedBox(width: spaceBetweenButtons),
+              ElevatedButton(onPressed: _goToSearchPage, style: defaultButton, child: const Icon(Icons.search_outlined)), //Search button
+              const SizedBox(width: spaceBetweenButtons),
+              ElevatedButton(onPressed: _goToShopPage, style: defaultButton, child: const Icon(Icons.shop_outlined)), //Shop button
+              const SizedBox(width: spaceBetweenButtons),
+              ElevatedButton(onPressed: _goToProfilePage, style: selectedButton, child: const Icon(Icons.person)), //Profile button
+            ],
+          )
         )
       ],
     );
