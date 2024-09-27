@@ -83,13 +83,13 @@ class _ShopPageState extends State<ShopPage>
             mainAxisAlignment: MainAxisAlignment.center,
             children:
             [
-              ElevatedButton(onPressed: _goToHomePage, style: defaultButton, child: const Icon(Icons.home_outlined)), //Home button
+              FilledButton(onPressed: _goToHomePage, style: defaultButton, child: const Icon(Icons.home_outlined)), //Home button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToSearchPage, style: defaultButton, child: const Icon(Icons.search_outlined)), //Search button
+              FilledButton(onPressed: _goToSearchPage, style: defaultButton, child: const Icon(Icons.search_outlined)), //Search button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToShopPage, style: selectedButton, child: const Icon(Icons.shop)), //Shop button
+              FilledButton(onPressed: _goToShopPage, style: selectedButton, child: const Icon(Icons.shop)), //Shop button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToProfilePage, style: defaultButton, child: const Icon(Icons.person_outline)), //Profile button
+              FilledButton(onPressed: _goToProfilePage, style: defaultButton, child: const Icon(Icons.person_outline)), //Profile button
             ],
           )
         )

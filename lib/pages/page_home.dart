@@ -129,13 +129,13 @@ class _HomePageState extends State<HomePage>
             mainAxisAlignment: MainAxisAlignment.center,
             children:
             [
-              ElevatedButton(onPressed: _goToHomePage, style: selectedButton, child: const Icon(Icons.home)), //Home button
+              FilledButton(onPressed: _goToHomePage, style: selectedButton, child: const Icon(Icons.home)), //Home button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToSearchPage, style: defaultButton, child: const Icon(Icons.search_outlined)), //Search button
+              FilledButton(onPressed: _goToSearchPage, style: defaultButton, child: const Icon(Icons.search_outlined)), //Search button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToShopPage, style: defaultButton, child: const Icon(Icons.shop_outlined)), //Shop button
+              FilledButton(onPressed: _goToShopPage, style: defaultButton, child: const Icon(Icons.shop_outlined)), //Shop button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToProfilePage, style: defaultButton, child: const Icon(Icons.person_outline)), //Profile button
+              FilledButton(onPressed: _goToProfilePage, style: defaultButton, child: const Icon(Icons.person_outline)), //Profile button
             ],
           ),
         )

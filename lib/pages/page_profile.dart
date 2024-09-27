@@ -83,13 +83,13 @@ class _ProfilePageState extends State<ProfilePage>
             mainAxisAlignment: MainAxisAlignment.center,
             children:
             [
-              ElevatedButton(onPressed: _goToHomePage, style: defaultButton, child: const Icon(Icons.home_outlined)), //Home button
+              FilledButton(onPressed: _goToHomePage, style: defaultButton, child: const Icon(Icons.home_outlined)), //Home button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToSearchPage, style: defaultButton, child: const Icon(Icons.search_outlined)), //Search button
+              FilledButton(onPressed: _goToSearchPage, style: defaultButton, child: const Icon(Icons.search_outlined)), //Search button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToShopPage, style: defaultButton, child: const Icon(Icons.shop_outlined)), //Shop button
+              FilledButton(onPressed: _goToShopPage, style: defaultButton, child: const Icon(Icons.shop_outlined)), //Shop button
               const SizedBox(width: spaceBetweenButtons),
-              ElevatedButton(onPressed: _goToProfilePage, style: selectedButton, child: const Icon(Icons.person)), //Profile button
+              FilledButton(onPressed: _goToProfilePage, style: selectedButton, child: const Icon(Icons.person)), //Profile button
             ],
           )
         )
