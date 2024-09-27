@@ -83,7 +83,7 @@ class _SearchPageState extends State<SearchPage>
               leading: Icon(Icons.search),
               padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 25)),
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(height: 10,),
             ConstrainedBox(
               constraints: const BoxConstraints(
                 minHeight: 50,
@@ -106,82 +106,6 @@ class _SearchPageState extends State<SearchPage>
               ),
             )
           ],
-          // child: Column(
-          //   children: [
-          //     const SizedBox(height: 10,),
-          //     // const SearchBar(
-          //     //   hintText: 'Search...',
-          //     //   backgroundColor: WidgetStatePropertyAll(Color.fromARGB(255, 193, 155, 112)),
-          //     //   leading: Icon(Icons.search),
-          //     //   padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 25)),
-          //     // ),
-          //     CarouselView(
-          //       itemExtent: 330,
-          //       shrinkExtent: 200,
-          //       children: List<Widget>.generate(20, (int index) {
-          //         return const Card(
-          //           color: Color(0xFFE07979),
-          //           child: Row(
-          //             children: [
-          //               SizedBox(width: 10,),
-          //               Text('tag'),
-          //             ]
-          //           )
-          //         );
-          //       }),
-          //     ),
-          //     // CarouselView(
-          //     //   itemExtent: 10 ,
-          //     //   children: List<Widget>.generate(5, (int index) {
-          //     //     return Card(
-          //     //       child: Column(
-          //     //         mainAxisSize: MainAxisSize.min,
-          //     //         children: <Widget>[
-          //     //           const ListTile(
-          //     //             leading: Icon(Icons.album),
-          //     //             title: Text('The Enchanted Nightingale'),
-          //     //             subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-          //     //           ),
-          //     //           Row(
-          //     //             mainAxisAlignment: MainAxisAlignment.end,
-          //     //             children: <Widget>[
-          //     //               TextButton(
-          //     //                 child: const Text('BUY TICKETS'),
-          //     //                 onPressed: () {/* ... */},
-          //     //               ),
-          //     //               const SizedBox(width: 8),
-          //     //               TextButton(
-          //     //                 child: const Text('LISTEN'),
-          //     //                 onPressed: () {/* ... */},
-          //     //               ),
-          //     //               const SizedBox(width: 8),
-          //     //             ],
-          //     //           ),
-          //     //         ],
-          //     //       ),
-          //     //     );
-          //     //   }),
-          //     // )
-
-          //     // CarouselView(
-          //     //   itemExtent: 100,
-          //     //   shrinkExtent: 50,
-          //     //   scrollDirection: Axis.horizontal,
-          //     //   children: List.generate(5, (int index) {
-          //     //     return const Card(
-          //     //       color: Color(0xFFE07979),
-          //     //       child: Row(
-          //     //         children: [
-          //     //           SizedBox(width: 10,),
-          //     //           Text('tag'),
-                        
-          //     //         ],
-          //     //       ),
-          //     //     );
-          //     //   })
-          //     // )
-          //   ],
-          // ),
         ),
       ),
       persistentFooterButtons: 
