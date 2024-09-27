@@ -1,12 +1,11 @@
-import 'dart:ffi';
-
 import 'package:central_perk/models/coffe_bean_type.dart';
 import 'package:central_perk/models/recipe_visibility.dart';
 import 'package:central_perk/models/user.dart';
 
 class Recipe {
   final String name;
-  final Int8 id;
+  final DateTime date;
+  final int id = 0;
   final User owner;
   final List<String> ingredients = List.empty(growable: true);
   final double? rating;
@@ -22,7 +21,8 @@ class Recipe {
   
   Recipe({
     required this.name,
-    required this.id,
+    required this.date,
+    // this.id,
     required this.owner,
     this.rating,
     required this.time,
@@ -31,4 +31,10 @@ class Recipe {
     required this.visibility,
     required this.coffeBean
   });
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return super.toString();
+  }
 }

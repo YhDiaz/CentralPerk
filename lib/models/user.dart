@@ -6,6 +6,7 @@ class User {
   static int globalId = 0;
   final String name;
   final String password;
+  final String profileImage;
   String id = '';
   // final Int8 id;
   final List<User> friends = List.empty(growable: true);
@@ -17,7 +18,8 @@ class User {
   User({
     required this.name,
     // required this.id,
-    required this.password
+    required this.password,
+    required this.profileImage
   }) {
     globalId++;
     id = name + globalId.toString();
