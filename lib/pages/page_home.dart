@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:central_perk/models/coffe_bean_type.dart';
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/recipe_visibility.dart';
@@ -148,8 +146,7 @@ class _HomePageState extends State<HomePage>
           (
             scrollDirection: Axis.vertical,
             itemExtent: 100,
-            shrinkExtent: 50,
-            children: List.generate(5, (int index) {
+            children: List<Widget>.generate(5, (int index) {
               return generateCard(index);
             })
           ),
@@ -207,7 +204,7 @@ Widget generateCard(int index) {
                 const Text('/'),
                 Text(recipes[index].date.year.toString()),
               ],
-            ),            
+            ),
           ],
         ),
         const SizedBox(width: 75,), //Space between info and user
