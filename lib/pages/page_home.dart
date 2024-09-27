@@ -152,40 +152,6 @@ class _HomePageState extends State<HomePage>
             children: List.generate(5, (int index) {
               return generateCard(index);
             })
-            // children: List<Widget>.generate(10, (int index) {
-            //   return Card
-            //   (
-            //     margin: const EdgeInsets.all(10),
-            //     color: const Color.fromARGB(255, 163, 128, 104),
-            //     child: Row
-            //     (
-            //       mainAxisAlignment: MainAxisAlignment.start,
-            //       children: 
-            //       [
-            //         const Padding(padding: EdgeInsets.all(5)),
-            //         const SizedBox //Recipe image
-            //         (
-            //           height: 75,
-            //           width: 75,
-            //           child: Icon(Icons.coffee_outlined),
-            //         ),
-            //         const SizedBox(width: 15,), //Space between recipe image and info
-            //         const Column //Info: recipe name and publish date
-            //         (
-            //           mainAxisSize: MainAxisSize.min,
-            //           mainAxisAlignment: MainAxisAlignment.start,
-            //           children:
-            //           [
-            //             Text('Mokaccino'),
-            //             Text('September 25, 2024')
-            //           ],
-            //         ),
-            //         const SizedBox(width: 75,), //Space between info and user
-            //         SizedBox.square(dimension: 50, child: IconButton(onPressed: _goToProfilePage, icon: const Icon(Icons.person)))
-            //       ],
-            //     ),
-            //   );
-            // }),
           ),
         ),
       ),
@@ -215,23 +181,15 @@ class _HomePageState extends State<HomePage>
 }
 
 Widget generateCard(int index) {
-  // final Random rand = Random(DateTime.now().millisecond);
-
-  // var recipe = recipes[index];
-  // const Recipe recipe = ;
-  // String recipeName = recipes[index].name;
-
   return Card(
     margin: const EdgeInsets.all(8),
     color: const Color.fromARGB(255, 163, 128, 104),
     child: Row(
-      // mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const Padding(padding: EdgeInsets.all(5)),
         SizedBox( // Recipe image.
           height: 75,
           width: 75,
-          // child: Icon(Icons.coffee_outlined),
           child: Image.asset(recipes[index].image)
         ),
         const SizedBox(width: 15,), // Space between recipe image and info.
@@ -240,11 +198,7 @@ Widget generateCard(int index) {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Text('Mokaccino'),
-            // Text('$recipes[index]'),
             Text(recipes[index].name),
-            // const Text('September 25, 2024')
-            // Text(recipes[index].date.toString())
             Row(
               children: [
                 Text(recipes[index].date.day.toString()),
@@ -259,10 +213,7 @@ Widget generateCard(int index) {
         const SizedBox(width: 75,), //Space between info and user
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          // crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            // Padding(padding: EdgeInsets.only(right: 10)),
-            // SizedBox(width: 50, height: 50, child: IconButton(onPressed: () => {}, icon: const Icon(Icons.person))),
             SizedBox.square(dimension: 50, child: IconButton(onPressed: () => {}, icon: const Icon(Icons.person)))
           ],
         )
