@@ -6,11 +6,6 @@ class UserManager {
 
   UserManager() {
     users = _generateUsersList();
-
-    for (int i = 0; i < users.length; i++) {
-      print(users[i].name);
-      print(users[i].id);
-    }
   }
 
   List<User> _generateUsersList() {

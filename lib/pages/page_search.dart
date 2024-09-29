@@ -101,10 +101,17 @@ class _SearchPageState extends State<SearchPage>
               ),
             ),
             const SizedBox(height: 20,),
+            const Text(
+              'Trend recipes',
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                fontSize: 25
+              ),
+            ),
             ConstrainedBox(
               constraints: const BoxConstraints( // Scroll box size.
                 minHeight: 350,
-                maxHeight: 525,
+                maxHeight: 475,
               ),
               child: CarouselView(
                 scrollDirection: Axis.vertical,
@@ -189,7 +196,13 @@ Widget generateCard(int index, List<Recipe> recipes) {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SizedBox.square(dimension: 50, child: IconButton(onPressed: () => {}, icon: const Icon(Icons.person)))
+            SizedBox.square(
+              dimension: 50,
+              child: IconButton(
+                onPressed: () => {},
+                icon: const Icon(Icons.person)
+              )
+            )
           ],
         )
       ]

@@ -1,12 +1,10 @@
-// import 'dart:ffi';
-
 import 'package:central_perk/models/user.dart';
 
 class Product {
   static int globalId = 0;
-  final String name;
-  // final Int8 id;
   String id = '';
+  
+  final String name;
   final String image;
   final double price;
   final User salesperson;
@@ -18,7 +16,6 @@ class Product {
 
   Product({
     required this.name,
-    // required this.id,
     required this.image,
     required this.price,
     required this.salesperson,

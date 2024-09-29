@@ -143,7 +143,13 @@ Widget generateCard(int index, List<Recipe> recipes) {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SizedBox.square(dimension: 50, child: IconButton(onPressed: () => {}, icon: const Icon(Icons.person)))
+            SizedBox.square(
+              dimension: 50,
+              child: IconButton(
+                onPressed: () => {},
+                icon: const Icon(Icons.person)
+              )
+            )
           ],
         )
       ],

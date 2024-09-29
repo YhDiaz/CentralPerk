@@ -9,8 +9,6 @@ class RecipeManager {
 
   RecipeManager() {
     recipes = _generateRecipesList();
-
-    // print('Name from recipe 1: ' + recipes[0].owner.name);
   }
 
   List<Recipe> _generateRecipesList() {
