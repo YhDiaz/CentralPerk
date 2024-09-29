@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:central_perk/models/user_manager.dart';
 import 'package:central_perk/pages/page_search.dart';
 import 'package:central_perk/pages/page_shop.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +20,8 @@ class _ProfilePageState extends State<ProfilePage>
   static const Color footerBarColor =  Color(0xFFF2E0D3);
   static const Color appBarColor = Color(0xFF66280a);
   static const Color appBarTextColor = Color(0xFFF2E0D3);
+
+  String name = UserManager.users[0].name;
 
   final ButtonStyle defaultButton = ElevatedButton.styleFrom //Footer buttons non-linked to current page
   (

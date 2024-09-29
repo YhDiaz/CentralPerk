@@ -1,5 +1,7 @@
 // import 'dart:ffi';
 
+import 'dart:ffi';
+
 import 'package:central_perk/models/recipe.dart';
 
 class User {
@@ -8,7 +10,6 @@ class User {
   final String password;
   final String profileImage;
   String id = '';
-  // final Int8 id;
   final List<User> friends = List.empty(growable: true);
   final List<Recipe> myRecipes = List.empty(growable: true);
   final List<Recipe> savedRecipes = List.empty(growable: true);
@@ -17,12 +18,21 @@ class User {
 
   User({
     required this.name,
-    // required this.id,
     required this.password,
     required this.profileImage
   }) {
     globalId++;
-    id = name + globalId.toString();
+    List<String> nameSplitted = name.split(' ');
+    String idName = '';
+
+    for (int i = 0; i < nameSplitted.length; i++) {
+      idName += nameSplitted[i];
+    }
+
+    id = idName + globalId.toString();
+
+    // id = name + globalId.toString();
+    // id = name.split(" ")[0] + name.split(" ")[1] + globalId.toString();
   }
 
   int friendsCount() {
@@ -41,19 +51,28 @@ class User {
 
   }
 
-  void createRecipe() {
+  void addRecipe(Recipe recipe) {
+    myRecipes.add(recipe);
+  }
+
+  void editRecipe(Recipe recipe) {
 
   }
 
-  void editRecipe(String recipeName) {
-
-  }
-
-  void markRecipeAsFav(String recipeName) {
-
+  void markRecipeAsFav(Recipe recipe) {
+    // The recipe is not in favoriteRecipes yet.
+    if (!favoriteRecipes.contains(recipe)) {
+      favoriteRecipes.add(recipe);
+    }
   }
 
   void shareRecipe(String recipeName) {
 
+  }
+
+  void removeRecipe(Recipe recipe) {
+    if (myRecipes.contains(recipe)) {
+      myRecipes.remove(recipe);
+    }
   }
 }
