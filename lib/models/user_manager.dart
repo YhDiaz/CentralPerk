@@ -10,6 +10,7 @@ class UserManager {
 
   List<User> _generateUsersList() {
     return [
+      _generateUser('Ross Geller', 'friends', ''),
       _generateUser('Carlos Martínez', '', ''),
       _generateUser('Ana Sofía', '', ''),
       _generateUser('María Fernanda', '', ''),
@@ -18,7 +19,11 @@ class UserManager {
     ];
   }
 
-  User _generateUser(String name, String password, String profileImage) {
+  User _generateUser(
+    String name,
+    String password,
+    String profileImage,
+  ) {
     return User(
       name: name,
       password: password,

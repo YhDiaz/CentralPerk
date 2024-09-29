@@ -1,4 +1,5 @@
-import 'package:central_perk/models/user_manager.dart';
+import 'package:central_perk/models/recipe.dart';
+import 'package:central_perk/models/recipe_manager.dart';
 import 'package:central_perk/pages/page_search.dart';
 import 'package:central_perk/pages/page_shop.dart';
 import 'package:flutter/material.dart';
@@ -71,65 +72,44 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Center(
         child: Column(
           children: [
-            // Image.asset(
-            //   'assets/icons/icon_central_perk_logo.png',
-            //   scale: 50,
-            // )
             const SizedBox(height: 10,),
             const Icon( // Profile image.
               Icons.person,
               size: 75,
             ),
+            const SizedBox(height: 5,),
+            const Text('Ross Geller'),
+            const SizedBox(height: 5,),
+            const Text('@professorgeller'),
             const SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            profileInfo(), // Friends, recipes, likes and rating.
+            const SizedBox(height: 20,),
+            const Row( // My recipes header.
               children: [
-                Column( // Friends counter.
-                  children: [
-                    const Icon(
-                      Icons.people,
-                      color: Colors.blue,
-                      semanticLabel: 'Friends',
-                    ),
-                    // const Text('Friends'),
-                    Text('$friends')
-                  ],
-                ),
-                Column( // Recipes created.
-                  children: [
-                    // const Text('Recipes created'),
-                    const Icon(
-                      Icons.receipt,
-                      color: Colors.brown,
-                      semanticLabel: 'Recipes created',
-                    ),
-                    Text('$myRecipes')
-                  ],
-                ),
-                Column( // Likes received.
-                  children: [
-                    // const Text('Likes received'),
-                    const Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                      semanticLabel: 'Likes received',
-                    ),
-                    Text('$likes')
-                  ],
-                ),
-                Column( // Average rating.
-                  children: [
-                    // const Text('Average rating'),
-                    const Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                      semanticLabel: 'Average rating',
-                    ),
-                    Text('$rating')
-                  ],
+                Padding(padding: EdgeInsets.only(left: 10)),
+                Text(
+                  'My recipes',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 10,),
+            ConstrainedBox(
+              constraints: const BoxConstraints( // Scroll box size.
+                minHeight: 350,
+                maxHeight: 400,
+              ),
+              child: CarouselView(
+                scrollDirection: Axis.vertical,
+                itemExtent: 100,
+                shrinkExtent: 0.0,
+                children: List<Widget>.generate(5, (int index) {
+                  return generateCard(index, RecipeManager.recipes);
+                })
+              ),
+            ),
           ],
         ),
       ),
@@ -166,6 +146,102 @@ class _ProfilePageState extends State<ProfilePage> {
           )
         )
       ],
+    );
+  }
+
+  Row profileInfo() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Column( // Friends counter.
+          children: [
+            const Icon(
+              Icons.people,
+              color: Colors.blue,
+              semanticLabel: 'Friends',
+            ),
+            Text('$friends')
+          ],
+        ),
+        Column( // Recipes created.
+          children: [
+            const Icon(
+              Icons.receipt,
+              color: Colors.brown,
+              semanticLabel: 'Recipes created',
+            ),
+            Text('$myRecipes')
+          ],
+        ),
+        Column( // Likes received.
+          children: [
+            const Icon(
+              Icons.favorite,
+              color: Colors.red,
+              semanticLabel: 'Likes received',
+            ),
+            Text('$likes')
+          ],
+        ),
+        Column( // Average rating.
+          children: [
+            const Icon(
+              Icons.star,
+              color: Colors.yellow,
+              semanticLabel: 'Average rating',
+            ),
+            Text('$rating')
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget generateCard(int index, List<Recipe> recipes) {
+    return Card(
+      margin: const EdgeInsets.all(8),
+      color: const Color.fromARGB(255, 163, 128, 104),
+      child: Row(
+        children: [
+          const Padding(padding: EdgeInsets.all(5)),
+          SizedBox( // Recipe image.
+            height: 75,
+            width: 75,
+            child: Image.asset(recipes[index].image)
+          ),
+          const SizedBox(width: 15,), // Space between recipe image and info.
+          Column( // Info: recipe name and publish date.
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(recipes[index].name),
+              Row(
+                children: [
+                  Text(recipes[index].date.day.toString()),
+                  const Text('/'),
+                  Text(recipes[index].date.month.toString()),
+                  const Text('/'),
+                  Text(recipes[index].date.year.toString()),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(width: 75,), //Space between info and user
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox.square(
+                dimension: 50,
+                child: IconButton(
+                  onPressed: () => {},
+                  icon: const Icon(Icons.person)
+                )
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }

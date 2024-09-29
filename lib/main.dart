@@ -1,3 +1,4 @@
+import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/recipe_manager.dart';
 import 'package:central_perk/models/user_manager.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,18 @@ void main() {
 
   UserManager(); // Expert class.
   RecipeManager(); //Expert class.
+
+  generateMyRecipes();
+
   runApp(const MyApp());
+}
+
+void generateMyRecipes() {
+  // UserManager.users[0].myRecipes.add(
+  //   Recipe(
+  //     name: 
+  //   )
+  // );
 }
 
 class MyApp extends StatelessWidget {
