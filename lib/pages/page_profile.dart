@@ -1,8 +1,13 @@
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/recipe_manager.dart';
+import 'package:central_perk/models/user.dart';
+import 'package:central_perk/models/user_manager.dart';
+import 'package:central_perk/pages/page_recipe.dart';
 import 'package:central_perk/pages/page_search.dart';
 import 'package:central_perk/pages/page_shop.dart';
 import 'package:flutter/material.dart';
+
+User myUser = UserManager.users[0];
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key, required this.title});
@@ -30,10 +35,12 @@ class _ProfilePageState extends State<ProfilePage> {
     backgroundColor: const Color(0xFFD1B6A3)
   );
 
-  final int friends = 5;
-  final int myRecipes = 2;
-  final int likes = 9;
-  final double rating = 4.8;
+  final String name = myUser.name;
+  final String username = myUser.username;
+  final int friends = myUser.friendsCount();
+  final int myRecipes = myUser.recipesCount();
+  final int likes = myUser.likesCount();
+  final double rating = myUser.averageRating();
 
   void _goToHomePage() {
     setState(() {
@@ -59,6 +66,18 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() { });
   }
 
+  void _favoriteOnPressed(Recipe recipe) {
+    setState(() {
+      if (recipe.favorite) {
+        myUser.removeFromFav(recipe);
+        const Icon(Icons.favorite_border_outlined);
+      } else {
+        myUser.markRecipeAsFav(recipe);
+        const Icon(Icons.favorite);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +97,11 @@ class _ProfilePageState extends State<ProfilePage> {
               size: 75,
             ),
             const SizedBox(height: 5,),
-            const Text('Ross Geller'),
+            // const Text('Ross Geller'),
+            Text(name),
             const SizedBox(height: 5,),
-            const Text('@professorgeller'),
+            // const Text('@professorgeller'),
+            Text(username),
             const SizedBox(height: 10,),
             profileInfo(), // Friends, recipes, likes and rating.
             const SizedBox(height: 20,),
@@ -105,8 +126,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 scrollDirection: Axis.vertical,
                 itemExtent: 100,
                 shrinkExtent: 0.0,
-                children: List<Widget>.generate(5, (int index) {
-                  return generateCard(index, RecipeManager.recipes);
+                onTap: (int index) => {
+                  RecipeManager.displayRecipe = orderedRecipes(myUser.myRecipes)[index],
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RecipePage(title: '')))
+                },
+                children: List<Widget>.generate(myRecipes, (int index) {
+                  // return generateCard(index, recipes);
+                  // return generateCard(index, RecipeManager.userRecipes(myUser));
+                  List<Recipe> auxRecipes = orderedRecipes(myUser.myRecipes);
+                  return generateCard(index, auxRecipes);
                 })
               ),
             ),
@@ -197,6 +225,26 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  // Return an ordered list of recipes, with favorite recipes at top.
+  List<Recipe> orderedRecipes(List<Recipe> recipes) {
+    List<Recipe> ordRecipes = List.empty(growable: true);
+
+    // Favorite recipes.
+    for (int i = myUser.favoriteRecipes.length - 1; i >= 0; i--) {
+      ordRecipes.add(myUser.favoriteRecipes[i]);
+    }
+
+    // Normal recipes.
+    for (int i = recipes.length - 1; i >= 0; i--) {
+      // Current recipe is not favorite.
+      if (!myUser.favoriteRecipes.contains(recipes[i])) {
+        ordRecipes.add(recipes[i]);
+      }
+    }
+
+    return ordRecipes;
+  }
+
   Widget generateCard(int index, List<Recipe> recipes) {
     return Card(
       margin: const EdgeInsets.all(8),
@@ -234,12 +282,20 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox.square(
                 dimension: 50,
                 child: IconButton(
-                  onPressed: () => {},
-                  icon: const Icon(Icons.person)
+                  onPressed: () => _favoriteOnPressed(recipes[index]),
+                  icon: (recipes[index].favorite) ? // If recipe has been marked as fav
+                        const Icon(Icons.favorite) : // Then, its icon is favorite filled
+                        const Icon(Icons.favorite_border_outlined) // Otherwise, its icon is favorite bordered.
                 )
               )
             ],
-          )
+          ),
+          const SizedBox(width: 10,),
+          // TextButton(
+          //   // onPressed: () => {print('pressing')},
+          //   onPressed: _goToHomePage,
+          //   child: const Icon(Icons.receipt)
+          // )
         ],
       ),
     );

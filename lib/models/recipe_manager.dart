@@ -6,6 +6,16 @@ import 'package:central_perk/models/user_manager.dart';
 
 class RecipeManager {
   static List<Recipe> recipes = List.empty(growable: true);
+  static Recipe displayRecipe = Recipe(
+    name: '',
+    date: DateTime(2024),
+    owner: User(name: '', username: '', password: '', profileImage: ''),
+    time: 0,
+    description: '',
+    image: '',
+    visibility: RecipeVisibility.public,
+    coffeBean: CoffeBeanType.arabica
+  );
 
   RecipeManager() {
     recipes = _generateRecipesList();
@@ -16,7 +26,7 @@ class RecipeManager {
       _generateRecipe(
         'Café Espresso',
         DateTime(2024, 09, 27),
-        UserManager.users[0],
+        UserManager.users[1],
         5,
         'El espresso es un café concentrado y fuerte, conocido por su sabor intenso y su capa de crema en la superficie. Es la base para muchas otras bebidas de café.',
         'assets/icons/icon_coffee_espresso.jpg',
@@ -26,7 +36,7 @@ class RecipeManager {
       _generateRecipe(
         'Café Latte',
         DateTime(2024, 09, 25),
-        UserManager.users[2],
+        UserManager.users[3],
         10,
         'El café latte combina un espresso con una gran cantidad de leche vaporizada, creando una bebida suave y cremosa. A menudo se sirve con una capa de espuma de leche en la parte superior.',
         'assets/icons/icon_coffee_latte.jpg',
@@ -36,7 +46,7 @@ class RecipeManager {
       _generateRecipe(
         'Café Mocha',
         DateTime(2024, 09, 24),
-        UserManager.users[2],
+        UserManager.users[3],
         10,
         'El café mocha es una deliciosa combinación de espresso, chocolate caliente y leche vaporizada. Es perfecto para aquellos que disfrutan de un toque de dulzura en su café.',
         'assets/icons/icon_coffee_mocha.jpg',
@@ -46,7 +56,7 @@ class RecipeManager {
       _generateRecipe(
         'Café Americano',
         DateTime(2024, 09, 19),
-        UserManager.users[4],
+        UserManager.users[5],
         5,
         'El café americano se prepara diluyendo un espresso con agua caliente, resultando en una bebida más suave y menos concentrada que el espresso, pero con un sabor robusto.',
         'assets/icons/icon_coffee_american.jpg',
@@ -56,7 +66,7 @@ class RecipeManager {
       _generateRecipe(
         'Café Cappuccino',
         DateTime(2024, 08, 31),
-        UserManager.users[1],
+        UserManager.users[2],
         10,
         'El cappuccino es una mezcla equilibrada de espresso, leche vaporizada y espuma de leche. Es conocido por su textura cremosa y su sabor rico.',
         'assets/icons/icon_coffee_cappuccino.jpg',
@@ -86,5 +96,17 @@ class RecipeManager {
       visibility: visibility,
       coffeBean: coffeBean
     );
+  }
+
+  static List<Recipe> userRecipes(User user) {
+    List<Recipe> myRecipes = List.empty(growable: true);
+
+    for (int i = 0; i < recipes.length; i++) {
+      if (recipes[i].owner == user) {
+        myRecipes.add(recipes[i]);
+      }
+    }
+
+    return myRecipes;
   }
 }

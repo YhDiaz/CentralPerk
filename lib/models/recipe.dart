@@ -8,7 +8,6 @@ class Recipe {
   final int id = 0;
   final User owner;
   final List<String> ingredients = List.empty(growable: true);
-  final double? rating;
   final double time;
   final String description;
   final String image;
@@ -19,17 +18,22 @@ class Recipe {
   // final List<Product> artifacts = List.empty(growable: true);
   final CoffeBeanType coffeBean;
   
+  double rating = 1.0;
+  int likes = 0;
+  bool favorite;
+  
   Recipe({
     required this.name,
     required this.date,
-    // this.id,
     required this.owner,
-    this.rating,
     required this.time,
     required this.description,
     required this.image,
     required this.visibility,
-    required this.coffeBean
+    required this.coffeBean,
+    this.rating = 1.0,
+    this.likes = 0,
+    this.favorite = false
   });
 
   @override
@@ -37,4 +41,8 @@ class Recipe {
     // TODO: implement toString
     return super.toString();
   }
+
+  // void markAsFav() {
+  //   favorite = true;
+  // }
 }
