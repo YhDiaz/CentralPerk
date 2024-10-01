@@ -1,5 +1,6 @@
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/recipe_manager.dart';
+import 'package:central_perk/pages/page_recipe.dart';
 import 'package:central_perk/pages/page_shop.dart';
 import 'package:central_perk/pages/page_profile.dart';
 import 'package:flutter/material.dart';
@@ -117,6 +118,12 @@ class _SearchPageState extends State<SearchPage>
                 scrollDirection: Axis.vertical,
                 itemExtent: 125, // Item size (in this case, height).
                 shrinkExtent: 0.0,
+                onTap: (value) => {
+                  setState(() {
+                    RecipeManager.displayRecipe = RecipeManager.recipes[value];
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const RecipePage(title: '')));
+                  })
+                },
                 children: List<Widget>.generate(5, (int index) {
                   return generateCard(index, RecipeManager.recipes);
                 }),
