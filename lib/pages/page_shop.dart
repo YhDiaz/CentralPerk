@@ -194,13 +194,6 @@ class _ShopPageState extends State<ShopPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ConstrainedBox(
-              //   constraints: const BoxConstraints(
-              //     minWidth: 5,
-              //     maxWidth: 200
-              //   ),
-              //   child: Text(products[index].name),
-              // ),
               Text(cutText(products[index].name, 20)),
               Text('${products[index].price} US')
             ],
