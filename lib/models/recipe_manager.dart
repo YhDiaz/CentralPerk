@@ -12,6 +12,7 @@ class RecipeManager {
     owner: User(name: '', username: '', password: '', profileImage: ''),
     time: 0,
     description: '',
+    steps: '',
     image: '',
     visibility: RecipeVisibility.public,
     coffeBean: CoffeBeanType.arabica
@@ -29,6 +30,7 @@ class RecipeManager {
         UserManager.users[1],
         5,
         'El espresso es un café concentrado y fuerte, conocido por su sabor intenso y su capa de crema en la superficie. Es la base para muchas otras bebidas de café.',
+        '',
         'assets/icons/icon_coffee_espresso.jpg',
         RecipeVisibility.public,
         CoffeBeanType.arabica
@@ -39,6 +41,7 @@ class RecipeManager {
         UserManager.users[3],
         10,
         'El café latte combina un espresso con una gran cantidad de leche vaporizada, creando una bebida suave y cremosa. A menudo se sirve con una capa de espuma de leche en la parte superior.',
+        '',
         'assets/icons/icon_coffee_latte.jpg',
         RecipeVisibility.public,
         CoffeBeanType.robusta
@@ -49,6 +52,7 @@ class RecipeManager {
         UserManager.users[3],
         10,
         'El café mocha es una deliciosa combinación de espresso, chocolate caliente y leche vaporizada. Es perfecto para aquellos que disfrutan de un toque de dulzura en su café.',
+        '',
         'assets/icons/icon_coffee_mocha.jpg',
         RecipeVisibility.public,
         CoffeBeanType.arabica
@@ -59,6 +63,7 @@ class RecipeManager {
         UserManager.users[5],
         5,
         'El café americano se prepara diluyendo un espresso con agua caliente, resultando en una bebida más suave y menos concentrada que el espresso, pero con un sabor robusto.',
+        '',
         'assets/icons/icon_coffee_american.jpg',
         RecipeVisibility.public,
         CoffeBeanType.arabica
@@ -69,6 +74,7 @@ class RecipeManager {
         UserManager.users[2],
         10,
         'El cappuccino es una mezcla equilibrada de espresso, leche vaporizada y espuma de leche. Es conocido por su textura cremosa y su sabor rico.',
+        '',
         'assets/icons/icon_coffee_cappuccino.jpg',
         RecipeVisibility.public,
         CoffeBeanType.robusta
@@ -82,6 +88,7 @@ class RecipeManager {
     User user,
     double time,
     String description,
+    String steps,
     String image,
     RecipeVisibility visibility,
     CoffeBeanType coffeBean
@@ -92,6 +99,7 @@ class RecipeManager {
       owner: user,
       time: time,
       description: description,
+      steps: steps,
       image: image,
       visibility: visibility,
       coffeBean: coffeBean
@@ -108,5 +116,14 @@ class RecipeManager {
     }
 
     return myRecipes;
+  }
+
+  static void updateRecipe(Recipe recipe) {
+    for (int i = 0; i < recipes.length; i++) {
+      if (recipes[i].id == recipe.id) {
+        recipes[i] = recipe;
+        return;
+      }
+    }
   }
 }
