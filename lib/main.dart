@@ -28,7 +28,7 @@ void generateMyRecipes() {
       time: 15,
       description: 'Café preparado con canela y piloncillo en una olla de barro.',
       steps: '1. En una olla de barro, hierve el agua con la canela, los clavos y el piloncillo.\n2. Añade el café molido y deja hervir a fuego lento durante 5 minutos.\n3. Retira del fuego y deja reposar unos minutos.\n4. Cuela y sirve en una taza grande.',
-      image: 'assets/icons/icon_my_coffee.jpg',
+      image: 'assets/icons/icon_coffee_pot.jpg',
       visibility: RecipeVisibility.friendsOnly,
       coffeBean: CoffeBeanType.liberica
     )
@@ -76,7 +76,7 @@ void generateMyRecipes() {
       time: 10,
       description: 'Café instantáneo mezclado con agua, azúcar y hielo, batido hasta obtener una textura espumosa.',
       steps: '1. Prepara un shot de espresso y déjalo enfriar.\n2. En una licuadora, mezcla el espresso, la leche, el hielo y el azúcar.\n3. Licúa hasta obtener una consistencia suave.\n4. Sirve en un vaso alto y decora con crema batida si lo deseas.',
-      image: 'assets/icons/icon_my_coffee.jpg',
+      image: 'assets/icons/icon_coffee_frappe.jpg',
       visibility: RecipeVisibility.public,
       coffeBean: CoffeBeanType.java,
       favorite: true
@@ -119,7 +119,7 @@ void generateMyRecipes() {
       time: 10,
       description: 'Café finamente molido hervido con agua y azúcar en una olla especial llamada cezve.',
       steps: '1. En el cezve, mezcla el agua, el café y el azúcar.\n2. Calienta a fuego lento hasta que comience a formar espuma.\n3. Retira del fuego antes de que hierva y deja reposar.\n4. Repite el proceso dos veces más.\n5. Sirve en una taza pequeña.',
-      image: 'assets/icons/icon_my_coffee.jpg',
+      image: 'assets/icons/icon_coffee_turkey.jpg',
       visibility: RecipeVisibility.public,
       coffeBean: CoffeBeanType.kenyaAA
     )
@@ -153,7 +153,7 @@ void generateMyRecipes() {
       time: 5,
       steps: '1. Coloca una bola de helado de vainilla en una taza pequeña.\n2. Prepara un shot de espresso y viértelo sobre el helado.',
       description: 'Un espresso vertido sobre una bola de helado de vainilla.',
-      image: 'assets/icons/icon_my_coffee.jpg',
+      image: 'assets/icons/icon_affogato.jpg',
       visibility: RecipeVisibility.private,
       coffeBean: CoffeBeanType.borbon
     )
