@@ -127,8 +127,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 itemExtent: 100,
                 shrinkExtent: 0.0,
                 onTap: (int index) => {
-                  RecipeManager.displayRecipe = orderedRecipes(myUser.myRecipes)[index],
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RecipePage(title: '')))
+                  setState(() {
+                    RecipeManager.displayRecipe = orderedRecipes(myUser.myRecipes)[index];
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const RecipePage(title: '')));
+                  })
                 },
                 children: List<Widget>.generate(myRecipes, (int index) {
                   // return generateCard(index, recipes);
@@ -184,7 +186,7 @@ class _ProfilePageState extends State<ProfilePage> {
         Column( // Friends counter.
           children: [
             const Icon(
-              Icons.people,
+              Icons.groups,
               color: Colors.blue,
               semanticLabel: 'Friends',
             ),
@@ -282,7 +284,11 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox.square(
                 dimension: 50,
                 child: IconButton(
-                  onPressed: () => _favoriteOnPressed(recipes[index]),
+                  onPressed: () => {
+                    setState(() {
+                      _favoriteOnPressed(recipes[index]);
+                    })
+                  },
                   icon: (recipes[index].favorite) ? // If recipe has been marked as fav
                         const Icon(Icons.favorite) : // Then, its icon is favorite filled
                         const Icon(Icons.favorite_border_outlined) // Otherwise, its icon is favorite bordered.
