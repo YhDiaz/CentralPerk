@@ -45,8 +45,10 @@ class User {
   }
 
   void addFriend(User friend) {
-    friends.add(friend);
-    friend.friends.add(this);
+    if (!friends.contains(friend)) {
+      friends.add(friend);
+      friend.friends.add(this);
+    }
   }
 
   void addRecipe(Recipe recipe) {
@@ -101,5 +103,12 @@ class User {
     }
 
     return (sum / recipesCount());
+  }
+
+  void removeFriend(User friend) {
+    if (friends.contains(friend)) {
+      friends.remove(friend);
+      friend.friends.remove(this);
+    }
   }
 }
