@@ -11,20 +11,20 @@ class Recipe {
   final String name;
   final DateTime date;
   final User owner;
-  final List<String> ingredients = List.empty(growable: true);
   final double time;
   final String description;
   final String steps;
   final String image;
   final RecipeVisibility visibility;
-  final List<String> tags = List.empty(growable: true);
-  final List<Comment> comments = List.empty(growable: true);
-  final List<Product> artifacts = List.empty(growable: true);
   final CoffeBeanType coffeBean;
   
   double rating = 1.0;
   int likes = 0;
   bool favorite;
+  List<String> ingredients = List.empty(growable: true);
+  List<String> tags = List.empty(growable: true);
+  List<Comment> comments = List.empty(growable: true);
+  List<Product> artifacts = List.empty(growable: true);
   
   Recipe({
     required this.name,
@@ -38,7 +38,7 @@ class Recipe {
     required this.coffeBean,
     this.rating = 1.0,
     this.likes = 0,
-    this.favorite = false
+    this.favorite = false,
   })
   {
     globalId++;
@@ -90,5 +90,17 @@ class Recipe {
     return (commentsMessage == '') ? 
             'There aren\'t any comments for this recipe.' :
             commentsMessage;
+  }
+
+  void initializeIngredients(List<String> ingredients) {
+    this.ingredients = ingredients;
+  }
+
+  void initializeArtifacts(List<Product> artifacts) {
+    this.artifacts = artifacts;
+  }
+
+  void initializeComments(List<Comment> comments) {
+    this.comments = comments;
   }
 }
