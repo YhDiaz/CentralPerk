@@ -118,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ConstrainedBox(
               constraints: const BoxConstraints( // Scroll box size.
                 minHeight: 350,
-                maxHeight: 400,
+                maxHeight: 375,
               ),
               child: CarouselView(
                 scrollDirection: Axis.vertical,
@@ -136,6 +136,22 @@ class _ProfilePageState extends State<ProfilePage> {
                 })
               ),
             ),
+            const SizedBox(height: 5,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: FloatingActionButton(
+                    onPressed: () => {},
+                    backgroundColor: const Color.fromARGB(255, 211, 176, 116),
+                    foregroundColor: const Color.fromARGB(255, 73, 50, 3),
+                    tooltip: 'Create new recipe',
+                    child: const Icon(Icons.add),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
