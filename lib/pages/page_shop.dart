@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 List<Product> products = [
   Product(
     name: 'Cafetera Espresso DeLonghi Dedica EC685',
-    image: '',
+    image: 'assets/icons/icon_cafetera_espresso_delonghi_dedica_ec685.jpg',
     price: 85,
     salesperson: UserManager.users[3],
     stock: 24,
@@ -18,7 +18,7 @@ List<Product> products = [
   ),
   Product(
     name: 'Cafetera de Goteo Philips HD7435/20',
-    image: '',
+    image: 'assets/icons/icon_cafetera_de_goteo_philips_hd7435_20.jpg',
     price: 15,
     salesperson: UserManager.users[5],
     stock: 58,
@@ -29,7 +29,7 @@ List<Product> products = [
   ),
   Product(
     name: 'Cafetera de Cápsulas Nespresso Inissia',
-    image: '',
+    image: 'assets/icons/icon_cafetera_de_cápsulas_nespresso_inissia.jpg',
     price: 49,
     salesperson: UserManager.users[2],
     stock: 3,
@@ -40,7 +40,7 @@ List<Product> products = [
   ),
   Product(
     name: 'Cafetera Italiana Bialetti Moka Express',
-    image: '',
+    image: 'assets/icons/icon_cafetera_italiana_bialetti_moka_express.jpg',
     price: 26,
     salesperson: UserManager.users[2],
     stock: 1,
@@ -51,7 +51,7 @@ List<Product> products = [
   ),
   Product(
     name: 'Molino de Café Krups GVX242',
-    image: '',
+    image: 'assets/icons/icon_molino_de_café_krups_gvx242.jpg',
     price: 194,
     salesperson: UserManager.users[1],
     stock: 16,
@@ -183,10 +183,13 @@ class _ShopPageState extends State<ShopPage> {
       child: Row(
         children: [
           const Padding(padding: EdgeInsets.all(5)),
-          const SizedBox( // Product image.
+          SizedBox( // Product image.
             height: 75,
             width: 75,
-            // child: Image.asset(''),
+            child: 
+              (products[index].image != '') ?
+                Image.asset(products[index].image) :
+                const Text(''),
           ),
           const SizedBox(width: 15,), // Space between recipe image and info.
           Column( // Info: recipe name and publish date.
