@@ -97,10 +97,8 @@ class _ProfilePageState extends State<ProfilePage> {
               size: 75,
             ),
             const SizedBox(height: 5,),
-            // const Text('Ross Geller'),
             Text(name),
             const SizedBox(height: 5,),
-            // const Text('@professorgeller'),
             Text(username),
             const SizedBox(height: 10,),
             profileInfo(), // Friends, recipes, likes and rating.
@@ -133,8 +131,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   })
                 },
                 children: List<Widget>.generate(myRecipes, (int index) {
-                  // return generateCard(index, recipes);
-                  // return generateCard(index, RecipeManager.userRecipes(myUser));
                   List<Recipe> auxRecipes = orderedRecipes(myUser.myRecipes);
                   return generateCard(index, auxRecipes);
                 })
@@ -297,11 +293,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
           const SizedBox(width: 10,),
-          // TextButton(
-          //   // onPressed: () => {print('pressing')},
-          //   onPressed: _goToHomePage,
-          //   child: const Icon(Icons.receipt)
-          // )
         ],
       ),
     );
