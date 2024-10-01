@@ -1,5 +1,4 @@
 import 'package:central_perk/models/product.dart';
-import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/user_manager.dart';
 import 'package:central_perk/pages/page_search.dart';
 import 'package:central_perk/pages/page_profile.dart';
