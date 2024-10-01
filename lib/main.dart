@@ -237,7 +237,7 @@ class _SplashPageState extends State<SplashPage> {
       showLoader: true,
       loadingText: const Text("Opening coffeehouse..."),
       navigator: const HomePage(title: 'Central Perk - Home page'),
-      durationInSeconds: 1,
+      durationInSeconds: 5,
     );
   }
 }
