@@ -25,6 +25,7 @@ void generateMyRecipes() {
       owner: UserManager.users[0],
       time: 15,
       description: 'Café preparado con canela y piloncillo en una olla de barro.',
+      steps: '',
       image: 'assets/icons/icon_my_coffee.jpg',
       visibility: RecipeVisibility.friendsOnly,
       coffeBean: CoffeBeanType.liberica
@@ -38,6 +39,7 @@ void generateMyRecipes() {
       owner: UserManager.users[0],
       time: 10,
       description: 'Café instantáneo mezclado con agua, azúcar y hielo, batido hasta obtener una textura espumosa.',
+      steps: '',
       image: 'assets/icons/icon_my_coffee.jpg',
       visibility: RecipeVisibility.public,
       coffeBean: CoffeBeanType.java,
@@ -45,6 +47,7 @@ void generateMyRecipes() {
     )
   );
 
+  // Mark second recipe as favorite.
   UserManager.users[0].favoriteRecipes.add(UserManager.users[0].myRecipes[1]);
 
   UserManager.users[0].myRecipes.add(
@@ -54,6 +57,7 @@ void generateMyRecipes() {
       owner: UserManager.users[0],
       time: 10,
       description: 'Café finamente molido hervido con agua y azúcar en una olla especial llamada cezve.',
+      steps: '',
       image: 'assets/icons/icon_my_coffee.jpg',
       visibility: RecipeVisibility.public,
       coffeBean: CoffeBeanType.kenyaAA
@@ -66,6 +70,7 @@ void generateMyRecipes() {
       date: DateTime(2024, 9, 28),
       owner: UserManager.users[0],
       time: 5,
+      steps: '',
       description: 'Un espresso vertido sobre una bola de helado de vainilla.',
       image: 'assets/icons/icon_my_coffee.jpg',
       visibility: RecipeVisibility.private,
@@ -73,6 +78,7 @@ void generateMyRecipes() {
     )
   );
 
+  // Add main user recipes to recipes list in Recipe Manager.
   for (int i = 0; i < UserManager.users[0].myRecipes.length; i++) {
     RecipeManager.recipes.add(UserManager.users[0].myRecipes[i]);
   }  
