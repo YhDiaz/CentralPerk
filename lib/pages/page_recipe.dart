@@ -75,30 +75,6 @@ class _RecipePageState extends State<RecipePage> {
                   Text('By ${recipe.owner.name} - ${recipe.owner.username}'), // Name and username.
                   const SizedBox(
                     width: 10,
-                    // child: 
-                    //   (UserManager.users[0] == recipe.owner) ?
-                    //     Text('') : 
-                    //     FilledButton( // Add or remove friend.
-                    //       style: const ButtonStyle(
-                    //         backgroundColor: WidgetStatePropertyAll(Color.fromARGB(0, 0, 0, 0)) // No background.
-                    //       ),
-                    //       onPressed: () => {
-                    //         setState(() {
-                    //           (UserManager.users[0].friends.contains(recipe.owner)) ? // If button is on pressed and main user and recipe's author are friends,
-                    //             UserManager.users[0].removeFriend(recipe.owner) : // Then, remove friend from each other,
-                    //             UserManager.users[0].addFriend(recipe.owner); // Otherwise, add friend to each other.
-                    //         })
-                    //       },
-                    //       child: Icon(
-                    //         (UserManager.users[0].friends.contains(recipe.owner)) ? // If they are friends,
-                    //           Icons.person_remove : // Then display remove friend icon,
-                    //           Icons.person_add_alt_1, // Otherwise, display add friend icon.
-                    //         color: 
-                    //         (UserManager.users[0].friends.contains(recipe.owner)) ? // They are friends,
-                    //           const Color.fromARGB(255, 202, 23, 23) : // Then, display red icon to remove,
-                    //           const Color.fromARGB(255, 24, 157, 24) // Otherwise, display green icon to add.
-                    //       )
-                    //     ),
                   ),
                   Container(
                     child:
@@ -131,13 +107,6 @@ class _RecipePageState extends State<RecipePage> {
             ),
             Row( // General info: recipe name, rating, time and favorite.
               children: [
-                // const Padding(padding: EdgeInsets.only(left: 10),), // Space between border and name.
-                // Text( // Recipe name.
-                //   recipe.name,
-                //   style: const TextStyle(
-                //     fontSize: 25
-                //   ),
-                // ),
                 const SizedBox(width: 30,),
                 Row( // Aditional info.
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -210,67 +179,6 @@ class _RecipePageState extends State<RecipePage> {
               ],
             ),
             const SizedBox(height: 10,),
-            // Padding( // Author and button to update friends relationship.
-            //   padding: const EdgeInsets.symmetric(horizontal: 15),
-            //   child: Row(
-            //     children: [
-            //       Text('By ${recipe.owner.name} - ${recipe.owner.username}'), // Name and username.
-            //       const SizedBox(
-            //         width: 10,
-            //         // child: 
-            //         //   (UserManager.users[0] == recipe.owner) ?
-            //         //     Text('') : 
-            //         //     FilledButton( // Add or remove friend.
-            //         //       style: const ButtonStyle(
-            //         //         backgroundColor: WidgetStatePropertyAll(Color.fromARGB(0, 0, 0, 0)) // No background.
-            //         //       ),
-            //         //       onPressed: () => {
-            //         //         setState(() {
-            //         //           (UserManager.users[0].friends.contains(recipe.owner)) ? // If button is on pressed and main user and recipe's author are friends,
-            //         //             UserManager.users[0].removeFriend(recipe.owner) : // Then, remove friend from each other,
-            //         //             UserManager.users[0].addFriend(recipe.owner); // Otherwise, add friend to each other.
-            //         //         })
-            //         //       },
-            //         //       child: Icon(
-            //         //         (UserManager.users[0].friends.contains(recipe.owner)) ? // If they are friends,
-            //         //           Icons.person_remove : // Then display remove friend icon,
-            //         //           Icons.person_add_alt_1, // Otherwise, display add friend icon.
-            //         //         color: 
-            //         //         (UserManager.users[0].friends.contains(recipe.owner)) ? // They are friends,
-            //         //           const Color.fromARGB(255, 202, 23, 23) : // Then, display red icon to remove,
-            //         //           const Color.fromARGB(255, 24, 157, 24) // Otherwise, display green icon to add.
-            //         //       )
-            //         //     ),
-            //       ),
-            //       Container(
-            //         child:
-            //           (UserManager.users[0] == recipe.owner) ?
-            //             const Text('') : 
-            //             FilledButton( // Add or remove friend.
-            //               style: const ButtonStyle(
-            //                 backgroundColor: WidgetStatePropertyAll(Color.fromARGB(0, 0, 0, 0)) // No background.
-            //               ),
-            //               onPressed: () => {
-            //                 setState(() {
-            //                   (UserManager.users[0].friends.contains(recipe.owner)) ? // If button is on pressed and main user and recipe's author are friends,
-            //                     UserManager.users[0].removeFriend(recipe.owner) : // Then, remove friend from each other,
-            //                     UserManager.users[0].addFriend(recipe.owner); // Otherwise, add friend to each other.
-            //                 })
-            //               },
-            //               child: Icon(
-            //                 (UserManager.users[0].friends.contains(recipe.owner)) ? // If they are friends,
-            //                   Icons.person_remove : // Then display remove friend icon,
-            //                   Icons.person_add_alt_1, // Otherwise, display add friend icon.
-            //                 color: 
-            //                 (UserManager.users[0].friends.contains(recipe.owner)) ? // They are friends,
-            //                   const Color.fromARGB(255, 202, 23, 23) : // Then, display red icon to remove,
-            //                   const Color.fromARGB(255, 24, 157, 24) // Otherwise, display green icon to add.
-            //               )
-            //             ),
-            //       )
-            //     ],
-            //   ),
-            // ),
             const SizedBox(height: 25,),
             Padding( // Recipe description.
               padding: const EdgeInsets.symmetric(horizontal: 15), // Horizontal margin.
