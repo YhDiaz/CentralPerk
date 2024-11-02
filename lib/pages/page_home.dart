@@ -15,19 +15,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const double spaceBetweenButtons = 15; //Space between footer buttons
+  static const double spaceBetweenButtons = 15; // Space between footer buttons.
   static const Color footerBarColor =  Color(0xFFF2E0D3);
   static const Color appBarColor = Color(0xFF66280a);
   static const Color appBarTextColor = Color(0xFFF2E0D3);
 
-  final ButtonStyle defaultButton = ElevatedButton.styleFrom //Footer buttons non-linked to current page
-  (
+  final ButtonStyle defaultButton = ElevatedButton.styleFrom( // Footer buttons non-linked to current page.
     iconColor: appBarColor,
     backgroundColor: footerBarColor
   );
 
-  final ButtonStyle selectedButton = ElevatedButton.styleFrom //Footer button linked to current page
-  (
+  final ButtonStyle selectedButton = ElevatedButton.styleFrom( // Footer button linked to current page.
     iconColor: appBarColor,
     backgroundColor: const Color(0xFFD1B6A3)
   );
@@ -62,104 +60,170 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
       ),
       body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minWidth: 350, maxWidth: 400),
-          child: CarouselView(
-            scrollDirection: Axis.vertical,
-            itemExtent: 100,
-            onTap: (value) => {
-              setState(() {
-                RecipeManager.displayRecipe = RecipeManager.recipes[value];
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const RecipePage(title: '')));
-              })
-            },
-            children: List<Widget>.generate(5, (int index) {
-              return generateCard(index, RecipeManager.recipes);
-            })
-          ),
-        ),
+        child: _getBody()
       ),
-      persistentFooterButtons: [
-        ColoredBox(
-          color: footerBarColor,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FilledButton( // Home button.
-                onPressed: _goToHomePage,
-                style: selectedButton,
-                child: const Icon(Icons.home)
-              ),
-              const SizedBox(width: spaceBetweenButtons),
-              FilledButton( // Search button.
-                onPressed: _goToSearchPage,
-                style: defaultButton,
-                child: const Icon(Icons.search_outlined)
-              ),
-              const SizedBox(width: spaceBetweenButtons),
-              FilledButton( // Shop button.
-                onPressed: _goToShopPage,
-                style: defaultButton,
-                child: const Icon(Icons.shop_outlined)
-              ),
-              const SizedBox(width: spaceBetweenButtons),
-              FilledButton( // Profile button.
-                onPressed: _goToProfilePage,
-                style: defaultButton,
-                child: const Icon(Icons.person_outline)
-              ),
-            ],
-          ),
-        )
-      ],
+      drawer: _getDrawer(context)
     );
   }
-}
 
-Widget generateCard(int index, List<Recipe> recipes) {
-  return Card(
-    margin: const EdgeInsets.all(8),
-    color: const Color.fromARGB(255, 163, 128, 104),
-    child: Row(
-      children: [
-        const Padding(padding: EdgeInsets.all(5)),
-        SizedBox( // Recipe image.
-          height: 75,
-          width: 75,
-          child: Image.asset(recipes[index].image)
-        ),
-        const SizedBox(width: 15,), // Space between recipe image and info.
-        Column( // Info: recipe name and publish date.
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(recipes[index].name),
-            Row(
-              children: [
-                Text(recipes[index].date.day.toString()),
-                const Text('/'),
-                Text(recipes[index].date.month.toString()),
-                const Text('/'),
-                Text(recipes[index].date.year.toString()),
-              ],
+  //------------------------------------------------
+  // Color? _getDrawerButton(bool buttonSelected) {
+  //   return buttonSelected ?
+  //           Colors.deepOrange :
+  //           Colors.white;
+  // }
+  //------------------------------------------------
+
+  // Get body.
+  Widget _getBody() {
+    return Center(
+      child: Column(       
+        children: <Widget>[
+          _getSpace('appbar_header'),
+          _generateSectionTitle('Actividad reciente'), // Generate custom title for section.
+          _getSpace('header_content'),
+          _getActivityInfo(false), // Activity in recipes to display in home page.
+          _getSpace('content_content'),
+          _getResizeButton()
+        ],
+      )
+    );
+  }
+
+  // Generate custom title for section.
+  Widget _generateSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 25
+      ),
+    );
+  }
+
+  // Generate vertical space between widgets depending on the type of space.
+  Widget _getSpace(String type) {
+    return
+      type == 'appbar_header' ?
+        const SizedBox(
+          height: 15,
+        ) :
+      type == 'header_content' ?
+        const SizedBox(
+          height: 25,
+        ) :
+      // type == 'content_content' ?
+        SizedBox(
+          height: currentSpaceBetweenItems.toDouble(),
+        );
+  }
+
+  // Get activity in recipes to display in home page, depending my recipes list is empty or not.
+  Widget _getActivityInfo(bool myRecipesEmpty) {
+    return myRecipesEmpty ?
+            const Text('No hay recetas en la lista') : // No recipes to display.
+            Expanded( // To avoid problems due to include a ListView inside a Column.
+              child: SizedBox(
+                width: 350.0, // Width of list items.
+                child: ListView( // Recipes are displayed as a list.
+                  padding: const EdgeInsets.all(8),
+                  children: List.generate(currentSpaceBetweenItems, (index) {
+                    return Column(
+                      children: [
+                        Container(
+                          height: 50,
+                          color: Colors.amber[600],
+                          child: Center(child: Text('Entry $index')),
+                        ),
+                        _getSpace('content_content')
+                      ],
+                    );
+                  })
+                  // <Widget>[
+                  //   Container(
+                  //     height: 50,
+                  //     color: Colors.amber[600],
+                  //     child: const Center(child: Text('Entry A')),
+                  //   ),
+                  //   _getSpace('content_content'),
+                  //   Container(
+                  //     height: 50,
+                  //     color: Colors.amber[500],
+                  //     child: const Center(child: Text('Entry B')),
+                  //   ),
+                  //   _getSpace('content_content'),
+                  //   Container(
+                  //     height: 50,
+                  //     color: Colors.amber[100],
+                  //     child: const Center(child: Text('Entry C')),
+                  //   ),
+                  // ],
+                )
+              ),
+            );
+  }
+
+  
+  Widget _getDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView( // In case there isn't enough space for all options.
+        padding: EdgeInsets.zero, // Recommended by Flutter documentation.
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
             ),
-          ],
-        ),
-        const SizedBox(width: 75,), //Space between info and user
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            SizedBox.square(
-              dimension: 50,
-              child: IconButton(
-                onPressed: () => {},
-                icon: const Icon(Icons.person)
-              )
-            )
-          ],
-        )
-      ],
-    ),
-  );
+            child: Text('Central Perk - Navegación'),
+          ),
+          ListTile(
+            title: const Text('Principal'),
+            selected: true,
+            // tileColor: _getDrawerButton(true),
+            onTap: () {
+              Navigator.pop(context); // Close the drawer.
+            },
+          ),
+          ListTile(
+            title: const Text('Mis recetas'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push( // Go to My recipes page.
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage(title: 'Mis recetas'))
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<int> spaceBetweenItems = <int>[0, 3, 5, 7, 10, 13];
+  int currentSpaceBetweenItems = 0;
+
+  Widget _getResizeButton() {
+    return FloatingActionButton(
+      onPressed: _getNextSize,
+      child: Text('$currentSpaceBetweenItems')
+    );
+  }
+
+  int _getNextSize() {
+    if (currentSpaceBetweenItems == -1 || currentSpaceBetweenItems == spaceBetweenItems.last) {
+      setState(() {
+        currentSpaceBetweenItems = spaceBetweenItems[0];
+      });      
+      return spaceBetweenItems[0];
+    }
+
+    for (int i = 0; i < spaceBetweenItems.length; i++) {
+      if (spaceBetweenItems[i] == currentSpaceBetweenItems) {
+        setState(() {
+          currentSpaceBetweenItems = spaceBetweenItems[i + 1];
+        });        
+        return spaceBetweenItems[i + 1];
+      }
+    }
+
+    return -1;
+  }
 }
