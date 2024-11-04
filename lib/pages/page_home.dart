@@ -1,10 +1,12 @@
 // import 'package:central_perk/models/recipe.dart';
 // import 'package:central_perk/models/recipe_manager.dart';
+import 'package:central_perk/pages/page_my_barista.dart';
 import 'package:central_perk/pages/page_my_recipes.dart';
 import 'package:central_perk/pages/page_profile.dart';
 // import 'package:central_perk/pages/page_recipe.dart';
 import 'package:central_perk/pages/page_search.dart';
 import 'package:central_perk/pages/page_shop.dart';
+import 'package:central_perk/pages/page_your_opinion.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -190,6 +192,26 @@ class _HomePageState extends State<HomePage> {
               Navigator.push( // Go to My recipes page.
                 context,
                 MaterialPageRoute(builder: (context) => const MyRecipesPage(title: 'Mis recetas'))
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Mi barista'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer before go to another page.
+              Navigator.push( // Go to My barista page.
+                context,
+                MaterialPageRoute(builder: (context) => const MyBaristaPage())
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Tu opinión'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer before go to another page.
+              Navigator.push( // Go to Your opinion page.
+                context,
+                MaterialPageRoute(builder: (context) => const YourOpinionPage())
               );
             },
           ),
