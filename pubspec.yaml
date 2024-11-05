@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
 
 dev_dependencies:
+  change_app_package_name: ^1.4.0
   flutter_test:
     sdk: flutter
 
