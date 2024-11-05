@@ -55,6 +55,12 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _goToPage() {
+    setState(() {
+      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,14 +74,6 @@ class _HomePageState extends State<HomePage> {
       drawer: _getDrawer(context)
     );
   }
-
-  //------------------------------------------------
-  // Color? _getDrawerButton(bool buttonSelected) {
-  //   return buttonSelected ?
-  //           Colors.deepOrange :
-  //           Colors.white;
-  // }
-  //------------------------------------------------
 
   // Get body.
   Widget _getBody() {
@@ -114,8 +112,7 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(
           height: 25,
         ) :
-      // type == 'content_content' ?
-        SizedBox(
+        SizedBox( // type == 'content_content'.
           height: currentSpaceBetweenItems.toDouble(),
         );
   }
@@ -141,30 +138,10 @@ class _HomePageState extends State<HomePage> {
                       ],
                     );
                   })
-                  // <Widget>[
-                  //   Container(
-                  //     height: 50,
-                  //     color: Colors.amber[600],
-                  //     child: const Center(child: Text('Entry A')),
-                  //   ),
-                  //   _getSpace('content_content'),
-                  //   Container(
-                  //     height: 50,
-                  //     color: Colors.amber[500],
-                  //     child: const Center(child: Text('Entry B')),
-                  //   ),
-                  //   _getSpace('content_content'),
-                  //   Container(
-                  //     height: 50,
-                  //     color: Colors.amber[100],
-                  //     child: const Center(child: Text('Entry C')),
-                  //   ),
-                  // ],
                 )
               ),
             );
   }
-
   
   Widget _getDrawer(BuildContext context) {
     return Drawer(
@@ -180,7 +157,6 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             title: const Text('Principal'),
             selected: true,
-            // tileColor: _getDrawerButton(true),
             onTap: () {
               Navigator.pop(context); // Close the drawer.
             },
