@@ -1,0 +1,62 @@
+{
+    "usability": [
+        {
+            "title": "Pregunta 1: ¿Qué tan fácil fue navegar a través de la aplicación?",
+            "value": 0,
+            "min": "0 estrellas: Fue muy difícil encontrar las funcionalidades, la navegación fue confusa.",
+            "max": "5 estrellas: Fue extremadamente fácil, la navegación es intuitiva y sin complicaciones."
+        },
+        {
+            "title": "Pregunta 2: ¿Pudiste completar tus tareas en la aplicación sin problemas?",
+            "value": 0,
+            "min": "0 estrellas: No pude completar las tareas, fue frustrante.",
+            "max": "5 estrellas: Pude completar todas las tareas de forma rápida y eficiente."
+        },
+        {
+            "title": "Pregunta 3: ¿Cómo calificas la interfaz gráfica en términos de diseño y claridad?",
+            "value": 0,
+            "min": "0 estrellas: La interfaz es poco clara y difícil de entender.",
+            "max": "5 estrellas: La interfaz es clara, atractiva y facilita el uso."
+        }
+    ],
+    "content": [
+        {
+            "title": "Pregunta 1: ¿El contenido de la aplicación fue útil para ti?",
+            "value": 0,
+            "min": "0 estrellas: El contenido no fue relevante ni útil.",
+            "max": "5 estrellas: El contenido fue muy útil y relevante para mis necesidades."
+        },
+        {
+            "title": "Pregunta 2: ¿Qué tan bien el contenido de la aplicación se adapta a tus expectativas?",
+            "value": 0,
+            "min": "0 estrellas: El contenido no cumplió con mis expectativas.",
+            "max": "5 estrellas: El contenido superó completamente mis expectativas."
+        },
+        {
+            "title": "Pregunta 3: ¿El contenido de la aplicación está presentado de manera clara y comprensible?",
+            "value": 0,
+            "min": "0 estrellas: El contenido está mal estructurado o es confuso.",
+            "max": "5 estrellas: El contenido está muy bien presentado y es fácil de comprender."
+        }
+    ],
+    "share": [
+        {
+            "title": "Pregunta 1: ¿Qué tan probable es que recomiendes esta aplicación a un amigo?",
+            "value": 0,
+            "min": "0 estrellas: No la recomendaría en absoluto.",
+            "max": "5 estrellas: Definitivamente la recomendaría."
+        },
+        {
+            "title": "Pregunta 2: ¿Cómo te sentirías al compartir esta aplicación con alguien más?",
+            "value": 0,
+            "min": "0 estrellas: No me sentiría cómodo compartiéndola.",
+            "max": "5 estrellas: Me sentiría muy cómodo compartiéndola."
+        },
+        {
+            "title": "Pregunta 3: ¿Crees que esta aplicación podría ser útil para personas cercanas a ti?",
+            "value": 0,
+            "min": "0 estrellas: No creo que sea útil para otras personas.",
+            "max": "5 estrellas: Estoy seguro de que sería muy útil para personas cercanas."
+        }
+    ]
+}
