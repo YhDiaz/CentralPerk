@@ -205,9 +205,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp (
       title: 'Central Perk',
       theme: ThemeData(
-        primaryColor: Color(0xFF543C2E),
+        primaryColor: const Color(0xFF543C2E),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Color(0xFFDD8051),
+          primary: const Color(0xFFDD8051),
         ),
         scaffoldBackgroundColor: const Color(0xFFD3B391), // Scaffold theme.
         appBarTheme: const AppBarTheme( // App bar theme.
@@ -222,42 +222,41 @@ class MyApp extends StatelessWidget {
           )
         ),
         buttonTheme: ButtonThemeData(
-          buttonColor: const Color.fromARGB(255, 180, 142, 110),
+          buttonColor: const Color(0xFFB48E6E),
           textTheme: ButtonTextTheme.primary
         )
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        // useMaterial3: true,
       ),
-      home: const SplashPage(),
+      // home: const SplashPage(),
+      home: const HomePage(title: 'Central perk - Home page')
     );
   }
 }
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+// class SplashPage extends StatefulWidget {
+//   const SplashPage({super.key});
 
-  @override
-  // ignore: library_private_types_in_public_api
-  _SplashPageState createState() => _SplashPageState();
-}
+//   @override
+//   // ignore: library_private_types_in_public_api
+//   _SplashPageState createState() => _SplashPageState();
+// }
 
-class _SplashPageState extends State<SplashPage> {
-  @override
-  Widget build(BuildContext context) {
-    return EasySplashScreen (
-      logo: Image.asset('assets/icons/icon_central_perk_logo.png'),
-      title: const Text (
-        "Central Perk",
-        style: TextStyle (
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      backgroundColor: const Color(0xFF724A22),
-      showLoader: true,
-      loadingText: const Text("Opening coffeehouse..."),
-      navigator: const HomePage(title: 'Central Perk - Home page'),
-      durationInSeconds: 5,
-    );
-  }
-}
+// class _SplashPageState extends State<SplashPage> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return EasySplashScreen (
+//       logo: Image.asset('assets/icons/icon_central_perk_logo.png'),
+//       title: const Text (
+//         "Central Perk",
+//         style: TextStyle (
+//           fontSize: 25,
+//           fontWeight: FontWeight.bold,
+//         ),
+//       ),
+//       backgroundColor: const Color(0xFF724A22),
+//       showLoader: true,
+//       loadingText: const Text("Opening coffeehouse..."),
+//       navigator: const HomePage(title: 'Central Perk - Home page'),
+//       durationInSeconds: 5,
+//     );
+//   }
+// }
