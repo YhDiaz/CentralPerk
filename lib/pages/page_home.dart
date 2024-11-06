@@ -1,11 +1,5 @@
-// import 'package:central_perk/models/recipe.dart';
-// import 'package:central_perk/models/recipe_manager.dart';
 import 'package:central_perk/pages/page_my_barista.dart';
 import 'package:central_perk/pages/page_my_recipes.dart';
-import 'package:central_perk/pages/page_profile.dart';
-// import 'package:central_perk/pages/page_recipe.dart';
-import 'package:central_perk/pages/page_search.dart';
-import 'package:central_perk/pages/page_shop.dart';
 import 'package:central_perk/pages/page_your_opinion.dart';
 import 'package:flutter/material.dart';
 
@@ -18,47 +12,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // static const double spaceBetweenButtons = 15; // Space between footer buttons.
-  // static const Color footerBarColor =  Color(0xFFF2E0D3);
-  // static const Color appBarColor = Color(0xFF66280a);
   static const Color appBarTextColor = Color(0xFFF2E0D3);
-
-  // final ButtonStyle defaultButton = ElevatedButton.styleFrom( // Footer buttons non-linked to current page.
-  //   iconColor: appBarColor,
-  //   backgroundColor: footerBarColor
-  // );
-
-  // final ButtonStyle selectedButton = ElevatedButton.styleFrom( // Footer button linked to current page.
-  //   iconColor: appBarColor,
-  //   backgroundColor: const Color(0xFFD1B6A3)
-  // );
 
   void _goToHomePage() {
     setState(() { });
-  }
-
-  void _goToSearchPage() {
-    setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchPage(title: 'Central Perk - Search page')));
-    });
-  }
-
-  void _goToShopPage() {
-    setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const ShopPage(title: 'Central Perk - Shop page')));      
-    });
-  }
-
-  void _goToProfilePage() {
-    setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage(title: 'Central Perk - Profile page'))); 
-    });
-  }
-
-  void _goToPage() {
-    setState(() {
-      
-    });
   }
 
   @override

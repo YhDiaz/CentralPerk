@@ -12,7 +12,7 @@ class _MyBaristaPageState extends State<MyBaristaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Crear receta'),
+        title: const Text('Mi barista'),
       ),
     );
   }
