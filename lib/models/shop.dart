@@ -1,13 +1,13 @@
-import 'package:central_perk/models/product.dart';
+// import 'package:central_perk/models/product.dart';
 
-class Shop {
-  final List<Product> products = List.empty(growable: true);
+// class Shop {
+//   final List<Product> products = List.empty(growable: true);
 
-  void addProduct(Product product) {
+//   void addProduct(Product product) {
 
-  }
+//   }
 
-  void sellProduct(String productName) {
+//   void sellProduct(String productName) {
     
-  }
-}
+//   }
+// }

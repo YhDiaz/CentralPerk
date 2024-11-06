@@ -1,9 +1,9 @@
-import 'package:central_perk/models/user.dart';
-import 'package:central_perk/models/user_manager.dart';
+// import 'package:central_perk/models/user.dart';
+// import 'package:central_perk/models/user_manager.dart';
 import 'package:central_perk/pages/page_create_recipe.dart';
 import 'package:flutter/material.dart';
 
-User myUser = UserManager.users[0];
+// User myUser = UserManager.users[0];
 
 class MyRecipesPage extends StatefulWidget {
   const MyRecipesPage({super.key, required this.title});

@@ -1,13 +1,13 @@
-import 'package:central_perk/models/user.dart';
+// import 'package:central_perk/models/user.dart';
 
-class Comment {
-  final User owner;
-  final DateTime date;
-  final String comment;
+// class Comment {
+//   final User owner;
+//   final DateTime date;
+//   final String comment;
 
-  Comment({
-    required this.owner,
-    required this.date,
-    required this.comment
-  });
-}
+//   Comment({
+//     required this.owner,
+//     required this.date,
+//     required this.comment
+//   });
+// }
