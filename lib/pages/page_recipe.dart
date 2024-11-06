@@ -34,7 +34,7 @@ class _RecipePageState extends State<RecipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 199, 167, 132),
+      backgroundColor: const Color(0xFFC7A784),
       appBar: AppBar(
         backgroundColor: appBarColor,
         title: Text(

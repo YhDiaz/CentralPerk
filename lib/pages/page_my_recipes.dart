@@ -37,7 +37,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: appBarColor,
+        // backgroundColor: appBarColor,
         title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
       ),
       body: Center(

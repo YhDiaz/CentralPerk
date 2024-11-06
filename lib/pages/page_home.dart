@@ -19,19 +19,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // static const double spaceBetweenButtons = 15; // Space between footer buttons.
-  static const Color footerBarColor =  Color(0xFFF2E0D3);
-  static const Color appBarColor = Color(0xFF66280a);
+  // static const Color footerBarColor =  Color(0xFFF2E0D3);
+  // static const Color appBarColor = Color(0xFF66280a);
   static const Color appBarTextColor = Color(0xFFF2E0D3);
 
-  final ButtonStyle defaultButton = ElevatedButton.styleFrom( // Footer buttons non-linked to current page.
-    iconColor: appBarColor,
-    backgroundColor: footerBarColor
-  );
+  // final ButtonStyle defaultButton = ElevatedButton.styleFrom( // Footer buttons non-linked to current page.
+  //   iconColor: appBarColor,
+  //   backgroundColor: footerBarColor
+  // );
 
-  final ButtonStyle selectedButton = ElevatedButton.styleFrom( // Footer button linked to current page.
-    iconColor: appBarColor,
-    backgroundColor: const Color(0xFFD1B6A3)
-  );
+  // final ButtonStyle selectedButton = ElevatedButton.styleFrom( // Footer button linked to current page.
+  //   iconColor: appBarColor,
+  //   backgroundColor: const Color(0xFFD1B6A3)
+  // );
 
   void _goToHomePage() {
     setState(() { });
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: appBarColor,
+        // backgroundColor: appBarColor,
         title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
       ),
       body: Center(
