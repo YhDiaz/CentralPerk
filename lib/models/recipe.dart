@@ -13,65 +13,52 @@ class Recipe {
   });
 
   Widget getCard(BuildContext context) {
-    return Column(
-                      children: [
-                        Card(
-                          color: const Color(0xFFE0D0C0), // Card color.
-                          elevation: 8,
-                          margin: EdgeInsets.symmetric(vertical: 10), // Vertical margin.
-                          child: InkWell( // To detect taps.
-                            onTap: () { // Behavior when touch the recipe.
-                              Navigator.push( // Add Recipe page to navigation stack.
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RecipePage(title: 'Receta'),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Center( // Center image.
-                                  child: ClipRRect( // Add recipe image with rounded borders.
-                                    borderRadius: BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
-                                    child: Image.asset(
-                                      // recetas[index]['image']!,
-                                      image,
-                                      width: 350,
-                                      height: 250,
-                                      fit: BoxFit.cover, // To adjust image to container.
-                                    ),
-                                  ),
-                                ),
-                                Padding( // Recipe name.
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Text(
-                                    // recetas[index]['name']!,
-                                    name,
-                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Padding( // Recipe content.
-                                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                                  child: Text(
-                                    // recetas[index]['description']!,
-                                    description,
-                                    style: TextStyle(fontSize: 16, color: const Color(0xFF674722)),
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                              ],
-                            ),
-                          ),
-                        ),
-                        // Container(
-                        //   height: 50,
-                        //   color: Colors.amber[600],
-                        //   child: Center(child: Text('Entry $index')),
-                        // ),
-                        // _getSpace('content_content')
-                      ],
-                    );
+    return Card(
+            color: const Color(0xFFE0D0C0), // Card color.
+            elevation: 8,
+            margin: EdgeInsets.symmetric(vertical: 10), // Vertical margin.
+            child: InkWell( // To detect taps.
+              onTap: () { // Behavior when touch the recipe.
+                Navigator.push( // Add Recipe page to navigation stack.
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RecipePage(title: 'Receta'),
+                  ),
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Center( // Center image.
+                    child: ClipRRect( // Add recipe image with rounded borders.
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
+                      child: Image.asset(
+                        image,
+                        width: 350,
+                        height: 250,
+                        fit: BoxFit.cover, // To adjust image to container.
+                      ),
+                    ),
+                  ),
+                  Padding( // Recipe name.
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      name,
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding( // Recipe content.
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      description,
+                      style: TextStyle(fontSize: 16, color: const Color(0xFF674722)),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                ],
+              ),
+            ),
+          );
   }
 }
 

@@ -89,19 +89,6 @@ class _HomePageState extends State<HomePage> {
     ),
     // Después hay que ver con data base también
   ];
-  
-  // final List<Map<String, String>> recetas = [ 
-  //   {
-  //     'name': 'Café Latte',
-  //     'description': 'Una deliciosa combinación de café expreso y leche vaporizada.',
-  //     'image': 'assets/icons/icon_coffee_american.jpg',
-  //   },
-  //   {
-  //     'name': 'Capuchino',
-  //     'description': 'Café expreso, leche vaporizada y espuma de leche.',
-  //     'image': 'assets/icons/icon_coffee_latte.jpg',
-  //   }, // Agrega más recetas aquí
-  // ];
 
   // Get activity in recipes to display in home page, depending my recipes list is empty or not.
   Widget _getActivityInfo(bool myRecipesEmpty) {
@@ -112,65 +99,9 @@ class _HomePageState extends State<HomePage> {
                 width: 350.0, // Width of list items.
                 child: ListView( // Recipes are displayed as a list.
                   padding: const EdgeInsets.all(8),
-                  // REPLACE 2 WHEN IMPLEMENT DATA BASE
-                  children: List.generate(/*currentSpaceBetweenItems*/recipes.length, (index) {
+                  // REPLACE recipes.length WHEN IMPLEMENT DATA BASE
+                  children: List.generate(recipes.length, (index) {
                       return recipes[index].getCard(context);
-                    // return Column(
-                    //   children: [
-                    //     Card(
-                    //       color: const Color(0xFFE0D0C0), // Card color.
-                    //       elevation: 8,
-                    //       margin: EdgeInsets.symmetric(vertical: 10), // Vertical margin.
-                    //       child: InkWell( // To detect taps.
-                    //         onTap: () { // Behavior when touch the recipe.
-                    //           Navigator.push( // Add Recipe page to navigation stack.
-                    //             context,
-                    //             MaterialPageRoute(
-                    //               builder: (context) => RecipePage(title: 'Receta'),
-                    //             ),
-                    //           );
-                    //         },
-                    //         child: Column(
-                    //           crossAxisAlignment: CrossAxisAlignment.start,
-                    //           children: <Widget>[
-                    //             Center( // Center image.
-                    //               child: ClipRRect( // Add recipe image with rounded borders.
-                    //                 borderRadius: BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
-                    //                 child: Image.asset(
-                    //                   recetas[index]['image']!,
-                    //                   width: 350,
-                    //                   height: 250,
-                    //                   fit: BoxFit.cover, // To adjust image to container.
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //             Padding( // Recipe name.
-                    //               padding: EdgeInsets.all(16.0),
-                    //               child: Text(
-                    //                 recetas[index]['name']!,
-                    //                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    //               ),
-                    //             ),
-                    //             Padding( // Recipe content.
-                    //               padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    //               child: Text(
-                    //                 recetas[index]['description']!,
-                    //                 style: TextStyle(fontSize: 16, color: const Color(0xFF674722)),
-                    //               ),
-                    //             ),
-                    //             SizedBox(height: 10),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     // Container(
-                    //     //   height: 50,
-                    //     //   color: Colors.amber[600],
-                    //     //   child: Center(child: Text('Entry $index')),
-                    //     // ),
-                    //     _getSpace('content_content')
-                    //   ],
-                    // );
                   })
                 )
               ),
