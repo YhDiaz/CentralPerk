@@ -204,9 +204,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp (
       title: 'Central Perk',
-      theme: ThemeData (
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      theme: ThemeData(
+        primaryColor: Color(0xFF543C2E),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: Color(0xFFDD8051),
+        ),
+        scaffoldBackgroundColor: const Color(0xFFD3B391), // Scaffold theme.
+        appBarTheme: const AppBarTheme( // App bar theme.
+          backgroundColor: Color(0xFF66280a)
+        ),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(
+            color: Color(0xFF794024)
+          ),
+          bodyMedium: const TextStyle(
+            color: Color(0xFF5F2101)
+          )
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: const Color.fromARGB(255, 180, 142, 110),
+          textTheme: ButtonTextTheme.primary
+        )
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        // useMaterial3: true,
       ),
       home: const SplashPage(),
     );
