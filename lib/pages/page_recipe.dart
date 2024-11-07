@@ -1,34 +1,51 @@
+import 'package:central_perk/models/recipe.dart';
 import 'package:flutter/material.dart';
 
 class RecipePage extends StatefulWidget {
-  const RecipePage({super.key, required this.title});
-  final String title;
+  final Recipe recipe;
+
+  RecipePage({required this.recipe});
 
   @override
-  State<RecipePage> createState() => _RecipePageState();
+  _RecipePageState createState() => _RecipePageState();
 }
 
 class _RecipePageState extends State<RecipePage> {
-  static const Color footerBarColor =  Color(0xFFF2E0D3);
-  static const Color appBarColor = Color(0xFF66280a);
-  // static const Color appBarTextColor = Color(0xFFF2E0D3);
-
-  final ButtonStyle defaultButton = ElevatedButton.styleFrom //Footer buttons non-linked to current page
-  (
-    iconColor: appBarColor,
-    backgroundColor: footerBarColor
-  );
-
-  final ButtonStyle selectedButton = ElevatedButton.styleFrom //Footer button linked to current page
-  (
-    iconColor: appBarColor,
-    backgroundColor: const Color(0xFFD1B6A3)
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        title: Text(widget.recipe.name),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column( // Recipe info.
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  widget.recipe.image,
+                  width: double.infinity,
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              widget.recipe.name,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16),
+            Text(
+              widget.recipe.description,
+              style: TextStyle(fontSize: 16, color: Color(0xFF794024)),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
