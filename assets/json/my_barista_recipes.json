@@ -1,73 +1,72 @@
-{
-    "recipes": [
-        {
-            "name": "Café Latte",
-            "description": "Una deliciosa combinación de café expreso y leche vaporizada.",
-            "pictures": [
-                ""
-            ],
-            "ingredients": [
-                "1 taza de café expreso",
-                "1 taza de leche",
-                "Azúcar al gusto"
-            ],
-            "products": [
-                "Máquina de expreso",
-                "Espumador de leche"
-            ]
-        },
-        {
-            "name": "Capuchino",
-            "description": "Un clásico café italiano con partes iguales de café expreso, leche vaporizada y espuma de leche.",
-            "pictures": [
-                ""
-            ],
-            "ingredients": [
-                "1 taza de café expreso",
-                "1 taza de leche vaporizada",
-                "Espuma de leche",
-                "Cacao en polvo para decorar"
-            ],
-            "products": [
-                "Máquina de expreso",
-                "Espumador de leche",
-                "Cernidor de cacao"
-            ]
-        },
-        {
-            "name": "Café Americano",
-            "description": "Café expreso diluido con agua caliente para un sabor suave y delicioso.",
-            "pictures": [
-                ""
-            ],
-            "ingredients": [
-                "1 taza de café expreso",
-                "1 taza de agua caliente"
-            ],
-            "products": [
-                "Máquina de expreso",
-                "Hervidor de agua"
-            ]
-        },
-        {
-            "name": "Moca",
-            "description": "Una deliciosa mezcla de café, chocolate y leche.",
-            "pictures": [
-                ""
-            ],
-            "ingredients": [
-                "1 taza de café expreso",
-                "1 taza de leche",
-                "2 cucharadas de jarabe de chocolate",
-                "Crema batida",
-                "Virutas de chocolate para decorar"
-            ],
-            "products": [
-                "Máquina de expreso",
-                "Espumador de leche",
-                "Jarabe de chocolate"
-            ]
-        }
-    ]
-}
+
+[
+    {
+        "name": "Café Latte",
+        "description": "Una deliciosa combinación de café expreso y leche vaporizada.",
+        "pictures": [
+            ""
+        ],
+        "ingredients": [
+            "1 taza de café expreso",
+            "1 taza de leche",
+            "Azúcar al gusto"
+        ],
+        "products": [
+            "Máquina de expreso",
+            "Espumador de leche"
+        ]
+    },
+    {
+        "name": "Capuchino",
+        "description": "Un clásico café italiano con partes iguales de café expreso, leche vaporizada y espuma de leche.",
+        "pictures": [
+            ""
+        ],
+        "ingredients": [
+            "1 taza de café expreso",
+            "1 taza de leche vaporizada",
+            "Espuma de leche",
+            "Cacao en polvo para decorar"
+        ],
+        "products": [
+            "Máquina de expreso",
+            "Espumador de leche",
+            "Cernidor de cacao"
+        ]
+    },
+    {
+        "name": "Café Americano",
+        "description": "Café expreso diluido con agua caliente para un sabor suave y delicioso.",
+        "pictures": [
+            ""
+        ],
+        "ingredients": [
+            "1 taza de café expreso",
+            "1 taza de agua caliente"
+        ],
+        "products": [
+            "Máquina de expreso",
+            "Hervidor de agua"
+        ]
+    },
+    {
+        "name": "Moca",
+        "description": "Una deliciosa mezcla de café, chocolate y leche.",
+        "pictures": [
+            ""
+        ],
+        "ingredients": [
+            "1 taza de café expreso",
+            "1 taza de leche",
+            "2 cucharadas de jarabe de chocolate",
+            "Crema batida",
+            "Virutas de chocolate para decorar"
+        ],
+        "products": [
+            "Máquina de expreso",
+            "Espumador de leche",
+            "Jarabe de chocolate"
+        ]
+    }
+]
   
