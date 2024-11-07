@@ -1,17 +1,25 @@
 import 'package:central_perk/models/recipe.dart';
+import 'package:central_perk/models/recipe_database.dart';
 import 'package:flutter/material.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
+  final Function(Recipe) moveRecipeFromMyBarista;
   final bool fromMyBarista;
 
-  RecipePage({required this.recipe, this.fromMyBarista = false});
+  RecipePage({
+    required this.recipe,
+    required this.moveRecipeFromMyBarista,
+    this.fromMyBarista = false
+  });
 
   @override
   _RecipePageState createState() => _RecipePageState();
 }
 
 class _RecipePageState extends State<RecipePage> {
+  final RecipeDatabase recipeDatabase = RecipeDatabase.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,25 +42,38 @@ class _RecipePageState extends State<RecipePage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               widget.recipe.name,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               widget.recipe.description,
-              style: TextStyle(fontSize: 16, color: Color(0xFF794024)),
+              style: const TextStyle(fontSize: 16, color: Color(0xFF794024)),
             ),
           ],
         ),
       ),
       floatingActionButton: widget.fromMyBarista ?
-        FloatingActionButton(
-          onPressed: () {
+        FloatingActionButton( // Add recipe from My barista to My recipes.
+          onPressed: () async {
+            await recipeDatabase.createRecipe(widget.recipe); // Add recipe to database.
+            widget.moveRecipeFromMyBarista(widget.recipe); // Move recipe from My barista, i.e., remove from My barista.
+            ScaffoldMessenger.of(context).showSnackBar( // Display message at the bottom of the screen.
+              const SnackBar(
+                content: Text(
+                  'Agregaste una receta de Mi barista a Mis recetas',
+                  style: TextStyle(
+                    color: Color(0xFFE7D0AE)
+                  ),
+                ),
+                backgroundColor: Color(0xFF7C5635),
+              )
+            );
             // Poner la funcionalidad para mover a mis receta, hay que ver bien si se necesita la database xq hay que agregar el bool de que pertenece al barista
           },
-          child: Icon(Icons.add)
+          child: const Icon(Icons.add)
         )
       :
         null

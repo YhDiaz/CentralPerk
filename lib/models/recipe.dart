@@ -73,7 +73,9 @@ class Recipe {
       image: image ?? this.image
     );
 
-  Widget getCard(BuildContext context) {
+  // Get custom card.
+  // deleteRecipe function is just in case of add a recipe from My barista.
+  Widget getCard(BuildContext context, Function(Recipe) deleteRecipe) {
     return Card(
             color: const Color(0xFFE0D0C0), // Card color.
             elevation: 8,
@@ -85,7 +87,8 @@ class Recipe {
                   MaterialPageRoute(
                     builder: (context) => RecipePage(
                       recipe: this,
-                      fromMyBarista: myBaristaRecipe
+                      fromMyBarista: myBaristaRecipe,
+                      moveRecipeFromMyBarista: deleteRecipe
                     ),
                   ),
                 );
@@ -95,7 +98,7 @@ class Recipe {
                 children: <Widget>[
                   Center( // Center image.
                     child: ClipRRect( // Add recipe image with rounded borders.
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
                       child: Image.asset(
                         image,
                         width: 350,
@@ -105,20 +108,20 @@ class Recipe {
                     ),
                   ),
                   Padding( // Recipe name.
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
                       name,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding( // Recipe content.
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       description,
-                      style: TextStyle(fontSize: 16, color: const Color(0xFF674722)),
+                      style: const TextStyle(fontSize: 16, color: const Color(0xFF674722)),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),

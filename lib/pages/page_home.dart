@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                 width: 350.0, // Width of list items.
                 child: ListView( // Recipes are displayed as a list.
                   padding: const EdgeInsets.all(8),
-                  children: recipes.map((receta) => receta.getCard(context)).toList()
+                  children: recipes.map((receta) => receta.getCard(context, (recipe) {})).toList()
                   // // REPLACE recipes.length WHEN IMPLEMENT DATA BASE
                   // children: List.generate(recipes.length, (index) {
                   //     return recipes[index].getCard(context);

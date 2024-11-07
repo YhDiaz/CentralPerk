@@ -28,13 +28,19 @@ class _MyBaristaPageState extends State<MyBaristaPage> {
     });
   }
 
+  void _deleteRecipe(Recipe recipe) {
+    setState(() {
+      _recipes.remove(recipe);
+    });
+  }
+
   List<Recipe> _buildMyBaristaRecipesList() {
     if (_recipesFuture == null) {
-      return []; // Or show an empty list message
+      return []; // Return an empty list of recipes.
     }
     _recipesFuture!.then((result) {
       for (var item in result) {
-        _recipes.add(item);
+        _recipes.add(item); // Add each recipe in recipes future to list of recipes.
       }
     });
     return _recipes;
@@ -79,7 +85,7 @@ class _MyBaristaPageState extends State<MyBaristaPage> {
                         return defaultInfo ?
                           Text('No se encontró información de la receta $index') // Recipes aren't loaded yet.
                         :
-                          _recipes[index].getCard(context); // Display recipe card.
+                          _recipes[index].getCard(context, _deleteRecipe); // Display recipe card.
                       },
                     )
                   ),
