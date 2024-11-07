@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:central_perk/pages/page_home.dart';
 
-void main() {
+void main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
