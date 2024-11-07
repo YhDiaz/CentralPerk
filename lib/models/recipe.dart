@@ -12,12 +12,14 @@ class Recipe {
   final String name;
   final String description;
   final String image;
+  final bool myBaristaRecipe;
 
   Recipe({
     this.id,
     required this.name,
     required this.description,
-    required this.image
+    required this.image,
+    this.myBaristaRecipe = false
   });
 
   // Convert to JSON.
@@ -36,7 +38,8 @@ class Recipe {
       id: map['id'],
       name: map['name'],
       description: map['description'],
-      image: map['image']
+      image: map['image'],
+      myBaristaRecipe: map['myBaristaRecipe'] ?? false // False by default.
     );
   }
 
@@ -44,7 +47,8 @@ class Recipe {
     return Recipe(
       name: map['name'],
       description: map['description'],
-      image: map['image']
+      image: map['image'],
+      myBaristaRecipe: map['myBaristaRecipe'] ?? true // True by default.
     );
   }
 
@@ -79,7 +83,10 @@ class Recipe {
                 Navigator.push( // Add Recipe page to navigation stack.
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RecipePage(recipe: this,),
+                    builder: (context) => RecipePage(
+                      recipe: this,
+                      fromMyBarista: myBaristaRecipe
+                    ),
                   ),
                 );
               },

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
+  final bool fromMyBarista;
 
-  RecipePage({required this.recipe});
+  RecipePage({required this.recipe, this.fromMyBarista = false});
 
   @override
   _RecipePageState createState() => _RecipePageState();
@@ -46,6 +47,15 @@ class _RecipePageState extends State<RecipePage> {
           ],
         ),
       ),
+      floatingActionButton: widget.fromMyBarista ?
+        FloatingActionButton(
+          onPressed: () {
+            // Poner la funcionalidad para mover a mis receta, hay que ver bien si se necesita la database xq hay que agregar el bool de que pertenece al barista
+          },
+          child: Icon(Icons.add)
+        )
+      :
+        null
     );
   }
 }
