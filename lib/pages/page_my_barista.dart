@@ -67,23 +67,25 @@ class _MyBaristaPageState extends State<MyBaristaPage> {
   // defaultInfo = true: indicates that there aren't any recipes loaded yet.
   // defaultInfo = false: indicate that My barista recipes were loaded.
   Widget _getRecipesListToDisplay(bool defaultInfo) {
-    return Column(
-            children: [
-              Expanded( // To avoid problems due to include a ListView inside a Column.
-                child: SizedBox(
-                  width: 350.0, // Width of list items.
-                  child: ListView.builder(
-                    itemCount: _recipes.length,
-                    itemBuilder: (context, index) {
-                      return defaultInfo ?
-                        Text('No se encontró información de la receta $index') // Recipes aren't loaded yet.
-                      :
-                        _recipes[index].getCard(context); // Display recipe card.
-                    },
-                  )
-                ),
-              )
-            ],
-          );
+    return Center(
+      child: Column(
+              children: [
+                Expanded( // To avoid problems due to include a ListView inside a Column.
+                  child: SizedBox(
+                    width: 350.0, // Width of list items.
+                    child: ListView.builder(
+                      itemCount: _recipes.length,
+                      itemBuilder: (context, index) {
+                        return defaultInfo ?
+                          Text('No se encontró información de la receta $index') // Recipes aren't loaded yet.
+                        :
+                          _recipes[index].getCard(context); // Display recipe card.
+                      },
+                    )
+                  ),
+                )
+              ],
+            ),
+    );
   }
 }
