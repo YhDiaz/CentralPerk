@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Café Latte",
+        "description": "Una deliciosa combinación de café expreso y leche vaporizada.",
+        "image": "assets/icons/icon_coffee_latte.jpg"
+    },
+    {
+        "name": "Café Cappuccino",
+        "description": "Un clásico café italiano con partes iguales de café expreso, leche vaporizada y espuma de leche.",
+        "image": "assets/icons/icon_coffee_cappuccino.jpg"
+    },
+    {
+        "name": "Café Americano",
+        "description": "Café expreso diluido con agua caliente para un sabor suave y delicioso.",
+        "image": "assets/icons/icon_coffee_american.jpg"
+    },
+    {
+        "name": "Mocha",
+        "description": "Una deliciosa mezcla de café, chocolate y leche.",
+        "image": "assets/icons/icon_coffee_mocha.jpg"
+    }
+]
+  

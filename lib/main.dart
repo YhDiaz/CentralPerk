@@ -13,29 +13,34 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp (
       title: 'Central Perk',
-      theme: ThemeData(
-        primaryColor: const Color(0xFF543C2E),
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xFFDD8051),
+      theme: _getColorPalette(),
+      home: const HomePage(title: 'Central perk - Home page')
+    );
+  }
+
+  // Get app color palette.
+  ThemeData _getColorPalette() {
+    return ThemeData(
+      primaryColor: const Color(0xFF543C2E),
+      colorScheme: ColorScheme.fromSwatch().copyWith(
+        primary: const Color(0xFF533424), // Buttons like Add and Cancel in pop-ups.
+      ),
+      scaffoldBackgroundColor: const Color(0xFFD3B391), // Scaffold theme.
+      appBarTheme: const AppBarTheme( // App bar theme.
+        backgroundColor: Color(0xFF66280a)
+      ),
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(
+          color: Color(0xFF794024)
         ),
-        scaffoldBackgroundColor: const Color(0xFFD3B391), // Scaffold theme.
-        appBarTheme: const AppBarTheme( // App bar theme.
-          backgroundColor: Color(0xFF66280a)
-        ),
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(
-            color: Color(0xFF794024)
-          ),
-          bodyMedium: const TextStyle(
-            color: Color(0xFF5F2101)
-          )
-        ),
-        buttonTheme: ButtonThemeData(
-          buttonColor: const Color(0xFFB48E6E),
-          textTheme: ButtonTextTheme.primary
+        bodyMedium: TextStyle(
+          color: Color(0xFF5F2101)
         )
       ),
-      home: const HomePage(title: 'Central perk - Home page')
+      buttonTheme: const ButtonThemeData(
+        buttonColor: Color(0xFFB48E6E),
+        textTheme: ButtonTextTheme.primary
+      )
     );
   }
 }

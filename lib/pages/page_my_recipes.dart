@@ -1,5 +1,6 @@
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/recipe_database.dart';
+import 'package:central_perk/pages/page_my_barista.dart';
 // import 'package:central_perk/pages/page_create_recipe.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +51,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
   }
 
   // Display pop-up to create a recipe.
-  void _addRecipeTab() {
+  void _addRecipeDialog() {
     // Fields to write a text.
     final _nameController = TextEditingController(); // Name field.
     final _descriptionController = TextEditingController(); // Description field.
@@ -61,7 +62,8 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Crear receta'),
+          title: const Text('Crear receta'),
+          backgroundColor: const Color(0xFFC4BA95),
           content: Column( // Fields and indicators.
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -81,13 +83,13 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
           ),
           actions: [ // Pop-up actions (buttons)
             TextButton( // Button to cancel action and close pop-up.
-              child: Text('Cancelar'),
+              child: const Text('Cancelar'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton( // Button to add create recipe, add it to database and close pop-up.
-              child: Text('Agregar'),
+              child: const Text('Agregar'),
               onPressed: () {
                 final recipe = Recipe(
                   name: _nameController.text,
@@ -95,6 +97,60 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
                   image: _imageController.text,
                 );
                 _addRecipe(recipe);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _createOptionsDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Agregar receta'),
+          backgroundColor: const Color(0xFFC4BA95),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Card(
+                color: const Color(0xFFA88959),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
+                child: ListTile(
+                  title: const Text('Crear receta'),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    _addRecipeDialog();
+                  },
+                ),
+              ),
+              // Divider(
+              //   color: Color.fromARGB(255, 0, 0, 0),
+              // ),
+              Card(
+                color: const Color(0xFFA88959),
+                margin: const EdgeInsets.symmetric(vertical: 10.0),
+                child: ListTile(
+                  title: const Text('Seleccionar receta de Mi barista'),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context, MaterialPageRoute(
+                        builder: (context) => MyBaristaPage(title: 'Mi barista'),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
+          actions: [
+            TextButton(
+              child: Text('Cancelar'),
+              onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
@@ -146,7 +202,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
                 width: 350.0, // Width of list items.
                 child: ListView( // Recipes are displayed as a list.
                   padding: const EdgeInsets.all(8),
-                  children: recipes.map((receta) => receta.getCard(context)).toList()
+                  children: recipes.map((receta) => receta.getCard(context, (recipe) {})).toList()
                 )
               ),
             );
@@ -154,7 +210,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
 
   Widget _getFloatingActionButton() {
     return FloatingActionButton(
-      onPressed: _addRecipeTab,
+      onPressed: _createOptionsDialog,
       child: const Icon(Icons.add)
     );
   }
