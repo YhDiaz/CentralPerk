@@ -42,29 +42,214 @@ class _MyBaristaPageState extends State<MyBaristaPage> {
     return _recipes;
   }
 
+  final Future<String> _calculation = Future<String>.delayed(
+    const Duration(seconds: 2),
+    () => 'Data Loaded',
+  );
+
   @override
   Widget build(BuildContext context) {
     print("players es: ${_recipes.toList()}");
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
-      ),
-      body: Expanded( // To avoid problems due to include a ListView inside a Column.
-              child: SizedBox(
-                width: 350.0, // Width of list items.
-                child: ListView.builder(
-                  itemCount: _recipes.length,
-                  itemBuilder: (context, index) {
-                    return _recipes[index].getCard(context);
-                  },
+    return DefaultTextStyle(
+      style: Theme.of(context).textTheme.displayMedium!,
+      textAlign: TextAlign.center,
+      child: FutureBuilder<List<Recipe>>(
+        future: _recipesFuture, // a previously-obtained Future<String> or null
+        builder: (BuildContext context, AsyncSnapshot<List<Recipe>> snapshot) {
+          Widget expanded = Column(
+            children: [
+              Expanded( // To avoid problems due to include a ListView inside a Column.
+                child: SizedBox(
+                  width: 350.0, // Width of list items.
+                  child: ListView.builder(
+                    itemCount: _recipes.length,
+                    itemBuilder: (context, index) {
+                      // return _recipes[index].getCard(context);
+                      return Text('no recipe $index');
+                    },
+                  )
+                ),
+              )
+            ],
+          );
+
+          // if (snapshot.hasData) {
+          //   expanded = Expanded( // To avoid problems due to include a ListView inside a Column.
+          //     child: SizedBox(
+          //       width: 350.0, // Width of list items.
+          //       child: const Icon(
+          //         Icons.check_circle_outline,
+          //         color: Colors.green,
+          //         size: 60,
+          //       )
+          //     )
+          //   );
+          // } else if (snapshot.hasError) {
+          //   expanded = Expanded( // To avoid problems due to include a ListView inside a Column.
+          //     child: SizedBox(
+          //       width: 350.0, // Width of list items.
+          //       child: const Icon(
+          //         Icons.error_outline,
+          //         color: Colors.red,
+          //         size: 60,
+          //       )
+          //     )
+          //   );
+          // } else {
+          // if (!snapshot.hasData && !snapshot.hasError) {
+          if (snapshot.hasData) {
+            expanded = Column(
+              children: [
+                Expanded( // To avoid problems due to include a ListView inside a Column.
+                  child: SizedBox(
+                    width: 350.0, // Width of list items.
+                    child: ListView.builder(
+                      itemCount: _recipes.length,
+                      itemBuilder: (context, index) {
+                        return _recipes[index].getCard(context);
+                        // return Text('recipe has data $index');
+                      },
+                    )
+                  ),
                 )
-                // child: ListView( // Recipes are displayed as a list.
-                //   padding: const EdgeInsets.all(8),
-                //   children: _recipes.map((receta) => receta.getCard(context)).toList()
-                // )
-              ),
+              ],
+            );
+          }
+          else if (snapshot.hasError) {
+            expanded = Column(
+              children: [
+                Expanded( // To avoid problems due to include a ListView inside a Column.
+                  child: SizedBox(
+                    width: 350.0, // Width of list items.
+                    child: ListView.builder(
+                      itemCount: _recipes.length,
+                      itemBuilder: (context, index) {
+                        // return _recipes[index].getCard(context);
+                        return Text('recipe has error $index');
+                      },
+                    )
+                  ),
+                )
+              ],
+            );
+          } else {
+            expanded = Column(
+              children: [
+                Expanded( // To avoid problems due to include a ListView inside a Column.
+                  child: SizedBox(
+                    width: 350.0, // Width of list items.
+                    child: ListView.builder(
+                      itemCount: _recipes.length,
+                      itemBuilder: (context, index) {
+                        // return _recipes[index].getCard(context);
+                        return Text('');
+                      },
+                    )
+                  ),
+                )
+              ],
+            );
+            // expanded = Expanded( // To avoid problems due to include a ListView inside a Column.
+            //   child: SizedBox(
+            //     width: 350.0, // Width of list items.
+            //     child: ListView.builder(
+            //       itemCount: _recipes.length,
+            //       itemBuilder: (context, index) {
+            //         return _recipes[index].getCard(context);
+            //       },
+            //     )
+            //   ),
+            // );
+          }
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
             ),
+            body: expanded
+            // body: Expanded( // To avoid problems due to include a ListView inside a Column.
+            //         child: SizedBox(
+            //           width: 350.0, // Width of list items.
+            //           child: ListView.builder(
+            //             itemCount: _recipes.length,
+            //             itemBuilder: (context, index) {
+            //               return _recipes[index].getCard(context);
+            //             },
+            //           )
+            //           // child: ListView( // Recipes are displayed as a list.
+            //           //   padding: const EdgeInsets.all(8),
+            //           //   children: _recipes.map((receta) => receta.getCard(context)).toList()
+            //           // )
+            //         ),
+            //       ),
+          );
+          // List<Widget> children;
+          // if (snapshot.hasData) {
+          //   children = <Widget>[
+          //     const Icon(
+          //       Icons.check_circle_outline,
+          //       color: Colors.green,
+          //       size: 60,
+          //     ),
+          //     Padding(
+          //       padding: const EdgeInsets.only(top: 16),
+          //       child: Text('Result: ${snapshot.data}'),
+          //     ),
+          //   ];
+          // } else if (snapshot.hasError) {
+          //   children = <Widget>[
+          //     const Icon(
+          //       Icons.error_outline,
+          //       color: Colors.red,
+          //       size: 60,
+          //     ),
+          //     Padding(
+          //       padding: const EdgeInsets.only(top: 16),
+          //       child: Text('Error: ${snapshot.error}'),
+          //     ),
+          //   ];
+          // } else {
+          //   children = const <Widget>[
+          //     SizedBox(
+          //       width: 60,
+          //       height: 60,
+          //       child: CircularProgressIndicator(),
+          //     ),
+          //     Padding(
+          //       padding: EdgeInsets.only(top: 16),
+          //       child: Text('Awaiting result...'),
+          //     ),
+          //   ];
+          // }
+          // return Center(
+          //   child: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: children,
+          //   ),
+          // );
+        },
+      ),
     );
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
+    //   ),
+    //   body: Expanded( // To avoid problems due to include a ListView inside a Column.
+    //           child: SizedBox(
+    //             width: 350.0, // Width of list items.
+    //             child: ListView.builder(
+    //               itemCount: _recipes.length,
+    //               itemBuilder: (context, index) {
+    //                 return _recipes[index].getCard(context);
+    //               },
+    //             )
+    //             // child: ListView( // Recipes are displayed as a list.
+    //             //   padding: const EdgeInsets.all(8),
+    //             //   children: _recipes.map((receta) => receta.getCard(context)).toList()
+    //             // )
+    //           ),
+    //         ),
+    // );
   }
 }
