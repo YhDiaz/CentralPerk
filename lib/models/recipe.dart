@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:central_perk/pages/page_recipe.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// import 'package:path_provider/path_provider.dart';
+// import 'dart:io';
 
 class Recipe {
   final int? id;
@@ -32,6 +38,22 @@ class Recipe {
       description: map['description'],
       image: map['image']
     );
+  }
+
+  factory Recipe.fromMapForBarista(Map<String, dynamic> map) {
+    return Recipe(
+      name: map['name'],
+      description: map['description'],
+      image: map['image']
+    );
+  }
+
+  static Future<List<Recipe>> loadMyBaristaRecipes() async {
+    final jsonString = await rootBundle.loadString('assets/json/my_barista_recipes_simple.json');
+    // final jsonString = await rootBundle.loadString('assets/json/my_barista_recipes.json');
+    final List<dynamic> jsonDecoded = jsonDecode(jsonString) as List<dynamic>;
+    print("test----:"+jsonDecoded.toString());
+    return jsonDecoded.map((dynamic item) => Recipe.fromMapForBarista(item as Map<String, dynamic>)).toList();
   }
 
   Recipe copy({

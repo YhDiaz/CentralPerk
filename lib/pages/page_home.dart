@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.pop(context); // Close drawer before go to another page.
               Navigator.push( // Go to My barista page.
                 context,
-                MaterialPageRoute(builder: (context) => const MyBaristaPage())
+                MaterialPageRoute(builder: (context) => const MyBaristaPage(title: 'Mi barista',))
               );
             },
           ),
