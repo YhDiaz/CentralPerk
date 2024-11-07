@@ -1,4 +1,6 @@
-import 'package:central_perk/pages/page_create_recipe.dart';
+import 'package:central_perk/models/recipe.dart';
+import 'package:central_perk/models/recipe_database.dart';
+// import 'package:central_perk/pages/page_create_recipe.dart';
 import 'package:flutter/material.dart';
 
 class MyRecipesPage extends StatefulWidget {
@@ -10,38 +12,95 @@ class MyRecipesPage extends StatefulWidget {
 }
 
 class _MyRecipesPageState extends State<MyRecipesPage> {
-  // static const double spaceBetweenButtons = 15; //Space between footer buttons
-  static const Color footerBarColor =  Color(0xFFF2E0D3);
-  static const Color appBarColor = Color(0xFF66280a);
   static const Color appBarTextColor = Color(0xFFF2E0D3);
 
-  final ButtonStyle defaultButton = ElevatedButton.styleFrom //Footer buttons non-linked to current page
-  (
-    iconColor: appBarColor,
-    backgroundColor: footerBarColor
-  );
+  List<Recipe> recipes = [];
 
-  final ButtonStyle selectedButton = ElevatedButton.styleFrom //Footer button linked to current page
-  (
-    iconColor: appBarColor,
-    backgroundColor: const Color(0xFFD1B6A3)
-  );
+  @override void initState() {
+    super.initState();
+    _loadRecipes();
+  }
+  
+  Future<void> _loadRecipes() async {
+    final dbHelper = RecipeDatabase.instance;
+    final _recipes = await dbHelper.readAllRecipes();
+    setState(() {
+      recipes = _recipes;
+    });
+  }
 
-  // bool _isAddButton = true;
+  Future<void> _addRecipe(Recipe recipe) async {
+    final dbHelper = RecipeDatabase.instance;
+    await dbHelper.createRecipe(recipe);
+    _loadRecipes(); // Refresh recipes list.
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: appBarColor,
         title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
       ),
       body: Center(
         child: _getBody()
       ),
-      // drawer: _getDrawer(context)
       floatingActionButton: _getFloatingActionButton()
 
+    );
+  }
+
+  // Display pop-up to create a recipe.
+  void _addRecipeTab() {
+    // Fields to write a text.
+    final _nameController = TextEditingController(); // Name field.
+    final _descriptionController = TextEditingController(); // Description field.
+    final _imageController = TextEditingController(); // Image field.
+    // Hay que hacer que la imagen se pueda seleccionar, por ahora hay que pasar la ruta en el directorio de íconos
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Crear receta'),
+          content: Column( // Fields and indicators.
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Nombre'),
+              ),
+              TextField(
+                controller: _descriptionController,
+                decoration: const InputDecoration(labelText: 'Descripción'),
+              ),
+              TextField(
+                controller: _imageController,
+                decoration: const InputDecoration(labelText: 'Imagen principal'),
+              ),
+            ],
+          ),
+          actions: [ // Pop-up actions (buttons)
+            TextButton( // Button to cancel action and close pop-up.
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton( // Button to add create recipe, add it to database and close pop-up.
+              child: Text('Agregar'),
+              onPressed: () {
+                final recipe = Recipe(
+                  name: _nameController.text,
+                  description: _descriptionController.text,
+                  image: _imageController.text,
+                );
+                _addRecipe(recipe);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -51,7 +110,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
       child: Column(       
         children: <Widget>[
           _getSpace('header_content'),
-          _getActivityInfo(false), // Activity in recipes to display in home page.
+          _getActivityInfo(), // Activity in recipes to display in home page.
           _getSpace('content_content'),
         ],
       )
@@ -76,26 +135,18 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
   }
 
   // Get activity in recipes to display in home page, depending my recipes list is empty or not.
-  Widget _getActivityInfo(bool myRecipesEmpty) {
-    return myRecipesEmpty ?
-            const Text('No hay recetas en la lista') : // No recipes to display.
+  Widget _getActivityInfo() {
+    return recipes.length == 0 ?
+            SizedBox(
+              width: 300.0,
+              child: const Text('Aún no has creado ninguna receta. Presiona + para agregar una o edita una receta de Mi barista para que se muestre aquí.'),
+            ) :
             Expanded( // To avoid problems due to include a ListView inside a Column.
               child: SizedBox(
                 width: 350.0, // Width of list items.
                 child: ListView( // Recipes are displayed as a list.
                   padding: const EdgeInsets.all(8),
-                  children: List.generate(currentSpaceBetweenItems, (index) {
-                    return Column(
-                      children: [
-                        Container(
-                          height: 50,
-                          color: Colors.amber[600],
-                          child: Center(child: Text('Entry $index')),
-                        ),
-                        _getSpace('content_content')
-                      ],
-                    );
-                  })
+                  children: recipes.map((receta) => receta.getCard(context)).toList()
                 )
               ),
             );
@@ -103,119 +154,11 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
 
   Widget _getFloatingActionButton() {
     return FloatingActionButton(
-      onPressed: () {
-        Navigator.push( // Go to Create recipe page.
-          context,
-          MaterialPageRoute(builder: (context) => const CreateRecipePage())
-        );
-      },
+      onPressed: _addRecipeTab,
       child: const Icon(Icons.add)
-    );
-    // return _isAddButton ?
-    //         FloatingActionButton(
-    //           onPressed: () {
-    //             setState(() {
-    //               _isAddButton = false;
-    //             });
-    //           },
-    //           child: const Icon(Icons.add)
-    //         ) :
-    //         FloatingActionButton(
-    //           onPressed: () {
-    //             setState(() {
-    //               _isAddButton = true;
-    //             });
-    //           },
-    //           child: const Icon(Icons.cancel_outlined)
-    //         );
-  }
-  
-  Widget _getDrawer(BuildContext context) {
-    return Drawer(
-      child: ListView( // In case there isn't enough space for all options.
-        padding: EdgeInsets.zero, // Recommended by Flutter documentation.
-        children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Text('Central Perk - Navegación'),
-          ),
-          ListTile(
-            title: const Text('Principal'),
-            selected: true,
-            onTap: () {
-              Navigator.pop(context); // Close the drawer.
-            },
-          ),
-          ListTile(
-            title: const Text('Mis recetas'),
-            onTap: () {
-              // Navigator.push( // Go to My recipes page.
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const ProfilePage(title: 'Mis recetas'))
-              // );
-            },
-          ),
-        ],
-      ),
     );
   }
 
   List<int> spaceBetweenItems = <int>[0, 3, 5, 7, 10, 13];
   int currentSpaceBetweenItems = 0;
-
-  Widget _getResizeButton() {
-    return FloatingActionButton(
-      onPressed: _getNextSize,
-      child: Text('$currentSpaceBetweenItems')
-    );
-  }
-
-  int _getNextSize() {
-    if (currentSpaceBetweenItems == -1 || currentSpaceBetweenItems == spaceBetweenItems.last) {
-      setState(() {
-        currentSpaceBetweenItems = spaceBetweenItems[0];
-      });      
-      return spaceBetweenItems[0];
-    }
-
-    for (int i = 0; i < spaceBetweenItems.length; i++) {
-      if (spaceBetweenItems[i] == currentSpaceBetweenItems) {
-        setState(() {
-          currentSpaceBetweenItems = spaceBetweenItems[i + 1];
-        });        
-        return spaceBetweenItems[i + 1];
-      }
-    }
-
-    return -1;
-  }
-
-  Widget _getAddButton() {
-    return FloatingActionButton(
-      heroTag: 'tag1',
-      onPressed: () {
-        //OPEN POP UP
-        setState(() {
-          //
-          // _getCancelButton();
-        });
-      },
-      child: const Icon(Icons.add),
-    );
-  }
-
-  Widget _getCancelButton() {
-    return FloatingActionButton(
-      heroTag: 'tag2',
-      onPressed: () {
-        // CLOSE POP UP
-        setState(() {
-          _getAddButton();
-        });
-      },
-      child: const Icon(Icons.cancel),
-    );
-  }
 }
