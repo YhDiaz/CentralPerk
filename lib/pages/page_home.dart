@@ -1,3 +1,4 @@
+import 'package:central_perk/models/recipe_database.dart';
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/pages/page_my_barista.dart';
 import 'package:central_perk/pages/page_my_recipes.dart';
@@ -20,16 +21,44 @@ class _HomePageState extends State<HomePage> {
     setState(() { });
   }
 
+  List<Recipe> recipes = [];
+
+  @override void initState() {
+    super.initState();
+    _loadRecipes();
+  }
+  
+  Future<void> _loadRecipes() async {
+    final dbRecipes = RecipeDatabase.instance;
+    final _recipes = await dbRecipes.readAllRecipes();
+    setState(() {
+      recipes = _recipes;
+    });
+  }
+
+  Future<void> _clearDatabase() async {
+    final dbRecipes = RecipeDatabase.instance;
+    await dbRecipes.clearDatabase();
+    _loadRecipes();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: appBarColor,
         title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
+        actions: [
+          IconButton(
+            onPressed: _displayCleanDatabaseAlert,
+            icon: Icon(Icons.cleaning_services_outlined)
+          )
+        ],
       ),
-      body: Center(
-        child: _getBody()
-      ),
+      body: _getBody(),
+      // body: Center(
+      //   child: _getBody()
+      // ),
       drawer: _getDrawer(context)
     );
   }
@@ -76,19 +105,19 @@ class _HomePageState extends State<HomePage> {
         );
   }
 
-  final List<Recipe> recipes = [
-    Recipe(
-      name: 'Café Latte',
-      description: 'Una deliciosa combinación de café expreso y leche vaporizada.',
-      image: 'assets/icons/icon_coffee_american.jpg',
-    ),
-    Recipe(
-      name: 'Capuchino',
-      description: 'Café expreso, leche vaporizada y espuma de leche.',
-      image: 'assets/icons/icon_coffee_latte.jpg',
-    ),
-    // Después hay que ver con data base también
-  ];
+  // final List<Recipe> recipes = [
+  //   Recipe(
+  //     name: 'Café Latte',
+  //     description: 'Una deliciosa combinación de café expreso y leche vaporizada.',
+  //     image: 'assets/icons/icon_coffee_american.jpg',
+  //   ),
+  //   Recipe(
+  //     name: 'Capuchino',
+  //     description: 'Café expreso, leche vaporizada y espuma de leche.',
+  //     image: 'assets/icons/icon_coffee_latte.jpg',
+  //   ),
+  //   // Después hay que ver con data base también
+  // ];
 
   // Get activity in recipes to display in home page, depending my recipes list is empty or not.
   Widget _getActivityInfo(bool myRecipesEmpty) {
@@ -99,10 +128,11 @@ class _HomePageState extends State<HomePage> {
                 width: 350.0, // Width of list items.
                 child: ListView( // Recipes are displayed as a list.
                   padding: const EdgeInsets.all(8),
-                  // REPLACE recipes.length WHEN IMPLEMENT DATA BASE
-                  children: List.generate(recipes.length, (index) {
-                      return recipes[index].getCard(context);
-                  })
+                  children: recipes.map((receta) => receta.getCard(context)).toList()
+                  // // REPLACE recipes.length WHEN IMPLEMENT DATA BASE
+                  // children: List.generate(recipes.length, (index) {
+                  //     return recipes[index].getCard(context);
+                  // })
                 )
               ),
             );
@@ -133,7 +163,9 @@ class _HomePageState extends State<HomePage> {
               Navigator.push( // Go to My recipes page.
                 context,
                 MaterialPageRoute(builder: (context) => const MyRecipesPage(title: 'Mis recetas'))
-              );
+              ).then((_) {
+                _loadRecipes();
+              });
             },
           ),
           ListTile(
@@ -189,5 +221,33 @@ class _HomePageState extends State<HomePage> {
     }
 
     return -1;
+  }
+
+  // Display pop-up to confirm the user want to delete their recipes.
+  void _displayCleanDatabaseAlert() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Eliminar recetas'), // Pop-up title.
+          content: Text('¿Quieres continuar con la eliminación de tus recetas?'), // Alert message.
+          actions: [
+            TextButton( // Button to cancel action and close pop-up.
+              child: Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton( // Button to eliminate recipes and close pop-up.
+              child: Text('Eliminar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _clearDatabase();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
