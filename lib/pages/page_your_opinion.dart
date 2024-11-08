@@ -67,14 +67,32 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
               title: const Text('Tu opinión'),
             ),
             body: questionsList,
-            floatingActionButton: FloatingActionButton(
-              onPressed: _sendEmail,
-              child: const Icon(Icons.email)
-            ),
+            floatingActionButton: _allQuestionsRated() ?
+              FloatingActionButton( // All questions were rated, then send email.
+                onPressed: _sendEmail,
+                child: const Icon(Icons.email)
+              )
+            :
+              FloatingActionButton( // All questions were rated, then send email.
+                backgroundColor: Color.fromARGB(150, 100, 100, 100),
+                onPressed: () {},
+                child: const Icon(
+                  Icons.email,
+                  color: Color.fromARGB(255, 207, 205, 205),
+                )
+              )
           );
         },
       ),
     );
+  }
+
+  bool _allQuestionsRated() {
+    for (var question in _questions) {
+      if (question.rating == 0) return false;
+    }
+
+    return true;
   }
 
   // Update rating in an specific question, which is accessed using its index.
