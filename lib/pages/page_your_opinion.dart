@@ -13,13 +13,36 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
   // Send email using flutter_email_sender package.
   Future<void> _sendEmail() async {
     final Email email = Email(
-            body: 'Test successful, direct to spam.',
-            subject: 'Testing email sender package',
+            body: _generateEmailBody(),
+            subject: 'Mi opinión sobre Central Perk',
             recipients: ['yhdiazofficial@gmail.com'],
             isHTML: false,
           );
 
     await FlutterEmailSender.send(email);
+  }
+
+  String _generateEmailBody() {
+    String body = 'Estas son mis respuestas sobre su aplicación:\n\n';
+    int finalRating = 0;
+    
+    for (var question in _questions) {
+      body += question.title;
+      body += '\n';
+      body += question.rating.toString() + '/5';
+      body += '\n\n';
+      finalRating += question.rating;
+    }
+
+    body += 'Resultado final $finalRating/45, ';
+    if (finalRating < 15) body += 'si fuera tú, me cambio de carrera a una en la que tenga futuro.';
+    else if (finalRating < 25) body += 'un poco lamentable, pero que se le va a hacer.';
+    else if (finalRating < 35) body += 'con un poco más de ganas la haces.';
+    else if (finalRating < 42) body += 'te quedó buena, pero plagiaste el nombre.';
+    else body += 'a la tienda y que genere :\$\$.';
+
+    body += '\n\n* Respuesta generada automáticamente con un algoritmo de generación de respuestas';
+    return body;
   }
 
   Future<List<Question>>? _questionsFuture;
