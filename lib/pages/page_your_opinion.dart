@@ -9,18 +9,16 @@ class YourOpinionPage extends StatefulWidget {
 }
 
 class _YourOpinionPageState extends State<YourOpinionPage> {
+  // Send email using flutter_email_sender package.
   Future<void> _sendEmail() async {
     final Email email = Email(
             body: 'Test successful, direct to spam.',
             subject: 'Testing email sender package',
             recipients: ['yhdiazofficial@gmail.com'],
-            // cc: ['cc@example.com'],
-            // bcc: ['bcc@example.com'],
-            // attachmentPaths: ['/path/to/attachment.zip'],
             isHTML: false,
           );
 
-          await FlutterEmailSender.send(email);
+    await FlutterEmailSender.send(email);
   }
   
   @override
@@ -29,12 +27,12 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
       appBar: AppBar(
         title: const Text('Tu opinión'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Preguntas')
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _sendEmail,
-        child: Icon(Icons.email)
+        child: const Icon(Icons.email)
       ),
     );
   }
