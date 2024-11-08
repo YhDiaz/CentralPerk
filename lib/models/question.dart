@@ -12,6 +12,7 @@ class Question {
 
   int min = 0;
   int max = 0;
+  int rating = 0;
 
   Question({
     required this.title,
@@ -43,9 +44,48 @@ class Question {
     return jsonDecoded.map((dynamic item) => Question.fromMap(item as Map<String, dynamic>)).toList();
   }
 
-  Widget getCard(BuildContext context) {
+  // Get customize card.
+  // star pressed function is used to implement an algorithm that simulate 5-star-rating-system.
+  Widget getCard(BuildContext context, Function(int) starPressed) {
     return Card(
-      child: Text(title),
+      color: const Color(0xFFEFBE7F),
+      child: Column(
+        children: [
+          Padding( // Display question.
+            padding: const EdgeInsets.all(16.0),
+            child: Text(title)
+          ),
+          Row( // Display 5-star buttons.
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(5, (index) { // Generate 5 stars.
+              return IconButton( // Star button.
+                onPressed: () {
+                  starPressed(index + 1); // Pass star number.
+                },
+                icon: rating > index ? // Customize stars color and shape to simulate 5-star-rating system.
+                  Icon(
+                    Icons.star,
+                    color: _getColorByIndex(index)
+                  )
+                :
+                  const Icon(
+                    Icons.star_border,
+                    color: Color(0xFF515151),
+                  )
+              );
+            }),
+          )
+        ],
+      )
     );
+  }
+
+  // Get star progressive colors.
+  Color _getColorByIndex(int index) {
+    return index == 0 ? const Color(0xFFC5B4A2) :
+           index == 1 ? const Color(0xFF92785D) :
+           index == 2 ? const Color(0xFF815F3B) :
+           index == 3 ? const Color(0xFF6F471C) :
+           /*index == 4*/const Color(0xFF4E2C08);
   }
 }

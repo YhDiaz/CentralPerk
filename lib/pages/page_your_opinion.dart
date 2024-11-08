@@ -67,9 +67,6 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
               title: const Text('Tu opinión'),
             ),
             body: questionsList,
-            // body: const Center(
-            //   child: Text('Preguntas')
-            // ),
             floatingActionButton: FloatingActionButton(
               onPressed: _sendEmail,
               child: const Icon(Icons.email)
@@ -80,42 +77,37 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
     );
   }
 
+  // Update rating in an specific question, which is accessed using its index.
+  void _updateRating(int index, int rating) {
+    setState(() {
+      _questions[index].rating = rating;
+    });
+  }
+
   Widget _getQuestionsListToDisplay(bool defaultInfo) {
     return Center(
       child: Column(
               children: [
-                Expanded( // To avoid problems due to include a ListView inside a Column.
-                  child: SizedBox(
-                    width: 350.0, // Width of list items.
-                    child: ListView.builder(
-                      itemCount: _questions.length,
-                      itemBuilder: (context, index) {
-                        return defaultInfo ?
-                          Text('No se encontró información de la receta $index') // Questions aren't loaded yet.
-                        :
-                          _questions[index].getCard(context); // Display question card.
-                      },
-                    )
-                  ),
-                )
+                const SizedBox(
+                  height: 15.0,
+                ),
+                SizedBox(
+                  width: 350.0, // Width of list items.
+                  height: 650.0,
+                  child: ListView.builder(
+                    itemCount: _questions.length, // Amount of items.
+                    itemBuilder: (context, index) {
+                      return defaultInfo ?
+                        Text('No se encontró información de la pregunta $index') // Questions aren't loaded yet.
+                      :
+                        _questions[index].getCard(context, (rating) { // Display question card.
+                          _updateRating(index, rating);
+                        });
+                    },
+                  )
+                ),
               ],
             ),
     );
   }
-  
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(
-  //       title: const Text('Tu opinión'),
-  //     ),
-  //     body: const Center(
-  //       child: Text('Preguntas')
-  //     ),
-  //     floatingActionButton: FloatingActionButton(
-  //       onPressed: _sendEmail,
-  //       child: const Icon(Icons.email)
-  //     ),
-  //   );
-  // }
 }
