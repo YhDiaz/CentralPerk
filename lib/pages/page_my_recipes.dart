@@ -1,7 +1,6 @@
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/recipe_database.dart';
 import 'package:central_perk/pages/page_my_barista.dart';
-// import 'package:central_perk/pages/page_create_recipe.dart';
 import 'package:flutter/material.dart';
 
 class MyRecipesPage extends StatefulWidget {
@@ -40,7 +39,23 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
+        title: Row(
+          children: [
+            Text(
+              widget.title,
+              style: const TextStyle(
+                fontFamily: 'Lobster',
+                color: appBarTextColor
+              )
+            ),
+            const SizedBox(width: 116,),
+            Image.asset(
+              'assets/icons/icon_central_perk_logo.png',
+              fit: BoxFit.contain,
+              height: 75,
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: _getBody()
@@ -127,9 +142,6 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
                   },
                 ),
               ),
-              // Divider(
-              //   color: Color.fromARGB(255, 0, 0, 0),
-              // ),
               Card(
                 color: const Color(0xFFA88959),
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
@@ -149,7 +161,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
           ),
           actions: [
             TextButton(
-              child: Text('Cancelar'),
+              child: const Text('Cancelar'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -193,9 +205,9 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
   // Get activity in recipes to display in home page, depending my recipes list is empty or not.
   Widget _getActivityInfo() {
     return recipes.length == 0 ?
-            SizedBox(
+            const SizedBox(
               width: 300.0,
-              child: const Text('Aún no has creado ninguna receta. Presiona + para agregar una o edita una receta de Mi barista para que se muestre aquí.'),
+              child: Text('Aún no has creado ninguna receta. Presiona + para agregar una o edita una receta de Mi barista para que se muestre aquí.'),
             ) :
             Expanded( // To avoid problems due to include a ListView inside a Column.
               child: SizedBox(

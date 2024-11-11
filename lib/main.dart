@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp (
       title: 'Central Perk',
       theme: _getColorPalette(),
-      home: const HomePage(title: 'Central perk - Home page')
+      home: const HomePage(title: 'Principal')
     );
   }
 
@@ -30,10 +30,24 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color(0xFF66280a)
       ),
       textTheme: const TextTheme(
-        bodyLarge: TextStyle(
+        headlineLarge: TextStyle(
+          fontFamily: 'DancingScript',
+          fontSize: 30,
+          fontWeight: FontWeight.bold
+        ),
+        headlineMedium: const TextStyle(
+          fontFamily: 'DancingScript',
+          fontSize: 25,
+          fontWeight: FontWeight.bold
+        ),
+        bodyLarge: const TextStyle(
+          fontFamily: 'Montserrat',
+          fontSize: 15,
           color: Color(0xFF794024)
         ),
-        bodyMedium: TextStyle(
+        bodyMedium: const TextStyle(
+          fontFamily: 'Montserrat',
+          fontSize: 12,
           color: Color(0xFF5F2101)
         )
       ),

@@ -10,6 +10,8 @@ class YourOpinionPage extends StatefulWidget {
 }
 
 class _YourOpinionPageState extends State<YourOpinionPage> {
+  static const Color appBarTextColor = Color(0xFFF2E0D3);
+
   // Send email using flutter_email_sender package.
   Future<void> _sendEmail() async {
     final Email email = Email(
@@ -87,7 +89,23 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Tu opinión'),
+              title: Row(
+                children: [
+                  Text(
+                    'Tu opinión',
+                    style: const TextStyle(
+                      fontFamily: 'Lobster',
+                      color: appBarTextColor
+                    )
+                  ),
+                  const SizedBox(width: 121,),
+                  Image.asset(
+                    'assets/icons/icon_central_perk_logo.png',
+                    fit: BoxFit.contain,
+                    height: 75,
+                  ),
+                ],
+              ),
             ),
             body: questionsList,
             floatingActionButton: _allQuestionsRated() ?

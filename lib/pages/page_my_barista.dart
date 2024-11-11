@@ -60,7 +60,23 @@ class _MyBaristaPageState extends State<MyBaristaPage> {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
+              title: Row(
+                children: [
+                  Text(
+                    widget.title,
+                    style: const TextStyle(
+                      fontFamily: 'Lobster',
+                      color: appBarTextColor
+                    )
+                  ),
+                  const SizedBox(width: 122,),
+                  Image.asset(
+                    'assets/icons/icon_central_perk_logo.png',
+                    fit: BoxFit.contain,
+                    height: 75,
+                  ),
+                ],
+              ),
             ),
             body: recipesList
           );

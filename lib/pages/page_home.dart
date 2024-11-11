@@ -2,7 +2,6 @@ import 'package:central_perk/models/recipe_database.dart';
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/pages/page_my_barista.dart';
 import 'package:central_perk/pages/page_my_recipes.dart';
-// import 'package:central_perk/pages/page_recipe.dart';
 import 'package:central_perk/pages/page_your_opinion.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +15,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static const Color appBarTextColor = Color(0xFFF2E0D3);
-
-  void _goToHomePage() {
-    setState(() { });
-  }
 
   List<Recipe> recipes = [];
 
@@ -46,19 +41,30 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: appBarColor,
-        title: Text(widget.title, style: const TextStyle(color: appBarTextColor)),
-        actions: [
-          IconButton(
-            onPressed: _displayCleanDatabaseAlert,
-            icon: Icon(Icons.cleaning_services_outlined)
-          )
-        ],
+        title: Row(
+          children: [
+            Text(
+              widget.title,
+              style: const TextStyle(
+                fontFamily: 'Lobster',
+                color: appBarTextColor
+              )
+            ),
+            const SizedBox(width: 77,),
+            IconButton(
+              onPressed: _displayCleanDatabaseAlert,
+              icon: const Icon(Icons.cleaning_services_outlined)
+            ),
+            const SizedBox(width: 5,),
+            Image.asset(
+              'assets/icons/icon_central_perk_logo.png',
+              fit: BoxFit.contain,
+              height: 75,
+            ),
+          ],
+        ),
       ),
       body: _getBody(),
-      // body: Center(
-      //   child: _getBody()
-      // ),
       drawer: _getDrawer(context)
     );
   }
@@ -73,7 +79,6 @@ class _HomePageState extends State<HomePage> {
           _getSpace('header_content'),
           _getActivityInfo(false), // Activity in recipes to display in home page.
           _getSpace('content_content'),
-          // _getResizeButton()
         ],
       )
     );
@@ -105,20 +110,6 @@ class _HomePageState extends State<HomePage> {
         );
   }
 
-  // final List<Recipe> recipes = [
-  //   Recipe(
-  //     name: 'Café Latte',
-  //     description: 'Una deliciosa combinación de café expreso y leche vaporizada.',
-  //     image: 'assets/icons/icon_coffee_american.jpg',
-  //   ),
-  //   Recipe(
-  //     name: 'Capuchino',
-  //     description: 'Café expreso, leche vaporizada y espuma de leche.',
-  //     image: 'assets/icons/icon_coffee_latte.jpg',
-  //   ),
-  //   // Después hay que ver con data base también
-  // ];
-
   // Get activity in recipes to display in home page, depending my recipes list is empty or not.
   Widget _getActivityInfo(bool myRecipesEmpty) {
     return myRecipesEmpty ?
@@ -129,10 +120,6 @@ class _HomePageState extends State<HomePage> {
                 child: ListView( // Recipes are displayed as a list.
                   padding: const EdgeInsets.all(8),
                   children: recipes.map((receta) => receta.getCard(context, (recipe) {})).toList()
-                  // // REPLACE recipes.length WHEN IMPLEMENT DATA BASE
-                  // children: List.generate(recipes.length, (index) {
-                  //     return recipes[index].getCard(context);
-                  // })
                 )
               ),
             );
@@ -140,17 +127,21 @@ class _HomePageState extends State<HomePage> {
   
   Widget _getDrawer(BuildContext context) {
     return Drawer(
+      backgroundColor: const Color(0xFFDECEB2),
       child: ListView( // In case there isn't enough space for all options.
         padding: EdgeInsets.zero, // Recommended by Flutter documentation.
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              image: DecorationImage(
+                image: AssetImage('assets/icons/icon_central_perk_logo.png')
+              ),
+              color: Color(0xFFDECEB2),
             ),
-            child: Text('Central Perk - Navegación'),
+            child: Text(''),
           ),
           ListTile(
-            title: const Text('Principal'),
+            title: Text('Principal', style: Theme.of(context).textTheme.bodyLarge,),
             selected: true,
             onTap: () {
               Navigator.pop(context); // Close the drawer.
@@ -229,17 +220,17 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Eliminar recetas'), // Pop-up title.
-          content: Text('¿Quieres continuar con la eliminación de tus recetas?'), // Alert message.
+          title: const Text('Eliminar recetas'), // Pop-up title.
+          content: const Text('¿Quieres continuar con la eliminación de tus recetas?'), // Alert message.
           actions: [
             TextButton( // Button to cancel action and close pop-up.
-              child: Text('Cancelar'),
+              child: const Text('Cancelar'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton( // Button to eliminate recipes and close pop-up.
-              child: Text('Eliminar'),
+              child: const Text('Eliminar'),
               onPressed: () {
                 Navigator.of(context).pop();
                 _clearDatabase();
