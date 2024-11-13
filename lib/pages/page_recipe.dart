@@ -36,6 +36,14 @@ class _RecipePageState extends State<RecipePage> {
     _loadRecipe(); // Refresh recipes list.
   }
 
+  Future<void> _deleteRecipe() async {
+    final dbHelper = RecipeDatabase.instance;
+    await dbHelper.deleteRecipe(widget.recipe.id!);
+    // _loadRecipe(); // Refresh recipes list.
+    // Agregar un pop up para  confirmación
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +94,7 @@ class _RecipePageState extends State<RecipePage> {
                   icon: const Icon(Icons.edit, color: Color(0xFF412402))
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: _deleteRecipe,
                   icon: const Icon(Icons.delete, color: Color(0xFF412402))
                 )
               ],
