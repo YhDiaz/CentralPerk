@@ -10,8 +10,6 @@ class MyBaristaPage extends StatefulWidget {
 }
 
 class _MyBaristaPageState extends State<MyBaristaPage> {
-  static const Color appBarTextColor = Color(0xFFF2E0D3);
-
   Future<List<Recipe>>? _recipesFuture;
   List<Recipe> _recipes = [];
 
@@ -64,12 +62,9 @@ class _MyBaristaPageState extends State<MyBaristaPage> {
                 children: [
                   Text(
                     widget.title,
-                    style: const TextStyle(
-                      fontFamily: 'Lobster',
-                      color: appBarTextColor
-                    )
+                    style: Theme.of(context).textTheme.headlineLarge
                   ),
-                  const SizedBox(width: 122,),
+                  const SizedBox(width: 99,),
                   Image.asset(
                     'assets/icons/icon_central_perk_logo.png',
                     fit: BoxFit.contain,

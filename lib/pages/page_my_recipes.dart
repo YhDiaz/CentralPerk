@@ -12,8 +12,6 @@ class MyRecipesPage extends StatefulWidget {
 }
 
 class _MyRecipesPageState extends State<MyRecipesPage> {
-  static const Color appBarTextColor = Color(0xFFF2E0D3);
-
   List<Recipe> recipes = [];
 
   @override void initState() {
@@ -43,12 +41,9 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
           children: [
             Text(
               widget.title,
-              style: const TextStyle(
-                fontFamily: 'Lobster',
-                color: appBarTextColor
-              )
+              style: Theme.of(context).textTheme.headlineLarge
             ),
-            const SizedBox(width: 116,),
+            const SizedBox(width: 90,),
             Image.asset(
               'assets/icons/icon_central_perk_logo.png',
               fit: BoxFit.contain,
@@ -67,50 +62,62 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
 
   // Display pop-up to create a recipe.
   void _addRecipeDialog() {
-    // Fields to write a text.
+    // Fields to write text.
     final _nameController = TextEditingController(); // Name field.
     final _descriptionController = TextEditingController(); // Description field.
-    final _imageController = TextEditingController(); // Image field.
-    // Hay que hacer que la imagen se pueda seleccionar, por ahora hay que pasar la ruta en el directorio de íconos
+    final _ingredientsController = TextEditingController(); // Ingredients field.
+    final _productsController = TextEditingController(); // Products field.
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Crear receta'),
+          title: Text('Crear receta', style: Theme.of(context).textTheme.headlineMedium),
           backgroundColor: const Color(0xFFC4BA95),
-          content: Column( // Fields and indicators.
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Nombre'),
-              ),
-              TextField(
-                controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Descripción'),
-              ),
-              TextField(
-                controller: _imageController,
-                decoration: const InputDecoration(labelText: 'Imagen principal'),
-              ),
-            ],
+          content: SingleChildScrollView(
+            child: Column( // Fields and indicators.
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(labelText: 'Nombre', labelStyle: Theme.of(context).textTheme.bodyMedium),
+                ),
+                TextField(
+                  controller: _descriptionController,
+                  decoration: InputDecoration(labelText: 'Descripción', labelStyle: Theme.of(context).textTheme.bodyMedium),
+                ),
+                TextField(
+                  controller: _ingredientsController,
+                  decoration: InputDecoration(labelText: 'Ingredientes (separados por comas)', labelStyle: Theme.of(context).textTheme.bodyMedium),
+                ),
+                TextField(
+                  controller: _productsController,
+                  decoration: InputDecoration(labelText: 'Productos (separados por comas)', labelStyle: Theme.of(context).textTheme.bodyMedium),
+                ),
+              ],
+            ),
           ),
           actions: [ // Pop-up actions (buttons)
             TextButton( // Button to cancel action and close pop-up.
-              child: const Text('Cancelar'),
+              child: Text('Cancelar', style: Theme.of(context).textTheme.bodyMedium),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton( // Button to add create recipe, add it to database and close pop-up.
-              child: const Text('Agregar'),
+              child: Text('Agregar', style: Theme.of(context).textTheme.bodyMedium),
               onPressed: () {
+                final List<String> ingredients = _ingredientsController.text.split(',').map((e) => e.trim()).toList();
+                final List<String> products = _productsController.text.split(',').map((e) => e.trim()).toList();
+
                 final recipe = Recipe(
                   name: _nameController.text,
                   description: _descriptionController.text,
-                  image: _imageController.text,
+                  pictures: ['assets/icons/icon_central_perk_logo.png'],
+                  ingredients: ingredients,
+                  products: products,
                 );
+
                 _addRecipe(recipe);
                 Navigator.of(context).pop();
               },
@@ -126,16 +133,16 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Agregar receta'),
+          title: Text('Agregar receta', style: Theme.of(context).textTheme.headlineMedium,),
           backgroundColor: const Color(0xFFC4BA95),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Card(
-                color: const Color(0xFFA88959),
+                color: const Color(0xFFBDA682),
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: ListTile(
-                  title: const Text('Crear receta'),
+                  title: Text('Crear receta', style: Theme.of(context).textTheme.bodyLarge),
                   onTap: () {
                     Navigator.of(context).pop();
                     _addRecipeDialog();
@@ -143,10 +150,10 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
                 ),
               ),
               Card(
-                color: const Color(0xFFA88959),
+                color: const Color(0xFFBDA682),
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: ListTile(
-                  title: const Text('Seleccionar receta de Mi barista'),
+                  title: Text('Seleccionar receta de Mi barista', style: Theme.of(context).textTheme.bodyLarge),
                   onTap: () {
                     Navigator.of(context).pop();
                     Navigator.push(
@@ -161,7 +168,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
           ),
           actions: [
             TextButton(
-              child: const Text('Cancelar'),
+              child: Text('Cancelar', style: Theme.of(context).textTheme.bodyMedium),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -197,17 +204,20 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
           height: 25,
         ) :
       // type == 'content_content' ?
-        SizedBox(
-          height: currentSpaceBetweenItems.toDouble(),
+        const SizedBox(
+          height: 10,
         );
   }
 
   // Get activity in recipes to display in home page, depending my recipes list is empty or not.
   Widget _getActivityInfo() {
     return recipes.length == 0 ?
-            const SizedBox(
+            SizedBox(
               width: 300.0,
-              child: Text('Aún no has creado ninguna receta. Presiona + para agregar una o edita una receta de Mi barista para que se muestre aquí.'),
+              child: Text(
+                'Aún no has creado ninguna receta. Presiona + para agregar una o edita una receta de Mi barista para que se muestre aquí.',
+                style: Theme.of(context).textTheme.bodyMedium
+              ),
             ) :
             Expanded( // To avoid problems due to include a ListView inside a Column.
               child: SizedBox(
@@ -226,7 +236,4 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
       child: const Icon(Icons.add)
     );
   }
-
-  List<int> spaceBetweenItems = <int>[0, 3, 5, 7, 10, 13];
-  int currentSpaceBetweenItems = 0;
 }

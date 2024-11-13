@@ -1,26 +1,49 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:central_perk/pages/page_recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// import 'package:path_provider/path_provider.dart';
-// import 'dart:io';
-
 class Recipe {
   final int? id;
   final String name;
   final String description;
-  final String image;
+  final List<String> pictures;
+  final List<String> ingredients;
+  final List<String> products;
   final bool myBaristaRecipe;
 
   Recipe({
     this.id,
     required this.name,
     required this.description,
-    required this.image,
+    required this.pictures,
+    required this.ingredients,
+    required this.products,
     this.myBaristaRecipe = false
-  });
+  }) {
+    print('-------------- Recipe created --------------');
+    print('* Name: ${this.name}');
+    print('* Description: ${this.description}');
+    print('* Pictures:');
+
+    for (int i = 0; i < this.pictures.length; i++) {
+      print('   - ${this.pictures[i]}');
+    }
+
+    print('* Ingredients:');
+
+    for (int i = 0; i < this.ingredients.length; i++) {
+      print('   - ${this.ingredients[i]}');
+    }
+
+    print('* Products:');
+
+    for (int i = 0; i < this.products.length; i++) {
+      print('   - ${this.products[i]}');
+    }
+  }
 
   // Convert to JSON.
   Map<String, dynamic> toMap() {
@@ -28,7 +51,9 @@ class Recipe {
       'id': id,
       'name': name,
       'description': description,
-      'image': image
+      'pictures': jsonEncode(pictures),
+      'ingredients': jsonEncode(ingredients),
+      'products': jsonEncode(products)
     };
   }
 
@@ -38,25 +63,36 @@ class Recipe {
       id: map['id'],
       name: map['name'],
       description: map['description'],
-      image: map['image'],
+      pictures: List<String>.from(jsonDecode(map['pictures']).map((item) => item.toString())),
+      ingredients: List<String>.from(jsonDecode(map['ingredients']).map((item) => item.toString())),
+      products: List<String>.from(jsonDecode(map['products']).map((item) => item.toString())),
       myBaristaRecipe: map['myBaristaRecipe'] ?? false // False by default.
     );
   }
 
   factory Recipe.fromMapForBarista(Map<String, dynamic> map) {
+    var picturesFromJson = map['pictures'];
+    var ingredientsFromJson = map['ingredients'];
+    var productsFromJson = map['products'];
+    List<String> picturesList = picturesFromJson.cast<String>();
+    List<String> ingredientsList = ingredientsFromJson.cast<String>();
+    List<String> productsList = productsFromJson.cast<String>();
+
     return Recipe(
+      id: map['id'],
       name: map['name'],
       description: map['description'],
-      image: map['image'],
-      myBaristaRecipe: map['myBaristaRecipe'] ?? true // True by default.
+      pictures: picturesList,
+      ingredients: ingredientsList,
+      products: productsList,
+      myBaristaRecipe: map['myBaristaRecipe'] ?? false, // False by default.
     );
   }
 
+
   static Future<List<Recipe>> loadMyBaristaRecipes() async {
-    final jsonString = await rootBundle.loadString('assets/json/my_barista_recipes_simple.json');
-    // final jsonString = await rootBundle.loadString('assets/json/my_barista_recipes.json');
+    final jsonString = await rootBundle.loadString('assets/json/my_barista_recipes.json');
     final List<dynamic> jsonDecoded = jsonDecode(jsonString) as List<dynamic>;
-    print("test----:"+jsonDecoded.toString());
     return jsonDecoded.map((dynamic item) => Recipe.fromMapForBarista(item as Map<String, dynamic>)).toList();
   }
 
@@ -70,61 +106,93 @@ class Recipe {
       id: id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
-      image: image ?? this.image
+      pictures: pictures,
+      ingredients: ingredients,
+      products: products
     );
 
   // Get custom card.
   // deleteRecipe function is just in case of add a recipe from My barista.
   Widget getCard(BuildContext context, Function(Recipe) deleteRecipe) {
     return Card(
-            color: const Color(0xFFE0D0C0), // Card color.
-            elevation: 8,
-            margin: EdgeInsets.symmetric(vertical: 10), // Vertical margin.
-            child: InkWell( // To detect taps.
-              onTap: () { // Behavior when touch the recipe.
-                Navigator.push( // Add Recipe page to navigation stack.
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RecipePage(
-                      recipe: this,
-                      fromMyBarista: myBaristaRecipe,
-                      moveRecipeFromMyBarista: deleteRecipe
-                    ),
-                  ),
-                );
-              },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center( // Center image.
-                    child: ClipRRect( // Add recipe image with rounded borders.
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
-                      child: Image.asset(
-                        image,
-                        width: 350,
-                        height: 250,
-                        fit: BoxFit.cover, // To adjust image to container.
-                      ),
-                    ),
-                  ),
-                  Padding( // Recipe name.
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      name,
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding( // Recipe content.
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      description,
-                      style: const TextStyle(fontSize: 16, color: const Color(0xFF674722)),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                ],
+      color: const Color(0xFFE0D0C0), // Card color.
+      elevation: 8,
+      margin: EdgeInsets.symmetric(vertical: 10), // Vertical margin.
+      child: InkWell( // To detect taps.
+        onTap: () { // Behavior when touch the recipe.
+          Navigator.push( // Add Recipe page to navigation stack.
+            context,
+            MaterialPageRoute(
+              builder: (context) => RecipePage(
+                recipe: this,
+                fromMyBarista: myBaristaRecipe,
+                moveRecipeFromMyBarista: deleteRecipe
               ),
             ),
           );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Center( // Center image.
+              child: ClipRRect( // Add recipe image with rounded borders.
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 200),
+                  child: CarouselView(
+                    itemExtent: 220,
+                    shrinkExtent: 200,
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    backgroundColor: Color(0x00FFFFFF),
+                    children: List<Widget>.generate(pictures.length, (int index) {
+                      return Image.asset(pictures[index]);
+                    })
+                  ),
+                )
+              ),
+            ),
+            Padding( // Recipe name.
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                name,
+                style: Theme.of(context).textTheme.bodyLarge
+              ),
+            ),
+            Padding( // Recipe content.
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis, // 3 points when text is overflow.
+                style: Theme.of(context).textTheme.bodyMedium
+              ),
+            ),
+            const SizedBox(height: 10)
+          ],
+        ),
+      ),
+    );
+  }
+
+  String getIngredients() {
+    String ingredientsText = '';
+
+    for (int i = 0; i < this.ingredients.length; i++) {
+      ingredientsText += '* ${this.ingredients[i]}';
+      if (i != this.ingredients.length - 1) ingredientsText += '\n';
+    }
+
+    return ingredientsText;
+  }
+
+  String getProducts() {
+    String productsText = '';
+
+    for (int i = 0; i < this.products.length; i++) {
+      productsText += '* ${this.products[i]}';
+      if (i != this.products.length - 1) productsText += '\n';
+    }
+
+    return productsText;
   }
 }

@@ -24,7 +24,10 @@ class _RecipePageState extends State<RecipePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.recipe.name),
+        title: Text(
+          widget.recipe.name,
+          style: Theme.of(context).textTheme.headlineLarge
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -34,23 +37,55 @@ class _RecipePageState extends State<RecipePage> {
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.asset(
-                  widget.recipe.image,
-                  width: double.infinity,
-                  height: 200,
-                  fit: BoxFit.cover,
-                ),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 200),
+                  child: CarouselView(
+                    itemExtent: 250,
+                    shrinkExtent: 200,
+                    backgroundColor: const Color(0xFFAC8964),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    children: List<Widget>.generate(widget.recipe.pictures.length, (int index) {
+                      return Image.asset(widget.recipe.pictures[index]);
+                    })
+                  ),
+                )
               ),
             ),
             const SizedBox(height: 16),
             Text(
               widget.recipe.name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.bodyLarge
             ),
             const SizedBox(height: 16),
             Text(
               widget.recipe.description,
-              style: const TextStyle(fontSize: 16, color: Color(0xFF794024)),
+              style: Theme.of(context).textTheme.bodyMedium
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Ingredientes',
+              style: Theme.of(context).textTheme.bodyLarge
+            ),
+            const SizedBox(height: 10),
+            Padding( // Ingredients.
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Text(
+                widget.recipe.getIngredients(),
+                style: Theme.of(context).textTheme.bodyMedium
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Productos',
+              style: Theme.of(context).textTheme.bodyLarge
+            ),
+            const SizedBox(height: 10),
+            Padding( // Products.
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Text(
+                widget.recipe.getProducts(),
+                style: Theme.of(context).textTheme.bodyMedium
+              ),
             ),
           ],
         ),
@@ -73,10 +108,10 @@ class _RecipePageState extends State<RecipePage> {
             );
             // Poner la funcionalidad para mover a mis receta, hay que ver bien si se necesita la database xq hay que agregar el bool de que pertenece al barista
           },
-          child: const Icon(Icons.add)
+          child: const Icon(Icons.add),
         )
       :
-        null
+        null,
     );
   }
 }

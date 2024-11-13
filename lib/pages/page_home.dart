@@ -14,8 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const Color appBarTextColor = Color(0xFFF2E0D3);
-
   List<Recipe> recipes = [];
 
   @override void initState() {
@@ -45,12 +43,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               widget.title,
-              style: const TextStyle(
-                fontFamily: 'Lobster',
-                color: appBarTextColor
-              )
+              style: Theme.of(context).textTheme.headlineLarge
             ),
-            const SizedBox(width: 77,),
+            const SizedBox(width: 56,),
             IconButton(
               onPressed: _displayCleanDatabaseAlert,
               icon: const Icon(Icons.cleaning_services_outlined)
@@ -77,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           _getSpace('appbar_header'),
           _generateSectionTitle('Actividad reciente'), // Generate custom title for section.
           _getSpace('header_content'),
-          _getActivityInfo(false), // Activity in recipes to display in home page.
+          _getActivityInfo(), // Activity in recipes to display in home page.
           _getSpace('content_content'),
         ],
       )
@@ -88,9 +83,7 @@ class _HomePageState extends State<HomePage> {
   Widget _generateSectionTitle(String title) {
     return Text(
       title,
-      style: const TextStyle(
-        fontSize: 25
-      ),
+      style: Theme.of(context).textTheme.headlineMedium
     );
   }
 
@@ -105,15 +98,22 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(
           height: 25,
         ) :
-        SizedBox( // type == 'content_content'.
-          height: currentSpaceBetweenItems.toDouble(),
+        const SizedBox( // type == 'content_content'.
+          height: 10,
         );
   }
 
   // Get activity in recipes to display in home page, depending my recipes list is empty or not.
-  Widget _getActivityInfo(bool myRecipesEmpty) {
-    return myRecipesEmpty ?
-            const Text('No hay recetas en la lista') : // No recipes to display.
+  Widget _getActivityInfo() {
+    return recipes.length == 0 ?
+            Container(
+              width: 300,
+              child: Text( // No recipes to display.
+                'No hay recetas en la lista. Agregue desde Mis recetas o Mi barista.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            )
+          :
             Expanded( // To avoid problems due to include a ListView inside a Column.
               child: SizedBox(
                 width: 350.0, // Width of list items.
@@ -141,14 +141,14 @@ class _HomePageState extends State<HomePage> {
             child: Text(''),
           ),
           ListTile(
-            title: Text('Principal', style: Theme.of(context).textTheme.bodyLarge,),
+            title: Text('Principal', style: Theme.of(context).textTheme.headlineMedium),
             selected: true,
             onTap: () {
               Navigator.pop(context); // Close the drawer.
             },
           ),
           ListTile(
-            title: const Text('Mis recetas'),
+            title: Text('Mis recetas', style: Theme.of(context).textTheme.headlineMedium),
             onTap: () {
               Navigator.pop(context); // Close drawer before go to another page.
               Navigator.push( // Go to My recipes page.
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: const Text('Mi barista'),
+            title: Text('Mi barista', style: Theme.of(context).textTheme.headlineMedium),
             onTap: () {
               Navigator.pop(context); // Close drawer before go to another page.
               Navigator.push( // Go to My barista page.
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           ListTile(
-            title: const Text('Tu opinión'),
+            title: Text('Tu opinión', style: Theme.of(context).textTheme.headlineMedium),
             onTap: () {
               Navigator.pop(context); // Close drawer before go to another page.
               Navigator.push( // Go to Your opinion page.
@@ -184,35 +184,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<int> spaceBetweenItems = <int>[0, 3, 5, 7, 10, 13];
-  int currentSpaceBetweenItems = 0;
-
-  Widget _getResizeButton() {
-    return FloatingActionButton(
-      onPressed: _getNextSize,
-      child: Text('$currentSpaceBetweenItems')
-    );
-  }
-
-  int _getNextSize() {
-    if (currentSpaceBetweenItems == -1 || currentSpaceBetweenItems == spaceBetweenItems.last) {
-      setState(() {
-        currentSpaceBetweenItems = spaceBetweenItems[0];
-      });      
-      return spaceBetweenItems[0];
-    }
-
-    for (int i = 0; i < spaceBetweenItems.length; i++) {
-      if (spaceBetweenItems[i] == currentSpaceBetweenItems) {
-        setState(() {
-          currentSpaceBetweenItems = spaceBetweenItems[i + 1];
-        });        
-        return spaceBetweenItems[i + 1];
-      }
-    }
-
-    return -1;
-  }
 
   // Display pop-up to confirm the user want to delete their recipes.
   void _displayCleanDatabaseAlert() {
@@ -220,17 +191,24 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Eliminar recetas'), // Pop-up title.
-          content: const Text('¿Quieres continuar con la eliminación de tus recetas?'), // Alert message.
+          backgroundColor: const Color(0xFFC4BA95),
+          title: Text( // Pop-up title.
+            'Eliminar recetas',
+            style: Theme.of(context).textTheme.headlineMedium
+          ),
+          content: Text( // Alert message.
+            '¿Quieres continuar con la eliminación de tus recetas?',
+            style: Theme.of(context).textTheme.bodyMedium
+          ),
           actions: [
             TextButton( // Button to cancel action and close pop-up.
-              child: const Text('Cancelar'),
+              child: Text('Cancelar', style: Theme.of(context).textTheme.bodyMedium),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton( // Button to eliminate recipes and close pop-up.
-              child: const Text('Eliminar'),
+              child: Text('Eliminar', style: Theme.of(context).textTheme.bodyMedium),
               onPressed: () {
                 Navigator.of(context).pop();
                 _clearDatabase();

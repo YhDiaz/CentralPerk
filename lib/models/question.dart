@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -35,12 +34,7 @@ class Question {
 
   static Future<List<Question>> loadYourOpinionQuestions() async {
     final jsonString = await rootBundle.loadString('assets/json/your_opinion_questions_simple.json');
-    // final jsonString = await rootBundle.loadString('assets/json/your_opinion_questions.json');
-    // final jsonString = await rootBundle.loadString('assets/json/my_barista_recipes.json');
-    // final Map<String, dynamic> jsonDecoded = jsonDecode(jsonString) as Map<String, dynamic>;
     final List<dynamic> jsonDecoded = jsonDecode(jsonString) as List<dynamic>;
-    print("test----:"+jsonDecoded.toString());
-    // return jsonDecoded.entries.map((entry) => Question.fromMap(entry.value as Map<String, dynamic>)).toList();
     return jsonDecoded.map((dynamic item) => Question.fromMap(item as Map<String, dynamic>)).toList();
   }
 
@@ -53,7 +47,10 @@ class Question {
         children: [
           Padding( // Display question.
             padding: const EdgeInsets.all(16.0),
-            child: Text(title)
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.bodyMedium
+            )
           ),
           Row( // Display 5-star buttons.
             mainAxisAlignment: MainAxisAlignment.center,

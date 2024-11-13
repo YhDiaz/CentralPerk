@@ -33,7 +33,9 @@ class RecipeDatabase {
         id $idType,
         name $textType,
         description $textType,
-        image $textType
+        pictures $textType,
+        ingredients $textType,
+        products $textType
         )
     ''');
   }
@@ -51,7 +53,7 @@ class RecipeDatabase {
 
     final maps = await db.query(
       'recipes',
-      columns: ['id', 'name', 'description', 'image'],
+      columns: ['id', 'name', 'description', 'pictures', 'ingredients', 'products'],
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -84,7 +86,7 @@ class RecipeDatabase {
     );
   }
 
-  // Delete an specific recipe from database.
+  // Delete a specific recipe from database.
   Future<int> deleteRecipe(int id) async {
     final db = await instance.database;
 
@@ -103,7 +105,6 @@ class RecipeDatabase {
 
   Future close() async {
     final db = await instance.database;
-
     db.close();
   }
 }

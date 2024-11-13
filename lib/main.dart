@@ -31,24 +31,26 @@ class MyApp extends StatelessWidget {
       ),
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
-          fontFamily: 'DancingScript',
-          fontSize: 30,
-          fontWeight: FontWeight.bold
+          fontFamily: 'Lobster',
+          fontSize: 28,
+          color: Color(0xFFF2E0D3)
         ),
         headlineMedium: const TextStyle(
           fontFamily: 'DancingScript',
-          fontSize: 25,
-          fontWeight: FontWeight.bold
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF794024)
         ),
         bodyLarge: const TextStyle(
           fontFamily: 'Montserrat',
-          fontSize: 15,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
           color: Color(0xFF794024)
         ),
         bodyMedium: const TextStyle(
           fontFamily: 'Montserrat',
-          fontSize: 12,
-          color: Color(0xFF5F2101)
+          fontSize: 15,
+          color: Color(0xFF794024)
         )
       ),
       buttonTheme: const ButtonThemeData(
