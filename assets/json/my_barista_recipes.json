@@ -1,10 +1,10 @@
-
 [
     {
         "name": "Café Latte",
         "description": "Una deliciosa combinación de café expreso y leche vaporizada.",
         "pictures": [
-            ""
+            "assets/icons/icon_coffee_cappuccino.jpg",
+            "assets/icons/icon_coffee_latte.jpg"
         ],
         "ingredients": [
             "1 taza de café expreso",
@@ -17,10 +17,10 @@
         ]
     },
     {
-        "name": "Capuchino",
+        "name": "Capuccino",
         "description": "Un clásico café italiano con partes iguales de café expreso, leche vaporizada y espuma de leche.",
         "pictures": [
-            ""
+            "assets/icons/icon_coffee_cappuccino.jpg"
         ],
         "ingredients": [
             "1 taza de café expreso",
@@ -38,7 +38,7 @@
         "name": "Café Americano",
         "description": "Café expreso diluido con agua caliente para un sabor suave y delicioso.",
         "pictures": [
-            ""
+            "assets/icons/icon_coffee_american.jpg"
         ],
         "ingredients": [
             "1 taza de café expreso",
@@ -50,10 +50,10 @@
         ]
     },
     {
-        "name": "Moca",
+        "name": "Mocha",
         "description": "Una deliciosa mezcla de café, chocolate y leche.",
         "pictures": [
-            ""
+            "assets/icons/icon_coffee_mocha.jpg"
         ],
         "ingredients": [
             "1 taza de café expreso",
