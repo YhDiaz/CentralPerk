@@ -23,7 +23,7 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
   }
 
   String _generateEmailBody() {
-    String body = 'Estas son mis respuestas sobre su aplicación:\n\n';
+    String body = '¡Hola! Estas son mis respuestas sobre tu aplicación:\n\n';
     int finalRating = 0;
     
     for (var question in _questions) {
@@ -40,6 +40,8 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
     else if (finalRating < 35) body += 'con un poco más de ganas la haces.';
     else if (finalRating < 42) body += 'te quedó buena, pero plagiaste el nombre.';
     else body += 'a la tienda y que genere :\$\$.';
+
+    body += '\n\nMis datos:\n- Nombre: $name\n- Ocupación: $occupation\n- Relación con el desarrollador: $relationship';
 
     body += '\n\n* Respuesta generada automáticamente con un algoritmo de generación de respuestas';
     return body;
@@ -128,7 +130,7 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
       if (question.rating == 0) return false;
     }
 
-    return true;
+    return true && register;
   }
 
   // Update rating in an specific question, which is accessed using its index.
@@ -138,16 +140,85 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
     });
   }
 
+  String name = '';
+  String relationship = '';
+  String occupation = '';
+  bool register = false;
+
+  final _nameController = TextEditingController();
+  final _relationshipController = TextEditingController();
+  final _occupationController = TextEditingController();
+
   Widget _getQuestionsListToDisplay(bool defaultInfo) {
     return Center(
       child: Column(
               children: [
-                const SizedBox(
-                  height: 15.0,
+                const SizedBox(height: 5,),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 50.0),
+                  child: TextField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: 'Nombre',
+                      labelStyle: Theme.of(context).textTheme.bodyLarge
+                    ),
+                  ),
                 ),
+                const SizedBox(height: 5,),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 50.0),
+                  child: TextField(
+                    controller: _occupationController,
+                    decoration: InputDecoration(
+                      hintText: '(Estudiante IDVRV, Cursando Programación para Dispositivos Móviles, No pertenece a la carrera)',
+                      hintStyle: const TextStyle(fontSize: 12, height: 1.75, fontFamily: 'Montserrat', color: Color(0xFF794024)),
+                      hintMaxLines: 3,
+                      labelText: 'Ocupación',
+                      labelStyle: Theme.of(context).textTheme.bodyLarge
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5,),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 50.0),
+                  child: TextField(
+                    controller: _relationshipController,
+                    decoration: InputDecoration(
+                      hintText: '(Familiar, amigo, etc.)',
+                      hintStyle: const TextStyle(fontSize: 12, height: 1.75, fontFamily: 'Montserrat', color: Color(0xFF794024)),
+                      hintMaxLines: 3,
+                      labelText: 'Relación con el desarrollador',
+                      labelStyle: Theme.of(context).textTheme.bodyLarge
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5,),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      name = _nameController.text;
+                      occupation = _occupationController.text;
+                      relationship = _relationshipController.text;
+                      register = true;
+                      ScaffoldMessenger.of(context).showSnackBar( // Display message at the bottom of the screen.
+                        const SnackBar(
+                          content: Text(
+                            'Te has registrado correctamente',
+                            style: TextStyle(
+                              color: Color(0xFFE7D0AE)
+                            ),
+                          ),
+                          backgroundColor: Color(0xFF7C5635),
+                        )
+                      );
+                    });
+                  },
+                  child: Text('Registrarse', style: Theme.of(context).textTheme.bodyMedium,)
+                ),
+                const SizedBox(height: 15,),
                 SizedBox(
                   width: 350.0, // Width of list items.
-                  height: 650.0,
+                  height: 350.0,
                   child: ListView.builder(
                     itemCount: _questions.length, // Amount of items.
                     itemBuilder: (context, index) {

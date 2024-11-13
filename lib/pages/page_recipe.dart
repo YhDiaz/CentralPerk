@@ -39,8 +39,7 @@ class _RecipePageState extends State<RecipePage> {
   Future<void> _deleteRecipe() async {
     final dbHelper = RecipeDatabase.instance;
     await dbHelper.deleteRecipe(widget.recipe.id!);
-    // _loadRecipe(); // Refresh recipes list.
-    // Agregar un pop up para  confirmación
+    // Agregar un pop up para confirmación
     Navigator.pop(context);
   }
 
