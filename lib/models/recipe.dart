@@ -195,4 +195,10 @@ class Recipe {
 
     return productsText;
   }
+
+  String generateShareText() {
+    return '¡Hola! Te invito a ver al receta que creé.\n\n' +
+           '$name\n\n$description\n\nIngredientes:\n${getIngredients()}\n\nProductos:\n${getProducts()}\n\n' +
+           'Con la aplicación Central Perk es sencillo crear recetas y personalizarlas a tu gusto ¡Pruébala ya!';
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/recipe_database.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
@@ -52,9 +53,28 @@ class _RecipePageState extends State<RecipePage> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              widget.recipe.name,
-              style: Theme.of(context).textTheme.bodyLarge
+            Row( // Top recipe information and options.
+              children: [
+                Text(
+                  widget.recipe.name,
+                  style: Theme.of(context).textTheme.bodyLarge
+                ),
+                const SizedBox(width: 15,),
+                IconButton(
+                  onPressed: () {
+                    Share.share(widget.recipe.generateShareText());
+                  },
+                  icon: const Icon(Icons.share, color: Color.fromARGB(255, 65, 36, 2))
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.edit, color: Color.fromARGB(255, 65, 36, 2))
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.delete, color: Color.fromARGB(255, 65, 36, 2))
+                )
+              ],
             ),
             const SizedBox(height: 16),
             Text(
