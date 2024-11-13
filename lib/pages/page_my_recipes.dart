@@ -224,7 +224,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
                 width: 350.0, // Width of list items.
                 child: ListView( // Recipes are displayed as a list.
                   padding: const EdgeInsets.all(8),
-                  children: recipes.map((receta) => receta.getCard(context, (recipe) {})).toList()
+                  children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList()
                 )
               ),
             );

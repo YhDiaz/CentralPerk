@@ -113,7 +113,7 @@ class Recipe {
 
   // Get custom card.
   // deleteRecipe function is just in case of add a recipe from My barista.
-  Widget getCard(BuildContext context, Function(Recipe) deleteRecipe) {
+  Widget getCard(BuildContext context, Function(Recipe) deleteRecipe, Function() loadRecipes) {
     return Card(
       color: const Color(0xFFE0D0C0), // Card color.
       elevation: 8,
@@ -129,7 +129,9 @@ class Recipe {
                 moveRecipeFromMyBarista: deleteRecipe
               ),
             ),
-          );
+          ).then((_) {
+            loadRecipes();
+          });
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,5 +202,27 @@ class Recipe {
     return '¡Hola! Te invito a ver al receta que creé.\n\n' +
            '$name\n\n$description\n\nIngredientes:\n${getIngredients()}\n\nProductos:\n${getProducts()}\n\n' +
            'Con la aplicación Central Perk es sencillo crear recetas y personalizarlas a tu gusto ¡Pruébala ya!';
+  }
+
+  String getIngredientsTextField() {
+    String ingredientsText = '';
+
+    for (int i = 0; i < this.ingredients.length; i++) {
+      ingredientsText += '${this.ingredients[i]}';
+      if (i != this.ingredients.length - 1) ingredientsText += ',';
+    }
+
+    return ingredientsText;
+  }
+
+  String getProductsTextField() {
+    String productsText = '';
+
+    for (int i = 0; i < this.products.length; i++) {
+      productsText += '${this.products[i]}';
+      if (i != this.products.length - 1) productsText += ',';
+    }
+
+    return productsText;
   }
 }

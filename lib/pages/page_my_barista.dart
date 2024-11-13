@@ -96,7 +96,7 @@ class _MyBaristaPageState extends State<MyBaristaPage> {
                         return defaultInfo ?
                           Text('No se encontró información de la receta $index') // Recipes aren't loaded yet.
                         :
-                          _recipes[index].getCard(context, _deleteRecipe); // Display recipe card.
+                          _recipes[index].getCard(context, _deleteRecipe, _loadRecipes); // Display recipe card.
                       },
                     )
                   ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
 class RecipePage extends StatefulWidget {
-  final Recipe recipe;
+  Recipe recipe;
   final Function(Recipe) moveRecipeFromMyBarista;
   final bool fromMyBarista;
 
@@ -20,6 +20,21 @@ class RecipePage extends StatefulWidget {
 
 class _RecipePageState extends State<RecipePage> {
   final RecipeDatabase recipeDatabase = RecipeDatabase.instance;
+
+  Future<void> _loadRecipe() async {
+    final dbHelper = RecipeDatabase.instance;
+    final _recipe = await dbHelper.readRecipe(widget.recipe.id!);
+    
+    setState(() {
+      widget.recipe = _recipe;
+    });
+  }
+
+  Future<void> _updateRecipe(Recipe recipe) async {
+    final dbHelper = RecipeDatabase.instance;
+    await dbHelper.updateRecipe(recipe);
+    _loadRecipe(); // Refresh recipes list.
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +79,15 @@ class _RecipePageState extends State<RecipePage> {
                   onPressed: () {
                     Share.share(widget.recipe.generateShareText());
                   },
-                  icon: const Icon(Icons.share, color: Color.fromARGB(255, 65, 36, 2))
+                  icon: const Icon(Icons.share, color: Color(0xFF412402))
+                ),
+                IconButton(
+                  onPressed: _editRecipe,
+                  icon: const Icon(Icons.edit, color: Color(0xFF412402))
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.edit, color: Color.fromARGB(255, 65, 36, 2))
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.delete, color: Color.fromARGB(255, 65, 36, 2))
+                  icon: const Icon(Icons.delete, color: Color(0xFF412402))
                 )
               ],
             ),
@@ -132,6 +147,76 @@ class _RecipePageState extends State<RecipePage> {
         )
       :
         null,
+    );
+  }
+
+  void _editRecipe() {
+    final _nameController = TextEditingController(text: widget.recipe.name); // Name field.
+    final _descriptionController = TextEditingController(text: widget.recipe.description); // Description field.
+    final _ingredientsController = TextEditingController(text: widget.recipe.getIngredientsTextField()); // Ingredients field.
+    final _productsController = TextEditingController(text: widget.recipe.getProductsTextField()); // Products field.
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Crear receta', style: Theme.of(context).textTheme.headlineMedium),
+          backgroundColor: const Color(0xFFC4BA95),
+          content: SingleChildScrollView(
+            child: Column( // Fields and indicators.
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(labelText: 'Nombre', labelStyle: Theme.of(context).textTheme.bodyMedium),
+                ),
+                TextField(
+                  controller: _descriptionController,
+                  decoration: InputDecoration(labelText: 'Descripción', labelStyle: Theme.of(context).textTheme.bodyMedium),
+                ),
+                TextField(
+                  controller: _ingredientsController,
+                  decoration: InputDecoration(labelText: 'Ingredientes (separados por comas)', labelStyle: Theme.of(context).textTheme.bodyMedium),
+                ),
+                TextField(
+                  controller: _productsController,
+                  decoration: InputDecoration(labelText: 'Productos (separados por comas)', labelStyle: Theme.of(context).textTheme.bodyMedium),
+                ),
+              ],
+            ),
+          ),
+          actions: [ // Pop-up actions (buttons)
+            TextButton( // Button to cancel action and close pop-up.
+              child: Text('Cancelar', style: Theme.of(context).textTheme.bodyMedium),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton( // Button to add create recipe, add it to database and close pop-up.
+              child: Text('Guardar', style: Theme.of(context).textTheme.bodyMedium),
+              onPressed: () {
+                final List<String> ingredients = _ingredientsController.text.split(',').map((e) => e.trim()).toList();
+                final List<String> products = _productsController.text.split(',').map((e) => e.trim()).toList();
+
+                final recipe = Recipe(
+                  id: widget.recipe.id,
+                  name: _nameController.text,
+                  description: _descriptionController.text,
+                  pictures: ['assets/icons/icon_central_perk_logo.png'],
+                  ingredients: ingredients,
+                  products: products,
+                );
+
+                // recipe.copy(id: widget.recipe.id);
+
+                // _addRecipe(recipe);
+                _updateRecipe(recipe);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
