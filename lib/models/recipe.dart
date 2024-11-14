@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:central_perk/pages/page_recipe.dart';
 import 'package:flutter/material.dart';
@@ -147,7 +148,20 @@ class Recipe {
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     backgroundColor: Color(0x00FFFFFF),
                     children: List<Widget>.generate(pictures.length, (int index) {
-                      return Image.asset(pictures[index]);
+                      print('--------------picture: ${pictures[index]}');
+                      return getPicture(index);
+                      // if (pictures[index].contains('assets')) return Image.asset(pictures[index]);
+                      // return Image.file(File(pictures[index]));
+                      // Image image = Image.file(File(pictures[index]));
+                      // // try
+                      // // try {
+                      // //   image = Image.asset(pictures[index]);
+                      // // } catch(e) {
+                      // //   print('------- fail, loading as file');
+                      // //   image = Image.file(File(pictures[index]));
+                      // // }
+
+                      // return image;
                     })
                   ),
                 )
@@ -224,5 +238,10 @@ class Recipe {
     }
 
     return productsText;
+  }
+
+  Image getPicture(int index) {
+    if (this.pictures[index].contains('assets')) return Image.asset(pictures[index]);
+    return Image.file(File(pictures[index]));
   }
 }

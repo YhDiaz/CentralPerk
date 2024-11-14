@@ -1,3 +1,4 @@
+
 import 'package:central_perk/models/recipe_database.dart';
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/pages/page_my_barista.dart';
@@ -60,9 +61,86 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: _getBody(),
-      drawer: _getDrawer(context)
+      drawer: _getDrawer(context),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     _showSelectionDialog(context);
+      //   },
+      //   child: Icon(Icons.camera_alt),
+      // ),
     );
   }
+
+  // Future<void> _showSelectionDialog(BuildContext context) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //             title: Text("From where do you want to take the photo?"),
+  //             content: SingleChildScrollView(
+  //               child: ListBody(
+  //                 children: <Widget>[
+  //                   GestureDetector(
+  //                     child: Text("Gallery"),
+  //                     onTap: () {
+  //                       _openGallery(context);
+  //                     },
+  //                   ),
+  //                   Padding(padding: EdgeInsets.all(8.0)),
+  //                   GestureDetector(
+  //                     child: Text("Camera"),
+  //                     onTap: () {
+  //                       _openCamera(context);
+  //                     },
+  //                   )
+  //                 ],
+  //               ),
+  //             ));
+  //       });
+  // }
+  // String imagePath = '';
+
+  // Future<void> _openGallery(BuildContext context) async {
+  //   XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (picture == null) return;
+
+  //   File tmpFile = File(picture.path);
+  //   // getting a directory path for saving
+  //   final Directory d = await getApplicationDocumentsDirectory();
+  //   final String path = d.path;
+
+  //   setState(() {
+  //   imagePath = '$path/image${DateTime.now()}.png';
+
+      
+  //   });
+
+  //   // copy the file to a new path
+  //   await tmpFile.copy(imagePath);
+
+  //   Navigator.of(context).pop();
+  // }
+
+  // void _openCamera(BuildContext context) async {
+  //   XFile? picture = await ImagePicker().pickImage(source: ImageSource.camera);
+  //   if (picture == null) return;
+
+  //   File tmpFile = File(picture.path);
+  //   // getting a directory path for saving
+  //   final Directory d = await getApplicationDocumentsDirectory();
+  //   final String path = d.path;
+
+  //   setState(() {
+  //   imagePath = '$path/image${DateTime.now()}.png';
+
+      
+  //   });
+
+  //   // copy the file to a new path
+  //   await tmpFile.copy(imagePath);
+
+  //   Navigator.of(context).pop();
+  // }
 
   // Get body.
   Widget _getBody() {
@@ -74,6 +152,11 @@ class _HomePageState extends State<HomePage> {
           _getSpace('header_content'),
           _getActivityInfo(), // Activity in recipes to display in home page.
           _getSpace('content_content'),
+          // _setImageView(),
+          // (imagePath != '') ?
+          //   Image.file(File(imagePath))
+          // :
+          //   Text('')
         ],
       )
     );
@@ -114,15 +197,25 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           :
-            Expanded( // To avoid problems due to include a ListView inside a Column.
-              child: SizedBox(
-                width: 350.0, // Width of list items.
-                child: ListView( // Recipes are displayed as a list.
-                  padding: const EdgeInsets.all(8),
-                  children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList()
-                )
-              ),
-            );
+            Text('');
+            // Column(
+            //   children: List.generate(recipes.length, (index) {
+            //     return recipes[index].getCard(context, (recipe) {}, _loadRecipes);
+            //   })
+              // children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList(),
+              // children: List.generate(2, (index) {
+
+              // }),
+            // );
+            // Expanded( // To avoid problems due to include a ListView inside a Column.
+            //   child: SizedBox(
+            //     width: 350.0, // Width of list items.
+            //     child: ListView( // Recipes are displayed as a list.
+            //       padding: const EdgeInsets.all(8),
+            //       children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList()
+            //     )
+            //   ),
+            // );
   }
   
   Widget _getDrawer(BuildContext context) {

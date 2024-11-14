@@ -68,7 +68,8 @@ class _RecipePageState extends State<RecipePage> {
                     backgroundColor: const Color(0xFFAC8964),
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     children: List<Widget>.generate(widget.recipe.pictures.length, (int index) {
-                      return Image.asset(widget.recipe.pictures[index]);
+                      // return Image.asset(widget.recipe.pictures[index]);
+                      return widget.recipe.getPicture(index);
                     })
                   ),
                 )
