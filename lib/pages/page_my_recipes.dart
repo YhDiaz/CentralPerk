@@ -290,40 +290,14 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
             ) :
             // MAGIC!! DON'T TOUCH
             SizedBox(
-              width: 200,
-              height: 350,
+              width: 350,
+              height: 700,
               child: ListView(
                 children: List.generate(recipes.length, (index) {
                   return recipes[index].getCard(context, (recipe) {}, _loadRecipes);
                 })
               ),
             );
-            // SizedBox(
-            //   width: 200,
-            //   height: 350,
-            //   child: ListView(
-            //     children: List.generate(recipes.length, (index) {
-            //       return Image.file(File(recipes[index].pictures[0]));
-            //     })
-            //   ),
-            // );
-            // ListView.builder(
-            //   itemBuilder: (context, index) {
-            //     return Image.file(File(recipes[index].pictures[0]));
-            //   },
-            // );
-            // List.generate(recipes.length, (index){
-            //   return
-            // });
-            // Expanded( // To avoid problems due to include a ListView inside a Column.
-            //   child: SizedBox(
-            //     width: 350.0, // Width of list items.
-            //     child: ListView( // Recipes are displayed as a list.
-            //       padding: const EdgeInsets.all(8),
-            //       children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList()
-            //     )
-            //   ),
-            // );
   }
 
   Widget _getFloatingActionButton() {

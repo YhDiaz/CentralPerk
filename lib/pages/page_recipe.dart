@@ -149,7 +149,6 @@ class _RecipePageState extends State<RecipePage> {
                 backgroundColor: Color(0xFF7C5635),
               )
             );
-            // Poner la funcionalidad para mover a mis receta, hay que ver bien si se necesita la database xq hay que agregar el bool de que pertenece al barista
           },
           child: const Icon(Icons.add),
         )
@@ -215,9 +214,6 @@ class _RecipePageState extends State<RecipePage> {
                   products: products,
                 );
 
-                // recipe.copy(id: widget.recipe.id);
-
-                // _addRecipe(recipe);
                 _updateRecipe(recipe);
                 Navigator.of(context).pop();
               },
