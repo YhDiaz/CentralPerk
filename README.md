@@ -49,10 +49,9 @@ En base a los resultados obtenidos de las pruebas realizadas con usuarios, desde
 - La aplicación debe tener un ícono que se muestra en el menú de aplicaciones del teléfono.
 
 ## Diagramas Desarrollados
-En la fase de diseño de la versión 2 de Central Perk, se elaboraron dos diagramas que pueden ayudar a comprender mejor la estructura y flujo dentro de la aplicación.
-
-![Central Perk - Diagrama de arquitectura de la información]([InformationArchitectureDiagram.png](https://alumnosutalca-my.sharepoint.com/:i:/g/personal/joediaz22_alumnos_utalca_cl/Ec8whW2PvtFEv-vNI-uASPMBRuHuEFVho21-rVsvc0PUeA?e=PhsFBg))
-![Central Perk - Diagrama de flujo]([FlowDiagrama_RecipeCreation.png](https://alumnosutalca-my.sharepoint.com/:i:/g/personal/joediaz22_alumnos_utalca_cl/Ecq7h_QSM3JNiCP226gXex4BCxk9bMsa0dWBJKGgUyRApA?e=OQcgKS))
+En la fase de diseño de la versión 2 de Central Perk, se elaboraron dos diagramas que pueden ayudar a comprender mejor la estructura y flujo dentro de la aplicación. Los diagramas se pueden encontrar en los siguientes links:
+[Central Perk - Diagrama de arquitectura de la información](https://alumnosutalca-my.sharepoint.com/:i:/g/personal/joediaz22_alumnos_utalca_cl/Ec8whW2PvtFEv-vNI-uASPMBRuHuEFVho21-rVsvc0PUeA?e=PhsFBg)
+[Central Perk - Diagrama de flujo](https://alumnosutalca-my.sharepoint.com/:i:/g/personal/joediaz22_alumnos_utalca_cl/Ecq7h_QSM3JNiCP226gXex4BCxk9bMsa0dWBJKGgUyRApA?e=OQcgKS)
 
 ## APK de la aplicación
 En la versión vigente de Central Perk, esta cuenta con un APK, el cuál puede ser descargado desde el siguiente link: [Central Perk - APK](). De este modo, los usuarios con dispositivos móviles que tengan sistema operativo Android podrán hacer uso de ella.
