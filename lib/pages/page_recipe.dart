@@ -68,7 +68,6 @@ class _RecipePageState extends State<RecipePage> {
                     backgroundColor: const Color(0xFFAC8964),
                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                     children: List<Widget>.generate(widget.recipe.pictures.length, (int index) {
-                      // return Image.asset(widget.recipe.pictures[index]);
                       return widget.recipe.getPicture(index);
                     })
                   ),
@@ -89,14 +88,20 @@ class _RecipePageState extends State<RecipePage> {
                   },
                   icon: const Icon(Icons.share, color: Color(0xFF412402))
                 ),
-                IconButton(
-                  onPressed: _editRecipe,
-                  icon: const Icon(Icons.edit, color: Color(0xFF412402))
-                ),
-                IconButton(
-                  onPressed: _deleteRecipe,
-                  icon: const Icon(Icons.delete, color: Color(0xFF412402))
-                )
+                widget.fromMyBarista ?
+                  const Text('')
+                :
+                  IconButton(
+                    onPressed: _editRecipe,
+                    icon: const Icon(Icons.edit, color: Color(0xFF412402))
+                  ),
+                widget.fromMyBarista ?
+                  const Text('')
+                :
+                  IconButton(
+                    onPressed: _deleteRecipe,
+                    icon: const Icon(Icons.delete, color: Color(0xFF412402))
+                  )
               ],
             ),
             const SizedBox(height: 16),
@@ -151,11 +156,14 @@ class _RecipePageState extends State<RecipePage> {
             );
           },
           child: const Icon(Icons.add),
+          backgroundColor: const Color(0xFF7C5635),
         )
       :
         null,
     );
   }
+
+  
 
   void _editRecipe() {
     final _nameController = TextEditingController(text: widget.recipe.name); // Name field.

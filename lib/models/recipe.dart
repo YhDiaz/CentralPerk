@@ -90,7 +90,7 @@ class Recipe {
       pictures: picturesList,
       ingredients: ingredientsList,
       products: productsList,
-      myBaristaRecipe: map['myBaristaRecipe'] ?? false, // False by default.
+      myBaristaRecipe: map['myBaristaRecipe'] ?? true, // False by default.
     );
   }
 
@@ -210,9 +210,14 @@ class Recipe {
   }
 
   String generateShareText() {
-    return '¡Hola! Te invito a ver al receta que creé.\n\n' +
-           '$name\n\n$description\n\nIngredientes:\n${getIngredients()}\n\nProductos:\n${getProducts()}\n\n' +
-           'Con la aplicación Central Perk es sencillo crear recetas y personalizarlas a tu gusto ¡Pruébala ya!';
+    return myBaristaRecipe ?
+            '¡Mira la receta de Mi barista!\n\n' +
+            '$name\n\n$description\n\nIngredientes:\n${getIngredients()}\n\nProductos:\n${getProducts()}\n\n' +
+            'Con la aplicación Central Perk puedes inspirarte en las recetas de Mi barista para crear las tuyas propias ¡Pruébala ya!'
+          :
+            '¡He creado una receta de café!\n\n' +
+            '$name\n\n$description\n\nIngredientes:\n${getIngredients()}\n\nProductos:\n${getProducts()}\n\n' +
+            'Con la aplicación Central Perk es sencillo crear recetas y personalizarlas a tu gusto ¡Pruébala ya!';
   }
 
   String getIngredientsTextField() {

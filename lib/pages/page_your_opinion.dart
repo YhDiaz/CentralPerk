@@ -108,7 +108,8 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
             floatingActionButton: _allQuestionsRated() ?
               FloatingActionButton( // All questions were rated, then send email.
                 onPressed: _sendEmail,
-                child: const Icon(Icons.email)
+                child: const Icon(Icons.email),
+                backgroundColor: const Color(0xFF7C5635),
               )
             :
               FloatingActionButton( // All questions were rated, then send email.
@@ -213,7 +214,10 @@ class _YourOpinionPageState extends State<YourOpinionPage> {
                       );
                     });
                   },
-                  child: Text('Registrarse', style: Theme.of(context).textTheme.bodyMedium,)
+                  child: Text('Registrarse', style: Theme.of(context).textTheme.bodyMedium,),
+                  style: ButtonStyle(
+                    backgroundColor: const WidgetStatePropertyAll(Color.fromARGB(255, 201, 168, 115))
+                  ),
                 ),
                 const SizedBox(height: 15,),
                 SizedBox(
