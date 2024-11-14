@@ -3,6 +3,10 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+<<<<<<< HEAD
+=======
+  file_selector_windows
+>>>>>>> central_perk_camera
   share_plus
   url_launcher_windows
 )

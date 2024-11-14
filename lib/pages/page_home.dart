@@ -1,3 +1,4 @@
+
 import 'package:central_perk/models/recipe_database.dart';
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/pages/page_my_barista.dart';
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: _getBody(),
-      drawer: _getDrawer(context)
+      drawer: _getDrawer(context),
     );
   }
 
@@ -114,15 +115,37 @@ class _HomePageState extends State<HomePage> {
               ),
             )
           :
+            // MAGIC!! DON'T TOUCH
             Expanded( // To avoid problems due to include a ListView inside a Column.
               child: SizedBox(
                 width: 350.0, // Width of list items.
                 child: ListView( // Recipes are displayed as a list.
                   padding: const EdgeInsets.all(8),
-                  children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList()
+                  children: List.generate(recipes.length, (index) {
+                    return recipes[index].getCard(context, (recipe) {}, _loadRecipes);
+                  })
                 )
               ),
             );
+            // Text('');
+            // Column(
+            //   children: List.generate(recipes.length, (index) {
+            //     return recipes[index].getCard(context, (recipe) {}, _loadRecipes);
+            //   })
+            //   children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList(),
+            //   children: List.generate(2, (index) {
+
+            //   }),
+            // );
+            // Expanded( // To avoid problems due to include a ListView inside a Column.
+            //   child: SizedBox(
+            //     width: 350.0, // Width of list items.
+            //     child: ListView( // Recipes are displayed as a list.
+            //       padding: const EdgeInsets.all(8),
+            //       children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList()
+            //     )
+            //   ),
+            // );
   }
   
   Widget _getDrawer(BuildContext context) {
@@ -185,7 +208,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 
   // Display pop-up to confirm the user want to delete their recipes.
   void _displayCleanDatabaseAlert() {

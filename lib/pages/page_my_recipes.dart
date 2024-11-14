@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:central_perk/models/recipe.dart';
 import 'package:central_perk/models/recipe_database.dart';
 import 'package:central_perk/pages/page_my_barista.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MyRecipesPage extends StatefulWidget {
   const MyRecipesPage({super.key, required this.title});
@@ -68,6 +72,8 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
     final _ingredientsController = TextEditingController(); // Ingredients field.
     final _productsController = TextEditingController(); // Products field.
 
+    // String imagePath = '';
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -94,6 +100,24 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
                   controller: _productsController,
                   decoration: InputDecoration(labelText: 'Productos (separados por comas)', labelStyle: Theme.of(context).textTheme.bodyMedium),
                 ),
+                Row(
+                  children: [
+                    Text('Imagen', style: Theme.of(context).textTheme.bodyMedium,),
+                    const SizedBox(width: 15,),
+                    IconButton(
+                      onPressed: () {
+                        _openCamera(context);
+                      },
+                      icon: Icon(Icons.camera_alt, color: Theme.of(context).colorScheme.primary),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        _openGallery(context);
+                      },
+                      icon: Icon(Icons.photo_library_rounded, color: Theme.of(context).colorScheme.primary)
+                    )
+                  ],
+                )
               ],
             ),
           ),
@@ -113,7 +137,7 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
                 final recipe = Recipe(
                   name: _nameController.text,
                   description: _descriptionController.text,
-                  pictures: ['assets/icons/icon_central_perk_logo.png'],
+                  pictures: imagePath == '' ? List<String>.from(['assets/icons/icon_central_perk_logo.png']) : List<String>.from([imagePath]),
                   ingredients: ingredients,
                   products: products,
                 );
@@ -126,6 +150,51 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
         );
       },
     );
+  }
+
+  String imagePath = '';
+
+  Future<void> _openGallery(BuildContext context) async {
+    XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (picture == null) return;
+
+    File tmpFile = File(picture.path);
+    // getting a directory path for saving
+    final Directory d = await getApplicationDocumentsDirectory();
+    final String path = d.path;
+
+    setState(() {
+      imagePath = '$path/image${DateTime.now()}.png';
+
+      
+    });
+
+    // copy the file to a new path
+    await tmpFile.copy(imagePath);
+
+    // Navigator.of(context).pop();
+  }
+
+  Future<void> _openCamera(BuildContext context) async {
+    XFile? picture = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (picture == null) return;
+
+    File tmpFile = File(picture.path);
+    // getting a directory path for saving
+    final Directory d = await getApplicationDocumentsDirectory();
+    final String path = d.path;
+
+    setState(() {
+      imagePath = '$path/image${DateTime.now()}.png';
+      // imagePath = '$path/image1.png';
+
+      
+    });
+
+    // copy the file to a new path
+    await tmpFile.copy(imagePath);
+
+    // Navigator.of(context).pop();
   }
 
   void _createOptionsDialog() {
@@ -219,13 +288,14 @@ class _MyRecipesPageState extends State<MyRecipesPage> {
                 style: Theme.of(context).textTheme.bodyMedium
               ),
             ) :
-            Expanded( // To avoid problems due to include a ListView inside a Column.
-              child: SizedBox(
-                width: 350.0, // Width of list items.
-                child: ListView( // Recipes are displayed as a list.
-                  padding: const EdgeInsets.all(8),
-                  children: recipes.map((receta) => receta.getCard(context, (recipe) {}, _loadRecipes)).toList()
-                )
+            // MAGIC!! DON'T TOUCH
+            SizedBox(
+              width: 350,
+              height: 700,
+              child: ListView(
+                children: List.generate(recipes.length, (index) {
+                  return recipes[index].getCard(context, (recipe) {}, _loadRecipes);
+                })
               ),
             );
   }

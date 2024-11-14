@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:central_perk/pages/page_recipe.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class Recipe {
   final List<String> products;
   final bool myBaristaRecipe;
 
+  static int counter = 0;
+
   Recipe({
     this.id,
     required this.name,
@@ -23,6 +26,8 @@ class Recipe {
     required this.products,
     this.myBaristaRecipe = false
   }) {
+    counter++;
+
     print('-------------- Recipe created --------------');
     print('* Name: ${this.name}');
     print('* Description: ${this.description}');
@@ -136,22 +141,28 @@ class Recipe {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center( // Center image.
-              child: ClipRRect( // Add recipe image with rounded borders.
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 200),
-                  child: CarouselView(
-                    itemExtent: 220,
-                    shrinkExtent: 200,
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
-                    backgroundColor: Color(0x00FFFFFF),
-                    children: List<Widget>.generate(pictures.length, (int index) {
-                      return Image.asset(pictures[index]);
-                    })
-                  ),
-                )
-              ),
+            Row( // Center image.
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ClipRRect( // Add recipe image with rounded borders.
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(4.0)), // Top card border.
+                  child: Container(
+                    width: 200,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxHeight: 200),
+                      child: CarouselView(
+                        itemExtent: 220,
+                        shrinkExtent: 200,
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        backgroundColor: Color(0x00FFFFFF),
+                        children: List<Widget>.generate(pictures.length, (int index) {
+                          return getPicture(index);
+                        })
+                      ),
+                    ),
+                  )
+                ),
+              ]
             ),
             Padding( // Recipe name.
               padding: const EdgeInsets.all(16.0),
@@ -224,5 +235,10 @@ class Recipe {
     }
 
     return productsText;
+  }
+
+  Image getPicture(int index) {
+    if (this.pictures[index].contains('assets')) return Image.asset(pictures[index]);
+    return Image.file(File(pictures[index]));
   }
 }
