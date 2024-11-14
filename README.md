@@ -54,7 +54,10 @@ En la fase de diseño de la versión 2 de Central Perk, se elaboraron dos diagra
 [Central Perk - Diagrama de flujo](https://alumnosutalca-my.sharepoint.com/:i:/g/personal/joediaz22_alumnos_utalca_cl/Ecq7h_QSM3JNiCP226gXex4BCxk9bMsa0dWBJKGgUyRApA?e=OQcgKS)
 
 ## APK de la aplicación
-En la versión vigente de Central Perk, esta cuenta con un APK, el cuál puede ser descargado desde el siguiente link: [Central Perk - APK](). De este modo, los usuarios con dispositivos móviles que tengan sistema operativo Android podrán hacer uso de ella.
+En la versión vigente de Central Perk, esta cuenta con un APK, el cuál puede ser descargado desde el siguiente link: [Central Perk - APK](https://alumnosutalca-my.sharepoint.com/:u:/g/personal/joediaz22_alumnos_utalca_cl/EYd_mePLWZxNk8iyfGnLvc0BUfLIkSjShEYGsuga8nZAcA?e=SfIY6K). De este modo, los usuarios con dispositivos móviles que tengan sistema operativo Android podrán hacer uso de ella.
 
 ## Video de Exposición
-Para una mejor comprensión sobre este proyecto, consulte el vídeo con la presentación y explicación de este en el siguiente link: [Central Perk - Presentación]().
+Para una mejor comprensión sobre este proyecto, consulte el vídeo con la presentación y explicación de este en el siguiente link: [Central Perk - Presentación](https://alumnosutalca-my.sharepoint.com/:f:/g/personal/joediaz22_alumnos_utalca_cl/EnM5BopzAzhOleNKsCN7LOsBL6mOwYPIkmJERFHbnUNYHw?e=08Suli).
+
+## Recursos
+Todos los recursos de la versión 2 de Central Perk se encuentran en este link: [Central Perk v2.0](https://alumnosutalca-my.sharepoint.com/:f:/g/personal/joediaz22_alumnos_utalca_cl/EiA5lnJnISBGtnEc4txI3ocBbGeKej0gvg1GWPsaWl9X3A?e=ZypnYT).
