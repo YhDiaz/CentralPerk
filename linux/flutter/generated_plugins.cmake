@@ -3,10 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-<<<<<<< HEAD
-=======
   file_selector_linux
->>>>>>> central_perk_camera
   url_launcher_linux
 )
 
